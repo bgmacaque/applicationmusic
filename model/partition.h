@@ -18,8 +18,11 @@ public:
     Partition();
     //Getter of the chords
     std::vector<Chord> getChords() const;
-    //Function that add a Chord at the end of the Partition
+    //Method that add a Chord at the end of the Partition
     void addChord(Chord chord);
+
+    //Method that play all the partition
+    void play();
 };
 
 #endif // PARTITION_H

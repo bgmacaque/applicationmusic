@@ -12,3 +12,7 @@ void Partition::addChord(Chord chord){
     this->m_chords.push_back(chord);
 }
 
+void Partition::play(){
+
+}
+
