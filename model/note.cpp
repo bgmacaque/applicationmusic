@@ -21,6 +21,6 @@ void Note::setName(std::string name){
     this->m_name = name;
 }
 
-void play(){
+void Note::play(double volume){
 
 }

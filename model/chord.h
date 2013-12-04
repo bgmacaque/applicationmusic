@@ -18,7 +18,7 @@ private:
     //The volume of the chord
     double m_volume;
     //The notes of the chord
-    std::vector<Note> notes;
+    std::vector<Note> m_notes;
 
 public:
     //Constructor of a chord
@@ -34,6 +34,8 @@ public:
     //Setter of the volume
     void setVolume(double volume);
 
+    //Methode permettant de jouer des notes
+    void play();
 
 };
 
