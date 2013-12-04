@@ -8,6 +8,5 @@ int main()
     Note n("A4", 440);
     cout << n.getFrequency() << endl;
     return 0;
-
 }
 

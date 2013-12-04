@@ -28,6 +28,9 @@ public:
     void setFrequency(int frequency);
     //Getter of frequency
     int getFrequency() const;
+
+    //Play the note
+    void play();
 };
 
 #endif // NOTE_H

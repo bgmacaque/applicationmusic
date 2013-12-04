@@ -20,3 +20,7 @@ std::string Note::getName() const{
 void Note::setName(std::string name){
     this->m_name = name;
 }
+
+void play(){
+
+}
