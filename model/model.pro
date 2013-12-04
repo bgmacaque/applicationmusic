@@ -4,9 +4,11 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     note.cpp \
-    chord.cpp
+    chord.cpp \
+    partition.cpp
 
 HEADERS += \
     note.h \
-    chord.h
+    chord.h \
+    partition.h
 
