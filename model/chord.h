@@ -34,7 +34,7 @@ public:
     //Setter of the volume
     void setVolume(double volume);
 
-    //Methode permettant de jouer des notes
+    //Method which allows to play notes 
     void play();
 
 };
