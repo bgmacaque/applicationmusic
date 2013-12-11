@@ -41,6 +41,6 @@ void Note::setName(std::string name){
 }
 
 /* @void play a note with a volume value equals to 'volume'*/
-void Note::play(double volume){
+void Note::play(double volume, double duration){
 
 }

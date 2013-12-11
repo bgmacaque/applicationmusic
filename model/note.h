@@ -30,7 +30,7 @@ public:
     int getFrequency() const;
 
     //Play the note
-    void play(double volume);
+    void play(double volume, double duration);
 };
 
 #endif // NOTE_H
