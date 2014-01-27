@@ -11,7 +11,8 @@ public:
     Analyze();
     void showNote(FMOD::Channel *channel);
     Note getNote(int frequency);
-    void sort(float spectrum[]);
+    void sort(float spectrum[], int size, int inf, int sup);
+    int place(float spectrum[], int size, int inf, int sup);
 };
 
 #endif // ANALYZE_H
