@@ -6,7 +6,8 @@ HEADERS += \
 SOURCES += \
     noskin.cpp \
     notjsonexception.cpp \
-    notconnected.cpp
+    notconnected.cpp \
+    test.cpp
 
 QT += core gui
 QT += webkit
