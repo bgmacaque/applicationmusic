@@ -9,10 +9,11 @@ private:
 
 public:
     Analyze();
-    void showNote(FMOD::Channel *channel);
+    void mainNote(FMOD::Channel *channel);
     Note getNote(int frequency);
-    void sort(float spectrum[], int size, int inf, int sup);
+    void sort(int places[], float spectrum[], int size, int inf, int sup);
     int place(float spectrum[], int size, int inf, int sup);
+    void record(Partition tab);
 };
 
 #endif // ANALYZE_H
