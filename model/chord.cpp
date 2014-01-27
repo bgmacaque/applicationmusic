@@ -28,6 +28,6 @@ void Chord::setVolume(double volume){
 void Chord::play(){
     unsigned int i;
     for(i = 0 ; i < m_notes.size() ; i++){
-        m_notes[i].play(m_volume);
+        m_notes[i].play(m_volume, m_duration);
     }
 }
