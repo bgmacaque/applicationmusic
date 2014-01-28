@@ -2,29 +2,29 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-NoSkin::NoSkin(Partition *p): QWidget()
+#include <QPushButton>
+
+NoSkin::NoSkin(Partition *p): QMainWindow()
 {
     //Locations of the icons
-    String s = "../Images/Icons/";
+    std::string s = "../Images/Icons/";
 
     //Firstly we create all buttons
     this->loadIcons();
 
     //Then we create other stuff
-    analyzer = new Analyze();
+    //analyzer = new Analyze();
     partition = p;
 
     //Now we set layout
     QVBoxLayout *main_lay = new QVBoxLayout(this);
-    QHBoxLayout *buttons_lay = new QHBoxLayout(this);
 
-    std::vector<QAction> btn = this->getButtons();
-    for(QAction& bt : btn)
-    {
-        buttons_lay->addWidget(&bt);
-    }
+    QList<QAction *> btn = this->getButtons();
+    barre = new QMenuBar(this);
+    for(int i=0; i<btn.size(); i++)
+        barre->addAction(btn.at(i));
 
-    main_lay->addLayout(buttons_lay);
+    this->setMenuBar(barre);
 
     //Finally, we define the window parameters
     this->setFixedSize(900, 500);
@@ -32,65 +32,64 @@ NoSkin::NoSkin(Partition *p): QWidget()
     this->show();
 }
 
-NoSkin::NoSkin() : QWidget()
+NoSkin::NoSkin() : QMainWindow()
 {
-    //Locations of the icons
-    String s = "../Images/Icons/";
-
     //Firstly we create all buttons
     this->loadIcons();
 
     //Then we create other stuff
-    analyzer = new Analyze();
-    partition = new Partition();
+    // analyzer = new Analyze();
+
+    //partition = new Partition;
 
     //Now we set layout
     QVBoxLayout *main_lay = new QVBoxLayout(this);
-    QHBoxLayout *buttons_lay = new QHBoxLayout(this);
 
-    std::vector<QAction> btn = this->getButtons();
-    for(QAction& bt : btn)
-    {
-        buttons_lay->addWidget(&bt);
-    }
+    QList<QAction *> btn = this->getButtons();
+    barre = new QMenuBar(this);
+    for(int i=0; i<btn.size(); i++)
+        barre->addAction(btn.at(i));
 
-    main_lay->addLayout(buttons_lay);
+    this->setMenuBar(barre);
 
     //Finally, we define the window parameters
-    this->setFixedSize(900, 500);
+    //this->setFixedSize(900, 500);
     this->setLayout(main_lay);
     this->show();
 }
 
-NoSkin::loadIcons()
+void NoSkin::loadIcons()
 {
-    btn_save = new QAction(QIcon(s+"save.jpg"));
-    btn_import = new QAction(QIcon(s+"import.png"));
-    btn_export = new QAction(QIcon(s+"export.png"));
-    btn_refresh = new QAction(QIcon(s+"refresh.png"));
-    btn_cloud_list = new QAction(QIcon(s+"cloud.png"));
-    btn_stop = new QAction(QIcon(s+"stop.png"));
-    btn_record_pause = new QAction(QIcon(s+"record.png"));
-    btn_options = new QAction(QIcon(s+"options.png"));
+    //Locations of the icons
+    QString s("../Images/Icons/");
 
-    btn_play_pause = new QAction(QIcon(s+""));
-    btn_chord = new QAction("Chord");
+    btn_save = new QAction(QIcon(s + QString("save.jpg")), "", this);
+    btn_import = new QAction(QIcon(s+QString("import.png")), "", this);
+    btn_export = new QAction(QIcon(s+QString("export.png")), "", this);
+    btn_refresh = new QAction(QIcon(s+QString("refresh.png")), "", this);
+    btn_cloud_list = new QAction(QIcon(s+QString("cloud.png")), "", this);
+    btn_stop = new QAction(QIcon(s+QString("stop.png")), "", this);
+    btn_record_pause = new QAction(QIcon(s+QString("record.png")), "", this);
+    btn_options = new QAction(QIcon(s+QString("options.png")), "", this);
+
+    btn_play_pause = new QAction(QIcon(s), "", this);
+    btn_chord = new QAction(QString("Chord"), this);
 }
 
-NoSkin::getButtons()
+QList<QAction *> NoSkin::getButtons()
 {
-    std::vector<QAction> buttons;
+    QList<QAction *> buttons;
 
-    buttons.push_back(btn_play_pause);
-    buttons.push_back(btn_stop);
-    buttons.push_back(btn_record_pause);
-    buttons.push_back(btn_chord);
-    buttons.push_back(btn_save);
-    buttons.push_back(btn_import);
-    buttons.push_back(btn_export);
-    buttons.push_back(btn_refresh);
-    buttons.push_back(btn_cloud_list);
-    buttons.push_back(btn_options);
+    buttons.append(btn_play_pause);
+    buttons.append(btn_stop);
+    buttons.append(btn_record_pause);
+    buttons.append(btn_chord);
+    buttons.append(btn_save);
+    buttons.append(btn_import);
+    buttons.append(btn_export);
+    buttons.append(btn_refresh);
+    buttons.append(btn_cloud_list);
+    buttons.append(btn_options);
 
     return buttons;
 }

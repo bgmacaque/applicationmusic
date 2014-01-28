@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include <QAction>
 #include <QList>
+#include <QMenuBar>
 #include "../model/partition.h"
-#include "../model/analyze.h"
+//#include "../model/analyze.h"
 
 /*!
  * \class noSkin noskin.h
@@ -69,14 +70,19 @@ private:
     QAction *btn_options;
 
     /*!
+     * \brief Bar that contains buttons
+     */
+    QMenuBar *barre;
+
+    /*!
      * \brief The partitiion currently showed
      */
-    Partition partition; //or just one partition ????
+    Partition *partition;
 
     /*!
      * \brief Analyze the input sound to determinate notes
      */
-     Analyze *analyzer;
+     //Analyze *analyzer;
 
      /*!
       * \brief A method to load all the icons of the app
@@ -87,7 +93,7 @@ private:
       * \brief A method to get the buttons
       * \return A vector containing all the buttons of the application
       */
-     std::vector<QAction> getButtons();
+     QList<QAction *> getButtons();
 
 public:
     /*!

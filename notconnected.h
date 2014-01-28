@@ -4,7 +4,7 @@
 #include <QException>
 #include <QString>
 
-class NotConnected
+class NotConnected:QException
 {
 private:
     QString message;
@@ -16,7 +16,12 @@ public:
      * \brief Describes the type of the error. Message might be shown to the user
      * \return A string describing the error
      */
-    virtual const char * what() const throw();
+    char * what() const throw();
+
+    /*!
+     * \brief To raise the exception
+     */
+    void raise();
 };
 
 #endif // NOTCONNECTED_H

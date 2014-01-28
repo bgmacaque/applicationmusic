@@ -4,7 +4,7 @@
 #include <QException>
 #include <QString>
 
-class NotJSONException:QException
+class NotJSONException
 {
 private:
     QString message;

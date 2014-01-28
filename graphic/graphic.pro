@@ -1,12 +1,9 @@
 HEADERS += \
-    noskin.h \
-    notjsonexception.h \
-    notconnected.h
+    noskin.h
+
 
 SOURCES += \
     noskin.cpp \
-    notjsonexception.cpp \
-    notconnected.cpp \
     test.cpp
 
 QT += core gui
