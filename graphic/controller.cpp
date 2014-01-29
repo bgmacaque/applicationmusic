@@ -4,6 +4,7 @@ Controller::Controller(NoSkin *f) : frame(f)
 {
     playing = false;
     recording = false;
+    saved = true;
 }
 
 void Controller::active()
@@ -32,4 +33,13 @@ void Controller::record()
         recording = true;
         frame->btn_record_pause->setIcon(QIcon(*frame->icons_loc+"pause_record.png"));
     }
+}
+
+void Controller::save()
+{
+    saved = true;
+
+    //We will save here the file
+
+    frame->btn_save->setEnabled(false);
 }

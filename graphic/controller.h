@@ -21,6 +21,7 @@ private:
 
     bool playing;
     bool recording;
+    bool saved;
     NoSkin *frame;
 
 public:
@@ -34,6 +35,7 @@ public:
 public slots:
     void play();
     void record();
+    void save();
 };
 
 #endif // CONTROLLER_H
