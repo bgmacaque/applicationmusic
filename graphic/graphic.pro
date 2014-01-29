@@ -1,10 +1,12 @@
 HEADERS += \
-    noskin.h
+    noskin.h \
+    controller.h
 
 
 SOURCES += \
     noskin.cpp \
-    test.cpp
+    test.cpp \
+    controller.cpp
 
 QT += core gui
 QT += webkit

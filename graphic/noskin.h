@@ -1,12 +1,19 @@
 #ifndef NOSKIN_H
 #define NOSKIN_H
 
+#include <QApplication>
 #include <QMainWindow>
 #include <QAction>
 #include <QList>
 #include <QMenuBar>
+#include <QToolBar>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QComboBox>
 #include "../model/partition.h"
 //#include "../model/analyze.h"
+
 
 /*!
  * \class noSkin noskin.h
@@ -18,6 +25,7 @@
  */
 class NoSkin:QMainWindow
 {
+friend class Controller;
 private:
     /*!
      * \brief Save the current partition (JSON text)
@@ -72,12 +80,12 @@ private:
     /*!
      * \brief Bar that contains buttons
      */
-    QMenuBar *barre;
+    QToolBar *bar;
 
     /*!
      * \brief The partitiion currently showed
      */
-    Partition *partition;
+    Partition *score;
 
     /*!
      * \brief Analyze the input sound to determinate notes
@@ -93,19 +101,30 @@ private:
       * \brief A method to get the buttons
       * \return A vector containing all the buttons of the application
       */
-     QList<QAction *> getButtons();
+     void loadButtons();
+
+     /*!
+      * \brief Creates the right bar where there are alla ctions to modify notes
+      * \return A layout containing the right bar
+      */
+     QVBoxLayout *noteModifier();
+
+     /*!
+      * \brief Location of the icons
+      */
+     const QString *icons_loc = new QString("../Images/Icons/");
 
 public:
     /*!
      * \brief Creates a window with the partition p
      * \param p
      */
-    NoSkin(Partition *p);
+    NoSkin(Partition *p, int minHeight, int minWidth);
 
     /*!
      * \brief Creates a window without partitions.
      */
-    NoSkin();
+    NoSkin(int minHeight, int minWidth);
 
     /*!
      * \brief Show the chord's window
