@@ -13,8 +13,9 @@
  * \brief This class can analyze notes and frequencies
  */
 class Analyze{
+
 private:
-    std::vector<Note> notes;
+    Note **notes;
 
 public:
     Analyze();

@@ -13,13 +13,14 @@ class Note{
 
 private:
     //Frequency of the note
-    int m_frequency;
+    float m_frequency;
     //Name of the note in the english norm (A, B ..)
     std::string m_name;
 
 public:
     //Note constructor
-    Note(std::string name, int frequency);
+    Note(std::string name, float frequency);
+    Note();
 
     //Setter of name
     void setName(std::string name);

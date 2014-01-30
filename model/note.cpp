@@ -10,9 +10,12 @@
 // Constructor
 //*************
 
-Note::Note(std::string name, int frequency){
+Note::Note(std::string name, float frequency){
     this->m_name = name;
     this->m_frequency = frequency;
+}
+
+Note::Note(){
 }
 
 //**********
