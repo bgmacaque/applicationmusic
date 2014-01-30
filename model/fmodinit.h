@@ -1,7 +1,9 @@
 #ifndef FMODINIT_H
 #define FMODINIT_H
 #include <string>
-#include "fmod.hpp"
+#include <fmod.hpp>
+#include <fmod_errors.h>
+#include <cstring>
 
 /*!
  * \class FModInit fmodinit.h
@@ -13,13 +15,16 @@
 class FModInit{
 private:
     FMOD::System *m_system;
+    FMOD::Sound *m_sound;
+
 
 public:
     FModInit();
-    ~FModInit();
     std::string init();
     std::string release();
-    std::string errorCheck(FMOD_RESULT result);
+    FMOD::System *getSystem();
+    FMOD::Sound *getSound();
+    std::string static errorCheck(FMOD_RESULT result);
 };
 
 #endif // FMODINIT_H

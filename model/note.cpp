@@ -50,5 +50,9 @@ void Note::play(double volume, double duration){
 
 
 std::string Note::getDisplay(){
-    return this->m_name;
+    if(m_name == ""){
+        return "Not in range";
+    }else{
+        return this->m_name;
+    }
 }

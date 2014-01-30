@@ -48,20 +48,41 @@ Analyze::Analyze(){
 
 
 
-void Analyze::mainNote(FMOD::Channel *channel){
+void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
     bool tune = true;
-    float spectrum[SPECTRUM_SIZE], max(0);
-    int result(0), i(0);
+    float spectrum[SPECTRUM_SIZE], max(0), freqMax(0);
+    int result(0), i(0), indexMax(0);
+    std::string error;
+    FMOD::Channel *channel;
     Note *n = new Note();
+    result = p_system->recordStart(0, p_sound, true);
+
+    usleep(200);
+
+    result = p_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &channel);
+    result = channel->setVolume(0);
     while(tune){
-        result = channel->getSpectrum(spectrum,SPECTRUM_SIZE,0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
+        result = channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
+        if(result != FMOD_OK){
+            cout << "ERROR" << endl;
+        }
+        max = 0;
+        freqMax = 0;
         for(i = 0; i < SPECTRUM_SIZE; i++){
             if(spectrum[i] > max){
                 max = spectrum[i];
+                indexMax = i;
+//                cout << spectrum[i] << "," << max << "," << i<< endl;
             }
         }
-        n = this->getNote(max);
-        cout << n->getDisplay() << endl;
+//                n = this->getNote(max);
+//        cout << n->getDisplay() << endl;
+        freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)8192);
+        n = getNote(freqMax);
+        cout << freqMax << endl;
+        cout << "Note : " << n->getDisplay() << endl;
+        p_system->update();
+        usleep(10000);
     }
 }
 
@@ -101,6 +122,9 @@ int Analyze::place(float spectrum[], int size, int inf, int sup){
 
 Note* Analyze::getNote(float frequency){
     Note *n = new Note();
+    if(frequency < 5.0f){
+        return n;
+    }
     int min(0), max(119), index(0);
     //Number of notes
     bool found = false;

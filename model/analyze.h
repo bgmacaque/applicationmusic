@@ -22,7 +22,7 @@ public:
     /*!
      * \brief Give the main note of what is recorded by the microphone
      */
-    void mainNote(FMOD::Channel *channel);
+    void mainNote(FMOD::System *p_system, FMOD::Sound *p_sound);
 
     /*!
      * \brief Give the note that correspond to the frequency
