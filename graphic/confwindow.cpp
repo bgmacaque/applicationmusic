@@ -9,21 +9,26 @@ ConfWindow::ConfWindow(NoSkin* parent):QMainWindow()
 
     this->loadTabs();
 
+    btn_apply = new QPushButton("Appliquer");
+
     //We load all pages
     loadAuthPage();
     loadOptionsPage();
     loadSkinsPage();
 
-    pages->setCurrentIndex(1);
-
     link();
-
-    main_lay = new QHBoxLayout(this);
-    main_lay->setAlignment(Qt::AlignCenter);
-    main_lay->addWidget(pages);
     this->addToolBar(Qt::LeftToolBarArea, tabs);
 
-    this->setLayout(main_lay);
+    this->setCentralWidget(pages);
+    pages->setCurrentWidget(page_connection);
+
+    //We laod preexisting configs
+    config = new Configuration();
+    if(config->load())
+    {
+        this->setConfig();
+    }
+
     this->setWindowTitle(QString("Configuration - Authentification"));
     this->show();
 }
@@ -65,6 +70,7 @@ void ConfWindow::loadAuthPage()
     layout_connection->addRow("Vous connecter au lancement", login_at_start);
     layout_connection->addRow("Vous reconnecter après erreur", relogin_after_errors);
     layout_connection->addRow("Vous reconnecter après", reloging_after);
+    layout_connection->addWidget(btn_apply);
 
     page_connection->setLayout(layout_connection);
     this->pages->addWidget(page_connection);
@@ -91,6 +97,7 @@ void ConfWindow::link()
     QObject::connect(btn_connection, SIGNAL(triggered()), this, SLOT(setAuthPage()));
     QObject::connect(btn_options, SIGNAL(triggered()), this, SLOT(setOptionsPage()));
     QObject::connect(btn_skins, SIGNAL(triggered()), this, SLOT(setSkinsPage()));
+    QObject::connect(btn_apply, SIGNAL(clicked()), this, SLOT(apply()));
 }
 
 
@@ -111,4 +118,20 @@ void ConfWindow::setSkinsPage()
 {
     this->setWindowTitle("Configuration - Skins");
     pages->setCurrentWidget(page_skins);
+}
+
+void ConfWindow::apply()
+{
+    config = new Configuration(username->text(), password->text(), pass_saved->isChecked(), relogin_after_errors->isChecked(), reloging_after->value());
+    config->save();
+    this->close();
+}
+
+void ConfWindow::setConfig()
+{
+    username->setText(*config->getUserName());
+    password->setText(*config->getPassword());
+    reloging_after->setValue(config->getRelogingAfter());
+    relogin_after_errors->setChecked(config->getRelogingAfterError());
+    pass_saved->setChecked(config->getPasswordSaved());
 }

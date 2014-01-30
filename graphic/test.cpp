@@ -11,8 +11,8 @@ int main(int argc, char **argv)
     c->active();
 
     //Testing the creation of a config file
-    Configuration *test = new Configuration(new QString("Cémoi"), new QString("toto666"), false, true, 5);
-    test->save();
+    //Configuration *test = new Configuration(new QString("Cémoi"), new QString("toto666"), false, true, 5);
+    //test->save();
 
 
     return app->exec();

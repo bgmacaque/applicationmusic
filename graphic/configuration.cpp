@@ -14,12 +14,10 @@ Configuration::Configuration()
     }
 }
 
-Configuration::Configuration(QString* u, QString* pwd, bool pwd_saved, bool relg_after_err, int rlg_after):username(u), password(pwd), password_saved(pwd_saved), reloging_after_error(relg_after_err), reloging_after(rlg_after)
+Configuration::Configuration(QString u, QString pwd, bool pwd_saved, bool relg_after_err, int rlg_after):username(&u), password(&pwd), password_saved(pwd_saved), reloging_after_error(relg_after_err), reloging_after(rlg_after)
 {
     path = "../user.conf";
 }
-
-
 
 bool Configuration::load()
 {

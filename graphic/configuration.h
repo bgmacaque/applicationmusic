@@ -29,7 +29,7 @@ private:
 
 public:
     Configuration();
-    Configuration(QString* u, QString* pwd, bool pwd_saved, bool relg_after_err, int rlg_after);
+    Configuration(QString u, QString pwd, bool pwd_saved, bool relg_after_err, int rlg_after);
 
     /*!
      * \brief Saves the current configuration in a config file

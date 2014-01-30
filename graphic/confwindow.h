@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include "noskin.h"
+#include "configuration.h"
 
 /*!
  * \class ConfWindow confwindow.h
@@ -31,6 +32,12 @@ private:
      * \brief The parent of the window (in order to apply modifications)
      */
     NoSkin* parent;
+
+    /*!
+     * \brief Represents the configurations of the user
+     */
+    Configuration* config;
+
     /*!
      * \brief Contains all pages of the window
      */
@@ -41,15 +48,12 @@ private:
      */
     QToolBar *tabs;
 
-    /*!
-     * \brief Layout containing tabs and pages
-     */
-    QHBoxLayout *main_lay;
-
     //All buttons to navigate (will be in the tab)
     QAction* btn_connection;
     QAction* btn_options;
     QAction* btn_skins;
+
+    QPushButton* btn_apply;
 
     //All pages of the window
     QWidget* page_connection;
@@ -97,14 +101,35 @@ private:
      */
     void link();
 
+    /*!
+     * \brief Set the configurations of the object configuration in the view
+     */
+    void setConfig();
+
 
 public:
     ConfWindow(NoSkin *parent);
 
 public slots:
+    /*!
+     * \brief Set the authentification page
+     */
     void setAuthPage();
+
+    /*!
+     * \brief Set the options page
+     */
     void setOptionsPage();
+
+    /*!
+     * \brief Set the skins page
+     */
     void setSkinsPage();
+
+    /*!
+     * \brief Apply changements and save them
+     */
+    void apply();
 };
 
 #endif // CONFWINDOW_H
