@@ -1,14 +1,16 @@
 HEADERS += \
     noskin.h \
     controller.h \
-    confwindow.h
+    confwindow.h \
+    configuration.h
 
 
 SOURCES += \
     noskin.cpp \
     test.cpp \
     controller.cpp \
-    confwindow.cpp
+    confwindow.cpp \
+    configuration.cpp
 
 QT += core gui
 QT += webkit
