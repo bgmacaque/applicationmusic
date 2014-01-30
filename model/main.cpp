@@ -10,14 +10,17 @@ using namespace std;
 int main()
 {
     Analyze *a = new Analyze();
-    delete a;
-//    FModInit *fmodLib = new FModInit();
-//    fmodLib->init();
-//    a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
-//    Note *note = a->getNote(14000.0f);
+//    Note *note = a->getNote(7000.0f);
 //    cout << note->getDisplay() << endl;
+    delete a;
+
+    FModInit *fmodLib = new FModInit();
+    fmodLib->init();
+    delete fmodLib;
+
+//    a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
 //    Partition *p = new Partition();
-//    Note n("A4",440);
+//     Note n("A4",440);
 //    vector<Note> *notes = new vector<Note>;
 //    notes->push_back(n);
 //    Chord *c = new Chord(*notes, 5, 6);

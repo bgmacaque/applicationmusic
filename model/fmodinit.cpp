@@ -3,6 +3,8 @@
 
 
 FModInit::FModInit(){
+    m_system = 0;
+    m_sound = 0;
 }
 
 FModInit::~FModInit(){
@@ -24,7 +26,7 @@ std::string FModInit::init(){
     FMOD_RESULT result;
     FMOD_CREATESOUNDEXINFO exinfo;
 
-    result = FMOD::System_Create(&this->m_system);
+    result = FMOD::System_Create(&m_system);
     retour = this->errorCheck(result);
     if(retour != ""){
         return retour;
@@ -48,47 +50,48 @@ std::string FModInit::init(){
         return retour;
     }
 
-    //Hard coded too
-    result = m_system->setDriver(0);
-    retour = this->errorCheck(result);
-    if(retour != ""){
-        return retour;
-    }
-
-    //Also hard coded, it's bad
+        //Hard coded too
+        result = m_system->setDriver(0);
+        retour = this->errorCheck(result);
+        if(retour != ""){
+            return retour;
+        }
 
 
-    result = m_system->setSoftwareFormat(OUTPUTRATE, FMOD_SOUND_FORMAT_PCM16, 1, 0, FMOD_DSP_RESAMPLER_LINEAR);
-    retour = this->errorCheck(result);
-    if(retour != ""){
-        return retour;
-    }
+        //Also hard coded, it's bad
+        result = m_system->setSoftwareFormat(OUTPUTRATE, FMOD_SOUND_FORMAT_PCM16, 1, 0, FMOD_DSP_RESAMPLER_LINEAR);
+        retour = this->errorCheck(result);
+        if(retour != ""){
+            return retour;
+        }
 
-    result = m_system->init(32, FMOD_INIT_NORMAL, 0);
-    retour = this->errorCheck(result);
-    if(retour != ""){
-        return retour;
-    }
+        result = m_system->init(32, FMOD_INIT_NORMAL, 0);
+        retour = this->errorCheck(result);
+        if(retour != ""){
+            return retour;
+        }
 
-    m_system->getSoftwareFormat(&output_freq, 0,0,0,0,0);
+        m_system->getSoftwareFormat(&output_freq, 0,0,0,0,0);
 
-    //We know that we only have to use one sound
-    memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
+        //We know that we only have to use one sound
+        memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
 
-    exinfo.cbsize           = sizeof(FMOD_CREATESOUNDEXINFO);
-    exinfo.numchannels      = 1;
-    exinfo.format           = FMOD_SOUND_FORMAT_PCM16;
-    exinfo.defaultfrequency = OUTPUTRATE;
-    exinfo.length           = exinfo.defaultfrequency * sizeof(short) * exinfo.numchannels * 5;
+        exinfo.cbsize           = sizeof(FMOD_CREATESOUNDEXINFO);
+        exinfo.numchannels      = 1;
+        exinfo.format           = FMOD_SOUND_FORMAT_PCM16;
+        exinfo.defaultfrequency = OUTPUTRATE;
+        exinfo.length           = exinfo.defaultfrequency * sizeof(short) * exinfo.numchannels * 5;
 
-    result = m_system->createSound(0, FMOD_2D | FMOD_SOFTWARE | FMOD_LOOP_NORMAL | FMOD_OPENUSER, &exinfo, &m_sound);
-    retour = this->errorCheck(result);
-    if(retour != ""){
-        return retour;
-    }
+        result = m_system->createSound(0, FMOD_2D | FMOD_SOFTWARE | FMOD_LOOP_NORMAL | FMOD_OPENUSER, &exinfo, &m_sound);
+        retour = this->errorCheck(result);
+        if(retour != ""){
+            return retour;
+        }
 
     return retour;
 }
+
+
 
 std::string FModInit::errorCheck(FMOD_RESULT result){
     std::string retour = "";
@@ -98,9 +101,11 @@ std::string FModInit::errorCheck(FMOD_RESULT result){
     return retour;
 }
 
+
 FMOD::Sound *FModInit::getSound(){
     return m_sound;
 }
+
 
 FMOD::System *FModInit::getSystem(){
     return m_system;

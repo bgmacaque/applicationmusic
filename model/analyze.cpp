@@ -34,22 +34,21 @@ static const float notefreq[120] =
 
 
 Analyze::Analyze(){
-//    Note *n = 0;
     //Init the tab
     notes = new Note*[120];
-    //int i(0);
-   // for(i = 0; i < 120; i++){
+    int i(0);
+    for(i = 0; i < 120; i++){
         //Init the notes
-//        notes[i] = new Note(note[i], notefreq[i]);
-    //}
+        notes[i] = new Note(note[i], notefreq[i]);
+    }
 }
 
 Analyze::~Analyze(){
     int i(0);
     for(i = 0; i < 120; i++){
-//        delete notes[i];
+        delete notes[i];
     }
-    delete notes;
+    delete[] notes;
 }
 
 
