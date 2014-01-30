@@ -50,11 +50,18 @@ Analyze::Analyze(){
 
 void Analyze::mainNote(FMOD::Channel *channel){
     bool tune = true;
-    float spectrum[SPECTRUM_SIZE];
-    int result;
+    float spectrum[SPECTRUM_SIZE], max(0);
+    int result(0), i(0);
+    Note *n = new Note();
     while(tune){
         result = channel->getSpectrum(spectrum,SPECTRUM_SIZE,0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
-//        this->sort(spectrum, SPECTRUM_SIZE, 0, SPECTRUM_SIZE - 1);
+        for(i = 0; i < SPECTRUM_SIZE; i++){
+            if(spectrum[i] > max){
+                max = spectrum[i];
+            }
+        }
+        n = this->getNote(max);
+        cout << n->getDisplay() << endl;
     }
 }
 
@@ -66,6 +73,7 @@ void Analyze::sort(int places[], float spectrum[], int size, int inf, int sup){
         this->sort(places, spectrum, size, index + 1, sup);
     }
 }
+
 
 int Analyze::place(float spectrum[], int size, int inf, int sup){
     int inda = inf;
@@ -89,12 +97,14 @@ int Analyze::place(float spectrum[], int size, int inf, int sup){
     spectrum[inda] = temp;
 }
 
+
+
 Note* Analyze::getNote(float frequency){
     Note *n = new Note();
-    int min(0), max(119), index(0), diffMin(0), diffMax(0);
+    int min(0), max(119), index(0);
     //Number of notes
     bool found = false;
-    float freqNote(0);
+    float freqNote(0), diffMin(0), diffMax(0);
     while(!found && min <= max){
         index = (max + min) / 2;
         //Frequency of the note that being test
@@ -120,9 +130,7 @@ Note* Analyze::getNote(float frequency){
         if(diffMax < 0 ){
             diffMax = -diffMax;
         }
-        cout << "diffMax" << diffMax << ", diffMin " << diffMin << endl;
         if(diffMax <= diffMin){
-
             n = this->notes[max];
         }else{
             n = this->notes[min];
