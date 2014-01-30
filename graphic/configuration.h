@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <fstream>
+#include <iostream>
+#include <stdlib.h>
 
 /*!
  * \class Configuration configuration.h
@@ -15,40 +17,42 @@
 class Configuration
 {
 private:
-    QString username;
-    QString password;
+    QString* username;
+    QString* password;
 
     bool password_saved;
     bool reloging_after_error;
 
     int reloging_after;
 
+    std::string path;
+
 public:
     Configuration();
-    Configuration(QString u, QString pwd, bool pwd_saved, bool relg_after_err, int rlg_after);
+    Configuration(QString* u, QString* pwd, bool pwd_saved, bool relg_after_err, int rlg_after);
 
     /*!
      * \brief Saves the current configuration in a config file
      */
-    void save();
+    bool save();
 
     /*!
      * \brief A static method to load a config file
      * \param The path to the file
      * \return A config object
      */
-    static Configuration load(std::string path);
+     bool load();
 
     //We define all the setters
-    void setUserName(QString usr);
-    void setPassword(QString pwd);
+    void setUserName(QString *usr);
+    void setPassword(QString *pwd);
     void setPasswordSaved(bool state);
     void setRelogingAfterError(bool state);
     void setRelogingAfter(int minutes);
 
     //We define all getters
-    QString getUserName();
-    QString getPassword();
+    QString* getUserName();
+    QString *getPassword();
     bool getPasswordSaved();
     bool getRelogingAfterError();
     int getRelogingAfter();
