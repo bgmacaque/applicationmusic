@@ -7,6 +7,10 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QToolBar>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QPushButton>
+#include <QSpinBox>
 #include "noskin.h"
 
 /*!
@@ -19,6 +23,9 @@
 
 class ConfWindow:QMainWindow
 {
+
+    Q_OBJECT
+
 private:
     /*!
      * \brief The parent of the window (in order to apply modifications)
@@ -53,10 +60,12 @@ private:
     QFormLayout *layout_connection;
     QLineEdit* username;
     QLineEdit* password;
-    bool pass_saved;
-    bool login_at_start;
-    bool relogin_after_errors;
-    int reloging_after;
+
+    QCheckBox* pass_saved;
+    QCheckBox* login_at_start;
+    QCheckBox* relogin_after_errors;
+
+    QSpinBox* reloging_after;
 
     //The options page
 
@@ -74,7 +83,7 @@ private:
     void loadAuthPage();
 
     /*!
-     * \brief load the otpion page
+     * \brief load the option page
      */
     void loadOptionsPage();
 
@@ -83,9 +92,19 @@ private:
      */
     void loadSkinsPage();
 
+    /*!
+     * \brief To connect signals and slots
+     */
+    void link();
+
 
 public:
     ConfWindow(NoSkin *parent);
+
+public slots:
+    void setAuthPage();
+    void setOptionsPage();
+    void setSkinsPage();
 };
 
 #endif // CONFWINDOW_H

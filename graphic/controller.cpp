@@ -11,6 +11,7 @@ void Controller::active()
 {
     QObject::connect(frame->btn_play_pause, SIGNAL(triggered()), this, SLOT(play()));
     QObject::connect(frame->btn_record_pause, SIGNAL(triggered()), this, SLOT(record()));
+    QObject::connect(frame->btn_options, SIGNAL(triggered()), this, SLOT(openConf()));
 }
 
 void Controller::play()
@@ -42,4 +43,9 @@ void Controller::save()
     //We will save here the file
 
     frame->btn_save->setEnabled(false);
+}
+
+void Controller::openConf()
+{
+    ConfWindow *window = new ConfWindow(frame);
 }

@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include "noskin.h"
+#include "confwindow.h"
 
 /*!
  * \class Controller controller.h
@@ -36,6 +37,7 @@ public slots:
     void play();
     void record();
     void save();
+    void openConf();
 };
 
 #endif // CONTROLLER_H
