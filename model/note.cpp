@@ -44,3 +44,8 @@ void Note::setName(std::string name){
 void Note::play(double volume, double duration){
 
 }
+
+
+std::string Note::getDisplay(){
+    return this->m_name;
+}

@@ -8,6 +8,8 @@ Analyze::Analyze(){
 }
 
 
+
+
 void Analyze::mainNote(FMOD::Channel *channel){
     bool tune = true;
     float spectrum[SPECTRUM_SIZE];

@@ -1,6 +1,7 @@
 #ifndef CHORD_H
 #define CHORD_H
 #include <vector>
+#include <string>
 #include "note.h"
 
 /*
@@ -36,6 +37,9 @@ public:
 
     //Method which allows to play notes 
     void play();
+
+    //Method used to display the chord(Debug)
+    std::string getDisplay();
 
 };
 

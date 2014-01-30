@@ -2,6 +2,7 @@
 #define ANALYZE_H
 #include <fmod.hpp>
 #include "note.h"
+#include "partition.h"
 #include <vector>
 class Analyze{
 private:

@@ -31,3 +31,13 @@ void Chord::play(){
         m_notes[i].play(m_volume, m_duration);
     }
 }
+
+std::string Chord::getDisplay(){
+    std::string retour("(");
+    unsigned int i;
+    for(i = 0; i < m_notes.size(); i++){
+        retour.append(m_notes.at(i).getDisplay());
+    }
+    retour.append(")");
+    return retour;
+}

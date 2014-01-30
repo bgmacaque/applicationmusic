@@ -1,6 +1,7 @@
 #ifndef PARTITION_H
 #define PARTITION_H
 #include "chord.h"
+#include <string>
 #include <vector>
 /*
 
@@ -16,8 +17,13 @@ private:
 public:
     //Constructor that initialize an empty partition
     Partition();
+
+    //Display the partition in text format (debug)
+    std::string getDisplay();
+
     //Getter of the chords
     std::vector<Chord> getChords() const;
+
     //Method that add a Chord at the end of the Partition
     void addChord(Chord chord);
 

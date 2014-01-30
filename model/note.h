@@ -31,6 +31,9 @@ public:
 
     //Play the note
     void play(double volume, double duration);
+
+    //Display the note(Debug only)
+    std::string getDisplay();
 };
 
 #endif // NOTE_H

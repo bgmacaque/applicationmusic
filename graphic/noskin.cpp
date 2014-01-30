@@ -1,4 +1,4 @@
-#include "NoSkin.h"
+#include "noskin.h"
 
 NoSkin::NoSkin(Partition *p, int minWidth = 600, int minHeight = 200): QMainWindow()
 {
