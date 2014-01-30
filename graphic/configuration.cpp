@@ -41,12 +41,12 @@ bool Configuration::load()
         password = new QString(pwd.c_str());
 
         //Booleans are transposed in int during the writting
-        if(pwd_saved)
+        if(pwd_saved == "1")
             password_saved = true;
         else
             password_saved = false;
 
-        if(rlg_after_err)
+        if(rlg_after_err == "1")
             reloging_after_error = true;
         else
             reloging_after_error = false;
