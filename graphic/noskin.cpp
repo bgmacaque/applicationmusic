@@ -8,9 +8,6 @@ NoSkin::NoSkin(Partition *p, int minWidth = 600, int minHeight = 200): QMainWind
 
 NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
 {
-    //Firstly we create all buttons
-    this->loadIcons();
-
     //Then we create other stuff
     // analyzer = new Analyze();
 
@@ -20,8 +17,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     QVBoxLayout *main_lay = new QVBoxLayout(this);
 
     //We add the toolbar
-    bar = new QToolBar("Toolbar", this);
-    loadButtons();
+    bar = this->createTopBar();
     this->addToolBar(bar);
 
     //We add the right bar
@@ -33,7 +29,36 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     this->show();
 }
 
-void NoSkin::loadIcons()
+QToolBar* NoSkin::createTopBar()
+{
+    icons_loc = new QString("../Images/Icons/");
+    this->loadTopIcons();
+
+    QToolBar *tools = new QToolBar("Top toolbar", this);
+
+    tools->addAction(btn_play_pause);
+    tools->addAction(btn_stop);
+    tools->addSeparator();
+
+    tools->addAction(btn_record_pause);
+    tools->addSeparator();
+
+    tools->addAction(btn_chord);
+    tools->addSeparator();
+
+    tools->addAction(btn_save);
+    tools->addAction(btn_import);
+    tools->addAction(btn_export);
+    tools->addAction(btn_refresh);
+    tools->addAction(btn_cloud_list);
+    tools->addSeparator();
+
+    tools->addAction(btn_options);
+
+    return tools;
+}
+
+void NoSkin::loadTopIcons()
 {
     btn_save = new QAction(QIcon(*icons_loc+QString("save.png")), "", this);
     btn_import = new QAction(QIcon(*icons_loc+QString("import.png")), "", this);
@@ -46,41 +71,4 @@ void NoSkin::loadIcons()
 
     btn_play_pause = new QAction(QIcon(*icons_loc+"play.png"), "", this);
     btn_chord = new QAction(QString("Chord"), this);
-}
-
-void NoSkin::loadButtons()
-{
-    bar->addAction(btn_play_pause);
-    bar->addAction(btn_stop);
-    bar->addSeparator();
-
-    bar->addAction(btn_record_pause);
-    bar->addSeparator();
-
-    bar->addAction(btn_chord);
-    bar->addSeparator();
-
-    bar->addAction(btn_save);
-    bar->addAction(btn_import);
-    bar->addAction(btn_export);
-    bar->addAction(btn_refresh);
-    bar->addAction(btn_cloud_list);
-    bar->addSeparator();
-
-    bar->addAction(btn_options);
-}
-
-QVBoxLayout* NoSkin::noteModifier()
-{
-    QVBoxLayout *layout = new QVBoxLayout(this);
-
-    QLabel *label = new QLabel("Modifier la note");
-
-    QComboBox *box = new QComboBox(this);
-    box->addItem("LA");
-
-    layout->addWidget(label);
-    layout->addWidget(box);
-
-    return layout;
 }

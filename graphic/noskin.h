@@ -93,9 +93,9 @@ private:
      //Analyze *analyzer;
 
      /*!
-      * \brief A method to load all the icons of the app
+      * \brief A method to load all the icons of the top
       */
-     void loadIcons();
+     void loadTopIcons();
 
      /*!
       * \brief A method to get the buttons
@@ -104,15 +104,21 @@ private:
      void loadButtons();
 
      /*!
-      * \brief Creates the right bar where there are alla ctions to modify notes
-      * \return A layout containing the right bar
+      * \brief Create the top toolbar
+      * \return The top toolbar
       */
-     QVBoxLayout *noteModifier();
+     QToolBar *createTopBar();
 
      /*!
-      * \brief Location of the icons
+      * \brief Create the bottom toolbar
+      * \return The bottom toolbar
       */
-     const QString *icons_loc = new QString("../Images/Icons/");
+     QToolBar createBottomBar();
+
+     /*!
+      * \brief The location of the icons
+      */
+     QString* icons_loc;
 
 public:
     /*!
