@@ -72,3 +72,8 @@ void NoSkin::loadTopIcons()
     btn_play_pause = new QAction(QIcon(*icons_loc+"play.png"), "", this);
     btn_chord = new QAction(QString("Chord"), this);
 }
+
+void NoSkin::loadBottomIcons()
+{
+
+}

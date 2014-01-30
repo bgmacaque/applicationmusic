@@ -98,10 +98,9 @@ private:
      void loadTopIcons();
 
      /*!
-      * \brief A method to get the buttons
-      * \return A vector containing all the buttons of the application
+      * \brief Load the icons for the bottom toolbar
       */
-     void loadButtons();
+     void loadBottomIcons();
 
      /*!
       * \brief Create the top toolbar
@@ -114,11 +113,6 @@ private:
       * \return The bottom toolbar
       */
      QToolBar createBottomBar();
-
-     /*!
-      * \brief The location of the icons
-      */
-     QString* icons_loc;
 
 public:
     /*!
@@ -184,6 +178,11 @@ public:
      * \brief Record input sounds.
      */
     void record();
+
+    /*!
+     * \brief The location of the icons
+     */
+    QString* icons_loc;
 
 };
 
