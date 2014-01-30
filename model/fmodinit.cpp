@@ -5,6 +5,10 @@
 FModInit::FModInit(){
 }
 
+FModInit::~FModInit(){
+    this->release();
+}
+
 std::string FModInit::release(){
     std::string retour = "";
 

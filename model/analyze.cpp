@@ -34,14 +34,22 @@ static const float notefreq[120] =
 
 
 Analyze::Analyze(){
-    Note *n;
+//    Note *n = 0;
     //Init the tab
-    this->notes = new Note*[120];
-    int i;
-    for(i = 0; i < 120; i++){
+    notes = new Note*[120];
+    //int i(0);
+   // for(i = 0; i < 120; i++){
         //Init the notes
-        this->notes[i] = new Note(note[i], notefreq[i]);
+//        notes[i] = new Note(note[i], notefreq[i]);
+    //}
+}
+
+Analyze::~Analyze(){
+    int i(0);
+    for(i = 0; i < 120; i++){
+//        delete notes[i];
     }
+    delete notes;
 }
 
 
@@ -54,7 +62,7 @@ void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
     int result(0), i(0), indexMax(0);
     std::string error;
     FMOD::Channel *channel;
-    Note *n = new Note();
+    Note *n = 0;
     result = p_system->recordStart(0, p_sound, true);
 
     usleep(200);
@@ -79,8 +87,11 @@ void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
 //        cout << n->getDisplay() << endl;
         freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)8192);
         n = getNote(freqMax);
-        cout << freqMax << endl;
-        cout << "Note : " << n->getDisplay() << endl;
+//        cout << freqMax << endl;
+        if(n != 0){
+//            cout << "Note : " << n->getDisplay() << endl;
+        }
+
         p_system->update();
         usleep(10000);
     }
@@ -121,22 +132,25 @@ int Analyze::place(float spectrum[], int size, int inf, int sup){
 
 
 Note* Analyze::getNote(float frequency){
-    Note *n = new Note();
-    if(frequency < 5.0f){
-        return n;
+    Note *n = 0;
+    if(frequency < (notes[0]->getFrequency() + notes[1]->getFrequency()) / 2){
+        return notes[0];
+    }else if(frequency > (notes[118]->getFrequency() + notes[119]->getFrequency()) / 2 ){
+        return notes[119];
     }
     int min(0), max(119), index(0);
     //Number of notes
-    bool found = false;
+    bool found = false, stop = false;
     float freqNote(0), diffMin(0), diffMax(0);
-    while(!found && min <= max){
+    while(!found && min <= max && !stop){
         index = (max + min) / 2;
         //Frequency of the note that being test
-        freqNote = this->notes[index]->getFrequency();
+        freqNote = notes[index]->getFrequency();
+        cout << "Fréquence: " << freqNote << endl;
         //If we have found the frequency
         if(frequency == freqNote){
             found = true;
-            n = this->notes[index];
+            n = notes[index];
         }else{
             if(frequency < freqNote){
                 max = index - 1;
@@ -144,20 +158,22 @@ Note* Analyze::getNote(float frequency){
                 min = index + 1;
             }
         }
+//        cout << index << endl;
+        cout << min << ", " << max << endl;
     }
     if(!found){
-        diffMin = frequency - this->notes[min]->getFrequency();
+        diffMin = frequency - notes[min]->getFrequency();
         if(diffMin < 0){
             diffMin = -diffMin;
         }
-        diffMax = frequency - this->notes[max]->getFrequency();
+        diffMax = frequency - notes[max]->getFrequency();
         if(diffMax < 0 ){
             diffMax = -diffMax;
         }
         if(diffMax <= diffMin){
-            n = this->notes[max];
+            n = notes[max];
         }else{
-            n = this->notes[min];
+            n = notes[min];
         }
 
     }

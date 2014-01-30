@@ -10,19 +10,20 @@ using namespace std;
 int main()
 {
     Analyze *a = new Analyze();
-    FModInit *fmodLib = new FModInit();
-    fmodLib->init();
-    a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
-    Note *note = a->getNote(445.0f);
+    delete a;
+//    FModInit *fmodLib = new FModInit();
+//    fmodLib->init();
+//    a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
+//    Note *note = a->getNote(14000.0f);
 //    cout << note->getDisplay() << endl;
-    Partition *p = new Partition();
-    Note n("A4",440);
-    vector<Note> *notes = new vector<Note>;
-    notes->push_back(n);
-    Chord *c = new Chord(*notes, 5, 6);
-    p->addChord(*c);
+//    Partition *p = new Partition();
+//    Note n("A4",440);
+//    vector<Note> *notes = new vector<Note>;
+//    notes->push_back(n);
+//    Chord *c = new Chord(*notes, 5, 6);
+//    p->addChord(*c);
 //    cout << p->getDisplay() << endl;
-    fmodLib->release();
+//    fmodLib->release();
     return 0;
 }
 

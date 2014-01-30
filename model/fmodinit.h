@@ -20,6 +20,7 @@ private:
 
 public:
     FModInit();
+    ~FModInit();
     std::string init();
     std::string release();
     FMOD::System *getSystem();

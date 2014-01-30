@@ -19,6 +19,8 @@ private:
 
 public:
     Analyze();
+    ~Analyze();
+
     /*!
      * \brief Give the main note of what is recorded by the microphone
      */
