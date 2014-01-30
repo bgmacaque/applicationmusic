@@ -9,6 +9,8 @@ using namespace std;
 int main()
 {
     Analyze *a = new Analyze();
+    Note *note = a->getNote(8400.0f);
+    cout << note->getDisplay() << endl;
     Partition *p = new Partition();
     Note n("A4",440);
     vector<Note> *notes = new vector<Note>;

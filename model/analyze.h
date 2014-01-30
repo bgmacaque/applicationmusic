@@ -27,7 +27,7 @@ public:
     /*!
      * \brief Give the note that correspond to the frequency
      */
-    Note getNote(int frequency);
+    Note *getNote(float frequency);
 
     /*!
      * \brief Sort the table places with the values in spectrum

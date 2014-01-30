@@ -89,6 +89,45 @@ int Analyze::place(float spectrum[], int size, int inf, int sup){
     spectrum[inda] = temp;
 }
 
-Note Analyze::getNote(int frequency){
+Note* Analyze::getNote(float frequency){
+    Note *n = new Note();
+    int min(0), max(119), index(0), diffMin(0), diffMax(0);
+    //Number of notes
+    bool found = false;
+    float freqNote(0);
+    while(!found && min <= max){
+        index = (max + min) / 2;
+        //Frequency of the note that being test
+        freqNote = this->notes[index]->getFrequency();
+        //If we have found the frequency
+        if(frequency == freqNote){
+            found = true;
+            n = this->notes[index];
+        }else{
+            if(frequency < freqNote){
+                max = index - 1;
+            }else{
+                min = index + 1;
+            }
+        }
+    }
+    if(!found){
+        diffMin = frequency - this->notes[min]->getFrequency();
+        if(diffMin < 0){
+            diffMin = -diffMin;
+        }
+        diffMax = frequency - this->notes[max]->getFrequency();
+        if(diffMax < 0 ){
+            diffMax = -diffMax;
+        }
+        cout << "diffMax" << diffMax << ", diffMin " << diffMin << endl;
+        if(diffMax <= diffMin){
 
+            n = this->notes[max];
+        }else{
+            n = this->notes[min];
+        }
+
+    }
+    return n;
 }
