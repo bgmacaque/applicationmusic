@@ -33,11 +33,14 @@ void Chord::play(){
 }
 
 std::string Chord::getDisplay(){
-    std::string retour("(");
+    std::string retour("[");
     unsigned int i;
     for(i = 0; i < m_notes.size(); i++){
         retour.append(m_notes.at(i).getDisplay());
+        if(i != m_notes.size() - 1){
+            retour.append(",");
+        }
     }
-    retour.append(")");
+    retour.append("]");
     return retour;
 }
