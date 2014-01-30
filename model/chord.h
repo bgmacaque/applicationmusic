@@ -4,12 +4,13 @@
 #include <string>
 #include "note.h"
 
-/*
-
-  This class represent a Chord
-  It's 1 to 6 notes played at the same time
-
-*/
+/*!
+ * \class Chord chord.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief This class represent a chord, of 1 to 6 notes
+ */
 class Chord{
 
 private:

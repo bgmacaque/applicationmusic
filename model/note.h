@@ -2,11 +2,13 @@
 #define NOTE_H
 #include <string>
 
-/*
-
-    This class represent a note
-
-*/
+/*!
+ * \class Note note.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief Class that represent a Note
+ */
 class Note{
 
 private:

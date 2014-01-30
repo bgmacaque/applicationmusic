@@ -32,6 +32,7 @@ void Chord::play(){
     }
 }
 
+//Display a chord (for debug)
 std::string Chord::getDisplay(){
     std::string retour("[");
     unsigned int i;

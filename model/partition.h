@@ -3,11 +3,15 @@
 #include "chord.h"
 #include <string>
 #include <vector>
-/*
 
-   This class represent a partition
 
-*/
+/*!
+ * \class Partition partition.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief Class that represent a partition
+ */
 class Partition{
 
 private:
