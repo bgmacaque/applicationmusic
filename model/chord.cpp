@@ -1,6 +1,6 @@
 #include "chord.h"
 
-Chord::Chord(std::vector<Note> notes, double duration, double volume){
+Chord::Chord(std::vector<Note> notes, float duration, float volume){
     this->m_notes = notes;
     this->m_volume = volume;
     this->m_duration = duration;
@@ -25,10 +25,10 @@ void Chord::setVolume(double volume){
 }
 
 //Play every notes in the chord
-void Chord::play(){
+void Chord::play(FMOD::System *p_system, FMOD::Sound *p_sound){
     unsigned int i;
     for(i = 0 ; i < m_notes.size() ; i++){
-        m_notes[i].play(m_volume, m_duration);
+        m_notes[i].play(m_volume, m_duration, p_system, p_sound);
     }
 }
 

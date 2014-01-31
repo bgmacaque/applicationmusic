@@ -67,7 +67,7 @@ void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
 
     result = p_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &channel);
     result = channel->setVolume(0);
-    for(j=0;j<500;j++){
+    for(j=0;j<5000;j++){
         result = channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
         if(result != FMOD_OK){
             cout << result << endl;
@@ -86,9 +86,9 @@ void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
         n = getNote(freqMax);
 //        cout << freqMax << endl;
         if(n != 0){
-            cout << "Note : " << n->getDisplay() << endl;
+            cout << n->getDisplay() << endl;
         }
-
+        n = 0;
         p_system->update();
         usleep(1000);
     }
@@ -143,7 +143,6 @@ Note* Analyze::getNote(float frequency){
         index = (max + min) / 2;
         //Frequency of the note that being test
         freqNote = notes[index]->getFrequency();
-        cout << "Fréquence: " << freqNote << endl;
         //If we have found the frequency
         if(frequency == freqNote){
             found = true;
@@ -155,8 +154,6 @@ Note* Analyze::getNote(float frequency){
                 min = index + 1;
             }
         }
-//        cout << index << endl;
-        cout << min << ", " << max << endl;
     }
     if(!found){
         diffMin = frequency - notes[min]->getFrequency();

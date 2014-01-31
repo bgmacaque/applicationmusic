@@ -18,7 +18,7 @@ int main()
     fmodLib->init();
     a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
 //    delete fmodLib;
-    usleep(500*10000 + 200);
+    usleep(500*10000 + 300);
     delete a;
     delete fmodLib;
 

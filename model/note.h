@@ -1,6 +1,7 @@
 #ifndef NOTE_H
 #define NOTE_H
 #include <string>
+#include <fmod.hpp>
 
 /*!
  * \class Note note.h
@@ -33,7 +34,7 @@ public:
     int getFrequency() const;
 
     //Play the note
-    void play(double volume, double duration);
+    void play(float volume, float duration, FMOD::System *p_system, FMOD::Sound *p_sound);
 
     //Display the note(Debug only)
     std::string getDisplay();
