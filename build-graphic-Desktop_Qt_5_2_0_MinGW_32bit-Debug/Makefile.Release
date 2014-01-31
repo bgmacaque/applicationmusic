@@ -14,10 +14,10 @@ CXX           = g++
 DEFINES       = -DUNICODE -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_NO_DEBUG -DQT_WEBKITWIDGETS_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_QUICK_LIB -DQT_POSITIONING_LIB -DQT_OPENGL_LIB -DQT_PRINTSUPPORT_LIB -DQT_MULTIMEDIA_LIB -DQT_QML_LIB -DQT_WEBKIT_LIB -DQT_WIDGETS_LIB -DQT_SENSORS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -pipe -fno-keep-inline-dllexport -O2 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -fno-keep-inline-dllexport -O2 -frtti -Wall -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I..\graphic -I"C:\Qt\5.2.0\mingw48_32\include" -I"C:\Qt\5.2.0\mingw48_32\include\QtWebKitWidgets" -I"C:\Qt\5.2.0\mingw48_32\include\QtMultimediaWidgets" -I"C:\Qt\5.2.0\mingw48_32\include\QtQuick" -I"C:\Qt\5.2.0\mingw48_32\include\QtPositioning" -I"C:\Qt\5.2.0\mingw48_32\include\QtOpenGL" -I"C:\Qt\5.2.0\mingw48_32\include\QtPrintSupport" -I"C:\Qt\5.2.0\mingw48_32\include\QtMultimedia" -I"C:\Qt\5.2.0\mingw48_32\include\QtQml" -I"C:\Qt\5.2.0\mingw48_32\include\QtWebKit" -I"C:\Qt\5.2.0\mingw48_32\include\QtWidgets" -I"C:\Qt\5.2.0\mingw48_32\include\QtSensors" -I"C:\Qt\5.2.0\mingw48_32\include\QtNetwork" -I"C:\Qt\5.2.0\mingw48_32\include\QtGui" -I"C:\Qt\5.2.0\mingw48_32\include\QtCore" -I"release" -I"." -I"C:\Qt\5.2.0\mingw48_32\mkspecs\win32-g++"
+INCPATH       = -I..\graphic -I"..\graphic" -I"C:\Qt\5.2.0\mingw48_32\include" -I"C:\Qt\5.2.0\mingw48_32\include\QtWebKitWidgets" -I"C:\Qt\5.2.0\mingw48_32\include\QtMultimediaWidgets" -I"C:\Qt\5.2.0\mingw48_32\include\QtQuick" -I"C:\Qt\5.2.0\mingw48_32\include\QtPositioning" -I"C:\Qt\5.2.0\mingw48_32\include\QtOpenGL" -I"C:\Qt\5.2.0\mingw48_32\include\QtPrintSupport" -I"C:\Qt\5.2.0\mingw48_32\include\QtMultimedia" -I"C:\Qt\5.2.0\mingw48_32\include\QtQml" -I"C:\Qt\5.2.0\mingw48_32\include\QtWebKit" -I"C:\Qt\5.2.0\mingw48_32\include\QtWidgets" -I"C:\Qt\5.2.0\mingw48_32\include\QtSensors" -I"C:\Qt\5.2.0\mingw48_32\include\QtNetwork" -I"C:\Qt\5.2.0\mingw48_32\include\QtGui" -I"C:\Qt\5.2.0\mingw48_32\include\QtCore" -I"release" -I"." -I"C:\Qt\5.2.0\mingw48_32\mkspecs\win32-g++"
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -lmingw32 -lqtmain -LC:\Qt\5.2.0\mingw48_32\lib -lQt5WebKitWidgets -lQt5MultimediaWidgets -lQt5Quick -lQt5Positioning -lQt5OpenGL -lQt5PrintSupport -lQt5Multimedia -lQt5Qml -lQt5WebKit -lQt5Widgets -lQt5Sensors -lQt5Network -lQt5Gui -lQt5Core 
+LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -lmingw32 -lqtmain -L/. -lfmodex -LC:\Qt\5.2.0\mingw48_32\lib -lQt5WebKitWidgets -lQt5MultimediaWidgets -lQt5Quick -lQt5Positioning -lQt5OpenGL -lQt5PrintSupport -lQt5Multimedia -lQt5Qml -lQt5WebKit -lQt5Widgets -lQt5Sensors -lQt5Network -lQt5Gui -lQt5Core 
 QMAKE         = C:\Qt\5.2.0\mingw48_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -289,7 +289,6 @@ release/moc_controller.cpp: ../graphic/noskin.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtWidgets/qspinbox.h \
 		../graphic/configuration.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString \
-		C:/Qt/5.2.0/mingw48_32/include/rsa.h \
 		../graphic/controller.h
 	C:\Qt\5.2.0\mingw48_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 $(INCPATH) ..\graphic\controller.h -o release\moc_controller.cpp
 
@@ -468,7 +467,6 @@ release/moc_confwindow.cpp: C:/Qt/5.2.0/mingw48_32/include/QtWidgets/QMainWindow
 		../model/note.h \
 		../graphic/configuration.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString \
-		C:/Qt/5.2.0/mingw48_32/include/rsa.h \
 		../graphic/confwindow.h
 	C:\Qt\5.2.0\mingw48_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 $(INCPATH) ..\graphic\confwindow.h -o release\moc_confwindow.cpp
 
@@ -819,8 +817,7 @@ release/test.o: ../graphic/test.cpp ../graphic/noskin.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtWidgets/QSpinBox \
 		C:/Qt/5.2.0/mingw48_32/include/QtWidgets/qspinbox.h \
 		../graphic/configuration.h \
-		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString \
-		C:/Qt/5.2.0/mingw48_32/include/rsa.h
+		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\test.o ..\graphic\test.cpp
 
 release/controller.o: ../graphic/controller.cpp ../graphic/controller.h \
@@ -999,8 +996,7 @@ release/controller.o: ../graphic/controller.cpp ../graphic/controller.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtWidgets/QSpinBox \
 		C:/Qt/5.2.0/mingw48_32/include/QtWidgets/qspinbox.h \
 		../graphic/configuration.h \
-		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString \
-		C:/Qt/5.2.0/mingw48_32/include/rsa.h
+		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\controller.o ..\graphic\controller.cpp
 
 release/confwindow.o: ../graphic/confwindow.cpp ../graphic/confwindow.h \
@@ -1178,8 +1174,7 @@ release/confwindow.o: ../graphic/confwindow.cpp ../graphic/confwindow.h \
 		../model/chord.h \
 		../model/note.h \
 		../graphic/configuration.h \
-		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString \
-		C:/Qt/5.2.0/mingw48_32/include/rsa.h
+		C:/Qt/5.2.0/mingw48_32/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\confwindow.o ..\graphic\confwindow.cpp
 
 release/configuration.o: ../graphic/configuration.cpp ../graphic/configuration.h \
@@ -1226,8 +1221,7 @@ release/configuration.o: ../graphic/configuration.cpp ../graphic/configuration.h
 		C:/Qt/5.2.0/mingw48_32/include/QtCore/qrefcount.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.2.0/mingw48_32/include/QtCore/qarraydata.h \
-		C:/Qt/5.2.0/mingw48_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/5.2.0/mingw48_32/include/rsa.h
+		C:/Qt/5.2.0/mingw48_32/include/QtCore/qstringbuilder.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\configuration.o ..\graphic\configuration.cpp
 
 release/moc_controller.o: release/moc_controller.cpp 

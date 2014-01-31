@@ -13,7 +13,6 @@
 #include <QSpinBox>
 #include "noskin.h"
 #include "configuration.h"
-#include <rsa.h>
 
 /*!
  * \class ConfWindow confwindow.h

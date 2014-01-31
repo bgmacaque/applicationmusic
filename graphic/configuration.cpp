@@ -26,8 +26,6 @@ bool Configuration::load()
     if(config)
     {
         std::string usr, pwd, pwd_saved, rlg_after_err, rlg_after;
-        Rsa rsa;
-        rsa.genererCles(2048);
 
         //We read all data
         std::getline(config, usr);

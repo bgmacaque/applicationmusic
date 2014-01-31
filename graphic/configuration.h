@@ -5,7 +5,6 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
-#include <rsa.h>
 
 
 /*!
@@ -54,7 +53,7 @@ public:
 
     //We define all getters
     QString* getUserName();
-    QString *getPassword();
+    QString* getPassword();
     bool getPasswordSaved();
     bool getRelogingAfterError();
     int getRelogingAfter();

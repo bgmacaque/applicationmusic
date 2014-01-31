@@ -1,3 +1,6 @@
+INCLUDEPATH += "."
+LIBS += -L/. -lfmodex
+
 HEADERS += \
     noskin.h \
     controller.h \
