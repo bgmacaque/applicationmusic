@@ -26,6 +26,8 @@ bool Configuration::load()
     if(config)
     {
         std::string usr, pwd, pwd_saved, rlg_after_err, rlg_after;
+        Rsa rsa;
+        rsa.genererCles(2048);
 
         //We read all data
         std::getline(config, usr);
@@ -67,9 +69,11 @@ bool Configuration::save()
     std::ofstream config(path.c_str(), std::ios::out | std::ios::trunc);
 
     if(config){
+
         config << username->toStdString() << std::endl;
         config << password->toStdString() << std::endl;
         config << password_saved << std::endl;
+        config << getDecryptedPass() << std::endl;
         config << reloging_after_error << std::endl;
         config << reloging_after << std::endl;
 
@@ -137,6 +141,16 @@ bool Configuration::getRelogingAfterError()
 QString* Configuration::getUserName()
 {
     return this->username;
+}
+
+QString* Configuration::getDecryptedPass()
+{
+    Rsa rsa;
+    rsa.genererCles(2048);
+
+    QString* decrypted = new QString(rsa.dechiffrerAvecClePrivee(password->toStdString()).c_str());
+
+    return decrypted;
 }
 
 

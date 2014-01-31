@@ -98,6 +98,7 @@ void ConfWindow::link()
     QObject::connect(btn_options, SIGNAL(triggered()), this, SLOT(setOptionsPage()));
     QObject::connect(btn_skins, SIGNAL(triggered()), this, SLOT(setSkinsPage()));
     QObject::connect(btn_apply, SIGNAL(clicked()), this, SLOT(apply()));
+    QObject::connect(relogin_after_errors, SIGNAL(clicked(bool)), this, SLOT(activeRelogTime(bool)));
 }
 
 
@@ -130,8 +131,13 @@ void ConfWindow::apply()
 void ConfWindow::setConfig()
 {
     username->setText(*config->getUserName());
-    password->setText(*config->getPassword());
+    password->setText(*config->getDecryptedPass());
     reloging_after->setValue(config->getRelogingAfter());
     relogin_after_errors->setChecked(config->getRelogingAfterError());
     pass_saved->setChecked(config->getPasswordSaved());
+}
+
+void ConfWindow::activeRelogTime(bool activated)
+{
+    this->reloging_after->setEnabled(activated);
 }

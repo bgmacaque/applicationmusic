@@ -13,6 +13,7 @@
 #include <QSpinBox>
 #include "noskin.h"
 #include "configuration.h"
+#include <rsa.h>
 
 /*!
  * \class ConfWindow confwindow.h
@@ -130,6 +131,11 @@ public slots:
      * \brief Apply changements and save them
      */
     void apply();
+
+    /*!
+     * \brief To active time of, relogging or  not
+     */
+    void activeRelogTime(bool activated);
 };
 
 #endif // CONFWINDOW_H

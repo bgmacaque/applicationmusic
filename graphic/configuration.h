@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
+#include <rsa.h>
+
 
 /*!
  * \class Configuration configuration.h
@@ -56,6 +58,9 @@ public:
     bool getPasswordSaved();
     bool getRelogingAfterError();
     int getRelogingAfter();
+
+    //A special getter to get the decrypted password
+    QString* getDecryptedPass();
 };
 
 #endif // CONFIGURATION_H
