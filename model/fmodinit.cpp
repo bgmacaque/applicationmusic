@@ -14,7 +14,7 @@ FModInit::~FModInit(){
 std::string FModInit::release(){
     std::string retour = "";
     m_system->release();
-//    this->m_sound->release();
+    m_sound->release();
     return retour;
 }
 
@@ -42,52 +42,52 @@ std::string FModInit::init(){
         return retour;
     }
 
+
+
+    //Hard coded for tests but need to be used with parameters
+    result = m_system->setOutput(FMOD_OUTPUTTYPE_PULSEAUDIO);
+    retour = this->errorCheck(result);
+    if(retour != ""){
+        return retour;
+    }
+
+    //Hard coded too
+    result = m_system->setDriver(0);
+    retour = this->errorCheck(result);
+    if(retour != ""){
+        return retour;
+    }
+
+
+    //Also hard coded, it's bad
+    result = m_system->setSoftwareFormat(OUTPUTRATE, FMOD_SOUND_FORMAT_PCM16, 1, 0, FMOD_DSP_RESAMPLER_LINEAR);
+    retour = this->errorCheck(result);
+    if(retour != ""){
+        return retour;
+    }
+
     result = m_system->init(32, FMOD_INIT_NORMAL, 0);
     retour = this->errorCheck(result);
     if(retour != ""){
         return retour;
     }
 
-    //Hard coded for tests but need to be used with parameters
-//    result = m_system->setOutput(FMOD_OUTPUTTYPE_PULSEAUDIO);
+    m_system->getSoftwareFormat(&output_freq, 0,0,0,0,0);
+
+    //We know that we only have to use one sound
+    memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
+
+    exinfo.cbsize           = sizeof(FMOD_CREATESOUNDEXINFO);
+    exinfo.numchannels      = 1;
+    exinfo.format           = FMOD_SOUND_FORMAT_PCM16;
+    exinfo.defaultfrequency = OUTPUTRATE;
+    exinfo.length           = exinfo.defaultfrequency * sizeof(short) * exinfo.numchannels * 5;
+
+    result = m_system->createSound(0, FMOD_2D | FMOD_SOFTWARE | FMOD_LOOP_NORMAL | FMOD_OPENUSER, &exinfo, &m_sound);
     retour = this->errorCheck(result);
     if(retour != ""){
         return retour;
     }
-
-//        //Hard coded too
-//        result = m_system->setDriver(0);
-//        retour = this->errorCheck(result);
-//        if(retour != ""){
-//            return retour;
-//        }
-
-
-//        //Also hard coded, it's bad
-//        result = m_system->setSoftwareFormat(OUTPUTRATE, FMOD_SOUND_FORMAT_PCM16, 1, 0, FMOD_DSP_RESAMPLER_LINEAR);
-//        retour = this->errorCheck(result);
-//        if(retour != ""){
-//            return retour;
-//        }
-
-
-
-//        m_system->getSoftwareFormat(&output_freq, 0,0,0,0,0);
-
-//        //We know that we only have to use one sound
-//        memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
-
-//        exinfo.cbsize           = sizeof(FMOD_CREATESOUNDEXINFO);
-//        exinfo.numchannels      = 1;
-//        exinfo.format           = FMOD_SOUND_FORMAT_PCM16;
-//        exinfo.defaultfrequency = OUTPUTRATE;
-//        exinfo.length           = exinfo.defaultfrequency * sizeof(short) * exinfo.numchannels * 5;
-
-//        result = m_system->createSound(0, FMOD_2D | FMOD_SOFTWARE | FMOD_LOOP_NORMAL | FMOD_OPENUSER, &exinfo, &m_sound);
-//        retour = this->errorCheck(result);
-//        if(retour != ""){
-//            return retour;
-//        }
 
     return retour;
 }

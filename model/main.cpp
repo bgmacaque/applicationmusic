@@ -12,13 +12,16 @@ int main()
     Analyze *a = new Analyze();
 //    Note *note = a->getNote(7000.0f);
 //    cout << note->getDisplay() << endl;
-    delete a;
+//    delete a;
 
     FModInit *fmodLib = new FModInit();
     fmodLib->init();
+    a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
+//    delete fmodLib;
+    usleep(500*10000 + 200);
+    delete a;
     delete fmodLib;
 
-//    a->mainNote(fmodLib->getSystem(), fmodLib->getSound());
 //    Partition *p = new Partition();
 //     Note n("A4",440);
 //    vector<Note> *notes = new vector<Note>;
