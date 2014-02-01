@@ -1,8 +1,8 @@
 TEMPLATE = app
 CONFIG += console
 CONFIG -= qt
-INCLUDEPATH += "/usr/include"
-LIBS += -L/usr/lib -lfmodex
+INCLUDEPATH += "../"
+LIBS += -L/../ -lfmodex
 
 SOURCES += main.cpp \
     note.cpp \
