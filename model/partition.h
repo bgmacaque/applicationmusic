@@ -18,25 +18,27 @@ class Partition{
 
 private:
     //Chords that are in the partition
-    std::vector<Chord> m_chords;
+    std::vector<Chord*> m_chords;
+
+    int m_tempo;
 
 public:
     //Constructor that initialize an empty partition
     Partition();
-
+    Partition(int tempo);
     //Display the partition in text format (debug)
     std::string getDisplay();
 
     //Getter of the chords
-    std::vector<Chord> getChords() const;
+    std::vector<Chord*> getChords() const;
 
     //Method that add a Chord at the end of the Partition
-    void addChord(Chord chord);
+    void addChord(Chord *chord);
 
     //Method that play all the partition
     void play();
 
-    void save(char *path);
+    void save(const char *path);
 
     static Partition load();
 };

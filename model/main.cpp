@@ -9,6 +9,7 @@ using namespace std;
 
 int main()
 {
+    Partition *p = new Partition();
     Chord *c = new Chord();
     Note *n = new Note("A4", 440.0);
     Note *n2 = new Note("A5", 550);
@@ -17,9 +18,13 @@ int main()
 //    c->setDuration(10.0);
 //    c->setVolume(5.0);
     cout << c->save() << endl;
+    p->addChord(c);
+    string path = "./partition.kebab";
+    p->save(path.c_str());
     delete c;
     delete n;
     delete n2;
+    delete p;
 //    Analyze *a = new Analyze();
 ////    Note *note = a->getNote(7000.0f);
 ////    cout << note->getDisplay() << endl;
