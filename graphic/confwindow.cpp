@@ -131,7 +131,7 @@ void ConfWindow::apply()
 void ConfWindow::setConfig()
 {
     username->setText(*config->getUserName());
-    password->setText(*config->getDecryptedPass());
+    //password->setText(*config->getDecryptedPass());
     reloging_after->setValue(config->getRelogingAfter());
     relogin_after_errors->setChecked(config->getRelogingAfterError());
     pass_saved->setChecked(config->getPasswordSaved());

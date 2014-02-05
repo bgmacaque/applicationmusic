@@ -11,8 +11,9 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QComboBox>
+#include <QSpinBox>
 #include "../model/partition.h"
-//#include "../model/analyze.h"
+#include "../model/analyze.h"
 
 
 /*!
@@ -78,6 +79,32 @@ private:
     QAction *btn_options;
 
     /*!
+     * \brief btn_delete
+     */
+    QAction *btn_delete;
+
+    /*!
+     * \brief btn_new
+     */
+    QAction *btn_new;
+
+    /*!
+     * \brief btn_new
+     */
+    QAction *btn_new;
+
+    /*!
+     * \brief btn_forward
+     */
+    QAction *btn_forward, *btn_back;
+
+    QLineEdit *choice_name;
+
+    QComboBox *choice_difficulty;
+
+    QSpinBox *choice_tempo;
+
+    /*!
      * \brief Bar that contains buttons
      */
     QToolBar *bar;
@@ -90,7 +117,7 @@ private:
     /*!
      * \brief Analyze the input sound to determinate notes
      */
-     //Analyze *analyzer;
+     Analyze *analyzer;
 
      /*!
       * \brief A method to load all the icons of the top
@@ -112,7 +139,7 @@ private:
       * \brief Create the bottom toolbar
       * \return The bottom toolbar
       */
-     QToolBar createBottomBar();
+     QToolBar *createBottomBar();
 
 public:
     /*!

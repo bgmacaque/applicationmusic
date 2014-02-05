@@ -59,7 +59,7 @@ public:
     int getRelogingAfter();
 
     //A special getter to get the decrypted password
-    QString* getDecryptedPass();
+    //QString* getDecryptedPass();
 };
 
 #endif // CONFIGURATION_H

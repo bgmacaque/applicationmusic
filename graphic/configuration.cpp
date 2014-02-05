@@ -71,7 +71,7 @@ bool Configuration::save()
         config << username->toStdString() << std::endl;
         config << password->toStdString() << std::endl;
         config << password_saved << std::endl;
-        config << getDecryptedPass() << std::endl;
+        //config << getDecryptedPass() << std::endl;
         config << reloging_after_error << std::endl;
         config << reloging_after << std::endl;
 
@@ -141,14 +141,13 @@ QString* Configuration::getUserName()
     return this->username;
 }
 
-QString* Configuration::getDecryptedPass()
-{
-    Rsa rsa;
-    rsa.genererCles(2048);
+//QString* Configuration::getDecryptedPass()
+//{
+////    rsa.genererCles(2048);
 
-    QString* decrypted = new QString(rsa.dechiffrerAvecClePrivee(password->toStdString()).c_str());
+////    QString* decrypted = new QString(rsa.dechiffrerAvecClePrivee(password->toStdString()).c_str());
 
-    return decrypted;
-}
+////    return decrypted;
+//}
 
 

@@ -9,9 +9,9 @@ NoSkin::NoSkin(Partition *p, int minWidth = 600, int minHeight = 200): QMainWind
 NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
 {
     //Then we create other stuff
-    // analyzer = new Analyze();
+    ///analyzer = new Analyze;
 
-    //score = new Partition;
+    ///score = new Partition;
 
     //Now we set layout
     QVBoxLayout *main_lay = new QVBoxLayout(this);
@@ -75,5 +75,14 @@ void NoSkin::loadTopIcons()
 
 void NoSkin::loadBottomIcons()
 {
+    btn_delete = new QAction(QIcon(*icons_loc+QString("delete.png")));
+    btn_new = new QAction(QIcon(*icons_loc+QString("new.png")));
+    btn_forward = new QAction(QIcon(*icons_loc+QString("forward_arrow.png")));
+    btn_back = new QAction(QIcon(*icons_loc+QString("back_arrow.png")));
+    choice_name = new QLineEdit(this);
 
+
+    QComboBox *choice_difficulty;
+
+    QSpinBox *choice_tempo;
 }

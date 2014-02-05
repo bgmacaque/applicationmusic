@@ -1,13 +1,12 @@
 INCLUDEPATH += "."
 INCLUDEPATH += "../"
-LIBS += -L/../ -lfmodex
+#LIBS += -L/../ -lfmodex
 
 HEADERS += \
     noskin.h \
     controller.h \
     confwindow.h \
     configuration.h \
-    fmodinit.h
 
 
 SOURCES += \
@@ -16,7 +15,6 @@ SOURCES += \
     controller.cpp \
     confwindow.cpp \
     configuration.cpp \
-    fmodinit.cpp
 
 
 QT += core gui
