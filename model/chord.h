@@ -19,13 +19,16 @@ private:
     float m_duration;
     //The volume of the chord
     float m_volume;
+
+protected:
     //The notes of the chord
     std::vector<Note*> m_notes;
 
 public:
     //Constructor of a chord
-    Chord(std::vector<Note*> notes, float duration, float volume);
+    Chord(std::vector<Note*> p_notes, float p_duration, float p_volume);
     Chord();
+    Chord(float p_duration, float p_volume);
 
     //Getter of the duration
     double getDuration() const;

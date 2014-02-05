@@ -17,7 +17,6 @@ private:
     FMOD::System *m_system;
     FMOD::Sound *m_sound;
 
-
 public:
     FModInit();
     ~FModInit();

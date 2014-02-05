@@ -1,15 +1,19 @@
 #include "chord.h"
 
-Chord::Chord(std::vector<Note*> notes, float duration, float volume){
-    this->m_notes = notes;
-    this->m_volume = volume;
-    this->m_duration = duration;
+Chord::Chord(std::vector<Note*> p_notes, float p_duration, float p_volume){
+    m_notes = p_notes;
+    m_volume = p_volume;
+    m_duration = p_duration;
 }
 
 Chord::Chord(){
-//    this->m_notes
-    m_volume   = 0;
+    m_volume = 0;
     m_duration = 0;
+}
+
+Chord::Chord(float p_duration, float p_volume){
+    m_volume = p_volume;
+    m_duration = p_duration;
 }
 
 //Getter of the duration

@@ -46,13 +46,14 @@ void Note::setName(std::string name){
 /* @void play a note with a volume value equals to 'volume'*/
 void Note::play(float volume, float duration, FMOD::System *p_system, FMOD::Sound *p_sound){
     FMOD::Channel *channel = 0;
-    //Prendre le fichier
-    //Jouer le son
+    //Load the file with the name
+    //Play the sound
     p_system->playSound(FMOD_CHANNEL_REUSE, p_sound, 0, &channel);
-    //Changer le volume
+    //Set the volume
     channel->setVolume(volume);
-    //Arrêter de jouer
+    //Playing during the whole duration
     usleep(duration);
+    //Stop playing
     channel->stop();
 }
 
