@@ -56,6 +56,8 @@ QToolBar* NoSkin::createTopBar()
     tools->addSeparator();
 
     tools->addAction(btn_options);
+    tools->setStyleSheet("QToolBar {background-color : #dcdcdc;} ");
+    tools->setMovable(false);
 
     return tools;
 }
@@ -92,20 +94,40 @@ QToolBar* NoSkin::createBottomBar()
 
     QToolBar *bottom = new QToolBar("bottom", this);
     QVBoxLayout *lay = new QVBoxLayout;
-    QWidget tmp;
+    QWidget* tmp = new QWidget;
 
     bottom->addAction(btn_delete);
     bottom->addAction(btn_new);
     bottom->addAction(btn_back);
     bottom->addAction(btn_forward);
 
+    bottom->addSeparator();
+
     lay->addWidget(choice_name);
     lay->addWidget(choice_difficulty);
     lay->addWidget(choice_tempo);
 
-    tmp.setLayout(lay);
+    choice_name->setPlaceholderText(QString("Nom de la partition"));
 
-    bottom->addWidget(&tmp);
+    choice_difficulty->setMaximumWidth(150);
+    choice_name->setMaximumWidth(150);
+    choice_tempo->setMaximumWidth(150);
+
+    choice_difficulty->addItem("Facile");
+    choice_difficulty->addItem("Normal");
+    choice_difficulty->addItem("Difficile");
+    choice_difficulty->addItem("Maxi-Hardcore");
+
+    tmp->setLayout(lay);
+
+    bottom->addWidget(tmp);
+
+//    bottom->addWidget(choice_name);
+//    bottom->addWidget(choice_tempo);
+//    bottom->addWidget(choice_difficulty);
+
+    bottom->setMovable(false);
+    bottom->setStyleSheet("QToolBar {background-color : #dcdcdc;} ");
 
     return bottom;
 }
