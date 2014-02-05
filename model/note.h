@@ -38,6 +38,8 @@ public:
 
     //Display the note(Debug only)
     std::string getDisplay();
+
+    std::string save();
 };
 
 #endif // NOTE_H

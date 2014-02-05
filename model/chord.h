@@ -20,11 +20,12 @@ private:
     //The volume of the chord
     float m_volume;
     //The notes of the chord
-    std::vector<Note> m_notes;
+    std::vector<Note*> m_notes;
 
 public:
     //Constructor of a chord
-    Chord(std::vector<Note> notes, float duration, float volume);
+    Chord(std::vector<Note*> notes, float duration, float volume);
+    Chord();
 
     //Getter of the duration
     double getDuration() const;
@@ -39,8 +40,12 @@ public:
     //Method which allows to play notes 
     void play(FMOD::System *p_system, FMOD::Sound *p_sound);
 
+    void addNote(Note *n);
+
     //Method used to display the chord(Debug)
     std::string getDisplay();
+
+    std::string save();
 
 };
 

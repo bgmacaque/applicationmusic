@@ -3,6 +3,8 @@
 #include "chord.h"
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 
 /*!
@@ -33,6 +35,10 @@ public:
 
     //Method that play all the partition
     void play();
+
+    void save(char *path);
+
+    static Partition load();
 };
 
 #endif // PARTITION_H

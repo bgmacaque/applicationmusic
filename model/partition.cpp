@@ -16,6 +16,18 @@ void Partition::play(){
 
 }
 
+void Partition::save(char *path){
+    std::ofstream config(path, std::ios::out | std::ios::trunc);
+
+    if(config){
+
+    }
+}
+
+Partition Partition::load(){
+
+}
+
 std::string Partition::getDisplay(){
     unsigned int i;
     std::string retour("");
