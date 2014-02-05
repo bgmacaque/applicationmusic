@@ -17,10 +17,14 @@ int main()
     c->addNote(n2);
 //    c->setDuration(10.0);
 //    c->setVolume(5.0);
-    cout << c->save() << endl;
+//    cout << c->save() << endl;
     p->addChord(c);
+    Chord *c2 = new Chord();
+    c2->addNote(n);
+    p->addChord(c2);
     string path = "./partition.kebab";
     p->save(path.c_str());
+    p = Partition::load(path.c_str());
     delete c;
     delete n;
     delete n2;

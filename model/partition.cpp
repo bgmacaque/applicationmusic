@@ -21,28 +21,51 @@ void Partition::play(){
 }
 
 void Partition::save(const char *path){
-    std::ofstream config(path, std::ios::out | std::ios::trunc);
+    std::ofstream file(path, std::ios::out | std::ios::trunc);
     unsigned int i;
-    if(config){
+    if(file.is_open()){
         //Opening the partition
-        config << "{" << std::endl;
+        file << "{" << std::endl;
         //Opening the chords
-        config << "\t\"Chords\" : " << std::endl << "\t{" << std::endl;
+        file << "\t\"Chords\" : " << std::endl << "\t{" << std::endl;
         for(i = 0; i < m_chords.size() ; i++){
-            config << m_chords.at(i)->save();
+            file << m_chords.at(i)->save();
             if(i != m_chords.size() - 1){
-                config << ",";
+                file << ",";
             }
-            config << std::endl;
+            file << std::endl;
         }
         //Closing the chords
-        config << "\t}" << std::endl;
-        config << "}" << std::endl;
+        file << "\t}" << std::endl;
+        file << "}" << std::endl;
+        file.close();
     }
 }
 
-Partition Partition::load(){
+Partition *Partition::load(const char *path){
+    Partition *p = new Partition();
+    std::ifstream file(path, std::ios::in);
+    std::string line;
+    unsigned int level(0);
+    if(file.is_open()){
 
+        while(std::getline(file, line)){
+//            std::cout << line << std::endl;
+            if(line.compare("{")){
+                level++;
+            }
+
+            if(1){
+                level = level - 1;
+            }
+//            std::cout << level << std::endl;
+        }
+        if(level != 0){
+//            std::cout << "JSON parse error" << std::endl;
+        }
+        file.close();
+    }
+    return p;
 }
 
 std::string Partition::getDisplay(){

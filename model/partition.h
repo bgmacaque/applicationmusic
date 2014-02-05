@@ -40,7 +40,7 @@ public:
 
     void save(const char *path);
 
-    static Partition load();
+    static Partition* load(const char *path);
 };
 
 #endif // PARTITION_H

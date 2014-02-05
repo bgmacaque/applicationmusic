@@ -75,7 +75,7 @@ std::string Chord::save(){
     retour.append("{\n");
     retour.append("\t" + volume + "\n");
     retour.append("\t" + duration + "\n");
-    retour.append("\t\"notes : ");
+    retour.append("\t\"notes\" : ");
     retour.append("{");
     for(i = 0; i < m_notes.size() ; i++){
         retour += m_notes.at(i)->save();
