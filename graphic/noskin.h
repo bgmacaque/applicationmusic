@@ -12,6 +12,7 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QSpinBox>
+#include <QLineEdit>
 #include "../model/partition.h"
 #include "../model/analyze.h"
 
@@ -88,10 +89,6 @@ private:
      */
     QAction *btn_new;
 
-    /*!
-     * \brief btn_new
-     */
-    QAction *btn_new;
 
     /*!
      * \brief btn_forward
@@ -105,9 +102,14 @@ private:
     QSpinBox *choice_tempo;
 
     /*!
-     * \brief Bar that contains buttons
+     * \brief Bar that contains top buttons
      */
-    QToolBar *bar;
+    QToolBar *topBar;
+
+    /*!
+     * \brief Bar that contains bottom buttons
+     */
+    QToolBar *bottomBar;
 
     /*!
      * \brief The partitiion currently showed

@@ -10,15 +10,18 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
 {
     //Then we create other stuff
     ///analyzer = new Analyze;
-
     ///score = new Partition;
+    icons_loc = new QString("../Images/Icons/");
 
     //Now we set layout
     QVBoxLayout *main_lay = new QVBoxLayout(this);
 
-    //We add the toolbar
-    bar = this->createTopBar();
-    this->addToolBar(bar);
+    //We add toolbars
+    topBar = this->createTopBar();
+    this->addToolBar(topBar);
+
+    bottomBar = this->createBottomBar();
+    this->addToolBar(Qt::BottomToolBarArea, bottomBar);
 
     //We add the right bar
     //main_lay->addLayout(this->noteModifier());
@@ -31,7 +34,6 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
 
 QToolBar* NoSkin::createTopBar()
 {
-    icons_loc = new QString("../Images/Icons/");
     this->loadTopIcons();
 
     QToolBar *tools = new QToolBar("Top toolbar", this);
@@ -75,14 +77,35 @@ void NoSkin::loadTopIcons()
 
 void NoSkin::loadBottomIcons()
 {
-    btn_delete = new QAction(QIcon(*icons_loc+QString("delete.png")));
-    btn_new = new QAction(QIcon(*icons_loc+QString("new.png")));
-    btn_forward = new QAction(QIcon(*icons_loc+QString("forward_arrow.png")));
-    btn_back = new QAction(QIcon(*icons_loc+QString("back_arrow.png")));
+    btn_delete = new QAction(QIcon(*icons_loc+QString("delete.png")), "", this);
+    btn_new = new QAction(QIcon(*icons_loc+QString("new.png")), "", this);
+    btn_forward = new QAction(QIcon(*icons_loc+QString("forward_arrow.png")), "", this);
+    btn_back = new QAction(QIcon(*icons_loc+QString("back_arrow.png")), "", this);
     choice_name = new QLineEdit(this);
+    choice_difficulty = new QComboBox(this);
+    choice_tempo = new QSpinBox(this);
+}
 
+QToolBar* NoSkin::createBottomBar()
+{
+    this->loadBottomIcons();
 
-    QComboBox *choice_difficulty;
+    QToolBar *bottom = new QToolBar("bottom", this);
+    QVBoxLayout *lay = new QVBoxLayout;
+    QWidget tmp;
 
-    QSpinBox *choice_tempo;
+    bottom->addAction(btn_delete);
+    bottom->addAction(btn_new);
+    bottom->addAction(btn_back);
+    bottom->addAction(btn_forward);
+
+    lay->addWidget(choice_name);
+    lay->addWidget(choice_difficulty);
+    lay->addWidget(choice_tempo);
+
+    tmp.setLayout(lay);
+
+    bottom->addWidget(&tmp);
+
+    return bottom;
 }
