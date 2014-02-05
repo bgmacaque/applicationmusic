@@ -64,3 +64,10 @@ std::string Note::getDisplay(){
         return m_name;
     }
 }
+
+//Return a string of a saved notes
+std::string Note::save(){
+    std::string retour = "";
+    retour += "\"" + m_name + "\"";
+    return retour;
+}

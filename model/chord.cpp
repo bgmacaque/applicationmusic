@@ -1,9 +1,15 @@
 #include "chord.h"
 
-Chord::Chord(std::vector<Note> notes, float duration, float volume){
+Chord::Chord(std::vector<Note*> notes, float duration, float volume){
     this->m_notes = notes;
     this->m_volume = volume;
     this->m_duration = duration;
+}
+
+Chord::Chord(){
+//    this->m_notes
+    m_volume   = 0;
+    m_duration = 0;
 }
 
 //Getter of the duration
@@ -28,7 +34,7 @@ void Chord::setVolume(double volume){
 void Chord::play(FMOD::System *p_system, FMOD::Sound *p_sound){
     unsigned int i;
     for(i = 0 ; i < m_notes.size() ; i++){
-        m_notes[i].play(m_volume, m_duration, p_system, p_sound);
+        m_notes.at(i)->play(m_volume, m_duration, p_system, p_sound);
     }
 }
 
@@ -37,11 +43,51 @@ std::string Chord::getDisplay(){
     std::string retour("[");
     unsigned int i;
     for(i = 0; i < m_notes.size(); i++){
-        retour.append(m_notes.at(i).getDisplay());
+        retour.append(m_notes.at(i)->getDisplay());
         if(i != m_notes.size() - 1){
             retour.append(",");
         }
     }
     retour.append("]");
     return retour;
+}
+
+//Return  a string of a saved chord
+std::string Chord::save(){
+    std::string retour = "";
+    std::string volume = "\"volume\" : ";
+    std::string duration = "\"duration\" : ";
+    unsigned int i;
+
+
+    if(!m_volume){
+        volume += "0";
+    }else{
+        volume += m_volume;
+    }
+    volume += ", ";
+    if(!m_duration){
+        duration += "0";
+    }else{
+        duration += m_duration;
+    }
+    duration.append(", ");
+    retour.append("{\n");
+    retour.append("\t" + volume + "\n");
+    retour.append("\t" + duration + "\n");
+    retour.append("\t\"notes : ");
+    retour.append("{");
+    for(i = 0; i < m_notes.size() ; i++){
+        retour += m_notes.at(i)->save();
+        if(i != m_notes.size() - 1){
+            retour.append(",");
+        }
+    }
+    retour.append("}\n");
+    retour.append("}");
+    return retour;
+}
+
+void Chord::addNote(Note *n){
+    m_notes.push_back(n);
 }
