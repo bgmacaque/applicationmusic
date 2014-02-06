@@ -13,8 +13,8 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QLineEdit>
-#include "../model/partition.h"
-#include "../model/analyze.h"
+#include "partition.h"
+#include "analyze.h"
 
 
 /*!

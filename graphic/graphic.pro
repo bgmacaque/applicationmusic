@@ -1,5 +1,5 @@
-INCLUDEPATH += "."
 INCLUDEPATH += "../"
+INCLUDEPATH += "../model/"
 #LIBS += -L/../ -lfmodex
 
 HEADERS += \
@@ -7,6 +7,7 @@ HEADERS += \
     controller.h \
     confwindow.h \
     configuration.h \
+    dbconnection.h \
 
 
 SOURCES += \
@@ -15,11 +16,13 @@ SOURCES += \
     controller.cpp \
     confwindow.cpp \
     configuration.cpp \
+    dbconnection.cpp \
 
 
 QT += core gui
 QT += webkit
 QT += webkitwidgets
+QT += sql
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
