@@ -40,6 +40,8 @@ public:
 
     void save(const char *path);
 
+    std::string toJSON();
+
     static Partition* load(const char *path);
 };
 

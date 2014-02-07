@@ -20,24 +20,30 @@ void Partition::play(){
 
 }
 
+std::string Partition::toJSON(){
+    std::string retour = "";
+    retour += "{\n";
+    retour += "\t\"Chords\" : \n\t{\n";
+    unsigned int i;
+    for(i = 0; i < m_chords.size() ; i++){
+        retour += m_chords.at(i)->save();
+        if(i != m_chords.size() - 1){
+            retour += ",";
+        }
+        retour += "\n";
+    }
+    retour += "\t}\n";
+    retour += "}\n";
+    return retour;
+}
+
 void Partition::save(const char *path){
     std::ofstream file(path, std::ios::out | std::ios::trunc);
-    unsigned int i;
+
     if(file.is_open()){
         //Opening the partition
-        file << "{" << std::endl;
-        //Opening the chords
-        file << "\t\"Chords\" : " << std::endl << "\t{" << std::endl;
-        for(i = 0; i < m_chords.size() ; i++){
-            file << m_chords.at(i)->save();
-            if(i != m_chords.size() - 1){
-                file << ",";
-            }
-            file << std::endl;
-        }
-        //Closing the chords
-        file << "\t}" << std::endl;
-        file << "}" << std::endl;
+        file << this->toJSON();
+
         file.close();
     }
 }
