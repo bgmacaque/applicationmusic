@@ -1,5 +1,8 @@
 INCLUDEPATH += "../"
 INCLUDEPATH += "../model/"
+TEMPLATE = app
+CONFIG += console
+
 #LIBS += -L/../ -lfmodex
 
 HEADERS += \
@@ -17,6 +20,9 @@ SOURCES += \
     confwindow.cpp \
     configuration.cpp \
     dbconnection.cpp \
+    ../model/partition.cpp \
+    ../model/chord.cpp \
+    ../model/note.cpp \
 
 
 QT += core gui

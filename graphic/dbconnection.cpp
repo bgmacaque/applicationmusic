@@ -37,12 +37,12 @@ Partition DBConnection::select(int id)
 {
     QString q("SELECT * FROM Partitions WHERE part_id = :id");
 
-    QSqlQuery query(base);
-    query.prepare(q);
-    query.bindValue(":id", id);
+    QSqlQuery *query = new QSqlQuery(*base);
+    query->prepare(q);
+    query->bindValue(":id", id);
 
-    query.exec();
-    QString s = query.boundValue(0).toString();
+    query->exec();
+    QString s = query->boundValue(0).toString();
 
     Partition *p; //= new Partition(0);
     return *p;
@@ -51,11 +51,11 @@ Partition DBConnection::select(int id)
 bool DBConnection::insert(Partition p)
 {
     QString q("INSERT INTO Partitions(part_name, part_file) VALUES (:part_name, :part_file)");
-    QSqlQuery query(base);
+    QSqlQuery query(*base);
 
     query.prepare(q);
-    query.bindValue(":part_name", p);
-    query.bindValue(":part_file", p.toJson());
+    query.bindValue(":part_name", p.getName().c_str());
+    query.bindValue(":part_file", p.toJSON().c_str());
 
     return query.exec();
 }
