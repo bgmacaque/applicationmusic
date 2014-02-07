@@ -33,12 +33,29 @@ DBConnection::DBConnection(std::string file)
     }
 }
 
-Partition DBConnection::DBConnection::select(int id)
+Partition DBConnection::select(int id)
 {
-    QString query("SELECT * FROM Partitions WHERE part_id = "+id);
-    QSqlQuery res = base->exec(query);
-    QString s = res.boundValue(0).toString();
+    QString q("SELECT * FROM Partitions WHERE part_id = :id");
 
-    Partition *p = new Partition(0);
+    QSqlQuery query(base);
+    query.prepare(q);
+    query.bindValue(":id", id);
+
+    query.exec();
+    QString s = query.boundValue(0).toString();
+
+    Partition *p; //= new Partition(0);
     return *p;
+}
+
+bool DBConnection::insert(Partition p)
+{
+    QString q("INSERT INTO Partitions(part_name, part_file) VALUES (:part_name, :part_file)");
+    QSqlQuery query(base);
+
+    query.prepare(q);
+    query.bindValue(":part_name", p);
+    query.bindValue(":part_file", p.toJson());
+
+    return query.exec();
 }
