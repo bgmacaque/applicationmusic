@@ -2,6 +2,7 @@
 #define NOTE_H
 #include <string>
 #include <fmod.hpp>
+#include <unistd.h>
 
 /*!
  * \class Note note.h
