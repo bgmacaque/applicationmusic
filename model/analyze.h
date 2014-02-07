@@ -24,12 +24,12 @@ public:
     /*!
      * \brief Give the main note of what is recorded by the microphone
      */
-    void mainNote(FMOD::System *p_system, FMOD::Sound *p_sound);
+    void mainNote(FMOD::System *p_system, FMOD::Sound *p_sound, int *diff);
 
     /*!
      * \brief Give the note that correspond to the frequency
      */
-    Note *getNote(float frequency);
+    Note *getNote(float frequency, int *diff);
 
     /*!
      * \brief Sort the table places with the values in spectrum

@@ -55,7 +55,7 @@ Analyze::~Analyze(){
 
 
 
-void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
+void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound, int *diff){
     bool tune = true;
     float spectrum[SPECTRUM_SIZE], max(0), freqMax(0);
     int result(0), i(0), j(0), indexMax(0);
@@ -67,31 +67,29 @@ void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound){
 
     result = p_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &channel);
     result = channel->setVolume(0);
-    for(j=0;j<5000;j++){
-        result = channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
-        if(result != FMOD_OK){
-            cout << result << endl;
-        }
-        max = 0;
-        freqMax = 0;
-        for(i = 0; i < SPECTRUM_SIZE; i++){
-            if(spectrum[i] > max){
-                max = spectrum[i];
-                indexMax = i;
-//                cout << spectrum[i] << "," << max << "," << i<< endl;
-            }
-        }
-//        cout << n->getDisplay() << endl;
-        freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)8192);
-        n = getNote(freqMax);
-//        cout << freqMax << endl;
-        if(n != 0){
-            cout << n->getDisplay() << endl;
-        }
-        n = 0;
-        p_system->update();
-        usleep(1000);
+    result = channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
+    if(result != FMOD_OK){
+        cout << result << endl;
     }
+    max = 0;
+    freqMax = 0;
+    for(i = 0; i < SPECTRUM_SIZE; i++){
+        if(spectrum[i] > max){
+            max = spectrum[i];
+            indexMax = i;
+//                cout << spectrum[i] << "," << max << "," << i<< endl;
+        }
+    }
+//        cout << n->getDisplay() << endl;
+    freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)8192);
+    n = getNote(freqMax, diff);
+    cout << freqMax << endl;
+    if(n != 0){
+        cout << n->getDisplay() << endl;
+    }
+    n = 0;
+    p_system->update();
+    usleep(1000);
 }
 
 void Analyze::sort(int places[], float spectrum[], int size, int inf, int sup){
@@ -128,7 +126,7 @@ int Analyze::place(float spectrum[], int size, int inf, int sup){
 
 
 
-Note* Analyze::getNote(float frequency){
+Note* Analyze::getNote(float frequency, int *diff){
     Note *n = 0;
     if(frequency < (notes[0]->getFrequency() + notes[1]->getFrequency()) / 2){
         return notes[0];
@@ -166,10 +164,16 @@ Note* Analyze::getNote(float frequency){
         }
         if(diffMax <= diffMin){
             n = notes[max];
+            if(diff != 0){
+                *diff = diffMax;
+                cout << *diff << "," << diffMax << endl;
+            }
         }else{
             n = notes[min];
+            if(diff != 0){
+                *diff = diffMin;
+            }
         }
-
     }
     return n;
 }

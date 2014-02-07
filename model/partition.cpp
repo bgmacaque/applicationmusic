@@ -16,6 +16,14 @@ void Partition::addChord(Chord *chord){
     this->m_chords.push_back(chord);
 }
 
+void Partition::setName(std::string p_name){
+    m_name = p_name;
+}
+
+std::string Partition::getName(){
+    return m_name;
+}
+
 void Partition::play(){
 
 }
@@ -43,7 +51,6 @@ void Partition::save(const char *path){
     if(file.is_open()){
         //Opening the partition
         file << this->toJSON();
-
         file.close();
     }
 }

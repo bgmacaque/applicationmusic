@@ -22,6 +22,8 @@ private:
 
     int m_tempo;
 
+    std::string m_name;
+
 public:
     //Constructor that initialize an empty partition
     Partition();
@@ -41,6 +43,9 @@ public:
     void save(const char *path);
 
     std::string toJSON();
+
+    std::string getName();
+    void setName(std::string p_name);
 
     static Partition* load(const char *path);
 };
