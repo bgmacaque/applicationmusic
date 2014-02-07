@@ -10,7 +10,17 @@ using namespace std;
 int main()
 {
 //    Partition *p = new Partition();
-//    Analyze *a = new Analyze();
+    Analyze *a = new Analyze();
+    FModInit *fmodlib = new FModInit();
+    fmodlib->init();
+    int diff(0);
+    int i(0);
+    for(i = 0 ; i < 5000 ; i++){
+        a->mainNote(fmodlib->getSystem(), fmodlib->getSound(), &diff);
+        cout << "Différence : " << diff << endl;
+    }
+    delete fmodlib;
+    delete a;
 //    Chord *c = new Chord();
 //    Note *n = new Note("A4", 440.0);
 //    Note *n2 = a->getNote(1337.0);
