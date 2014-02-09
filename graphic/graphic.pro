@@ -3,7 +3,7 @@ INCLUDEPATH += "../model/"
 TEMPLATE = app
 CONFIG += console
 
-#LIBS += -L/../ -lfmodex
+LIBS += -L/../ -lfmodex
 
 HEADERS += \
     noskin.h \
@@ -11,6 +11,9 @@ HEADERS += \
     confwindow.h \
     configuration.h \
     dbconnection.h \
+    ../model/partition.h \
+    ../model/chord.h \
+    ../model/note.h \
 
 
 SOURCES += \
@@ -26,8 +29,6 @@ SOURCES += \
 
 
 QT += core gui
-QT += webkit
-QT += webkitwidgets
 QT += sql
 
 
