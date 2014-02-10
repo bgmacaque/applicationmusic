@@ -1,8 +1,6 @@
 #include "analyze.h"
-#include <iostream>
-#define SPECTRUM_SIZE 8192
 
-using namespace std;
+#define SPECTRUM_SIZE 8192
 
 static const char *note[120] =
 {
@@ -59,22 +57,18 @@ void Analyze::init(FMOD::System *p_system, FMOD::Sound *p_sound){
     int result(0);
     result = m_system->recordStart(0, m_sound, true);
     result = m_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &m_channel);
+//    result = m_channel->setVolume(0);
 }
 
 
-void Analyze::mainNote(int *diff){
+void Analyze::mainNote(Note *note, float *diff){
     float spectrum[SPECTRUM_SIZE], max(0), freqMax(0);
-    int result(0), i(0), j(0), indexMax(0);
+    int result(0), i(0), indexMax(0);
     Note *n = 0;
-//    result = m_system->recordStart(0, m_sound, true);
-
     usleep(200);
-
-
-    result = m_channel->setVolume(0);
     result = m_channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
     if(result != FMOD_OK){
-        cout << result << endl;
+        std::cout << result << std::endl;
     }
     max = 0;
     freqMax = 0;
@@ -82,16 +76,14 @@ void Analyze::mainNote(int *diff){
         if(spectrum[i] > max){
             max = spectrum[i];
             indexMax = i;
-//            cout << spectrum[i] << "," << max << "," << i<< endl;
         }
-//        cout << spectrum[i] << "," ;
     }
     freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)8192);
-    cout << freqMax << endl;
     n = getNote(freqMax, diff);
-    cout << "Fréquence trouvée : " << freqMax << endl;
     if(n != 0){
-        cout << n->getDisplay() << endl;
+        note->setFrequency(n->getFrequency());
+        note->setName(n->getName());
+        std::cout << n->getDisplay() << std::endl;
     }
 //    delete channel;
 }
@@ -104,7 +96,7 @@ void Analyze::sort(int places[], float spectrum[], int inf, int sup){
         unsigned int i;
         for(i = 0 ; i < SPECTRUM_SIZE ; i++){
             places[i] = i;
-        cout << places[i] << endl;
+            std::cout << places[i] << std::endl;
         }
     }
     if(inf < sup){
@@ -116,30 +108,29 @@ void Analyze::sort(int places[], float spectrum[], int inf, int sup){
 
 
 int Analyze::place(int places[], const float spectrum[], int inf, int sup){
-//    int inda = inf;
-//    float temp;
-//    float a = spectrum[inf];
-//    inf--;
-//    while(sup >= inf){
-//        if(spectrum[inf] > a){
-//            while(sup >= inf || spectrum[sup] > a){
-//                sup--;
-//            }
-//            temp = spectrum[sup];
-//            spectrum[sup] = spectrum[inf];
-//            spectrum[inf] = temp;
-//            sup--;
-//        }
-//        inf--;
-//    }
-//    temp = spectrum[sup];
-//    spectrum[sup] = spectrum[inda];
-//    spectrum[inda] = temp;
+    float temp;
+    int inda = inf;
+    float a = spectrum[inf];
+    while(sup >= inf){
+        if(spectrum[places[inf]] > a){
+            while(sup >= inf || spectrum[places[inf]] > a){
+                sup--;
+            }
+            temp = places[sup];
+            places[sup] = places[inf];
+            places[inf] = temp;
+            sup--;
+        }
+        inf--;
+    }
+    temp = places[sup];
+    places[sup] = places[inda];
+    places[inda] = temp;
 }
 
 
 
-Note* Analyze::getNote(float frequency, int *diff){
+Note* Analyze::getNote(float frequency, float *diff){
     Note *n = 0;
     if(frequency < (m_notes[0]->getFrequency() + m_notes[1]->getFrequency()) / 2){
         return m_notes[0];
@@ -179,12 +170,13 @@ Note* Analyze::getNote(float frequency, int *diff){
             n = m_notes[max];
             if(diff != 0){
                 *diff = diffMax;
-                cout << *diff << "," << diffMax << endl;
+//                std::cout << "Différence : " << *diff << ", note : " << m_notes[max]->getFrequency() << " fréquence : " <<  frequency << std::endl;
             }
         }else{
             n = m_notes[min];
             if(diff != 0){
                 *diff = diffMin;
+//                std::cout << "Différence : " << *diff << ", note : " << m_notes[max]->getFrequency() << " fréquence : " <<  frequency << std::endl;
             }
         }
     }

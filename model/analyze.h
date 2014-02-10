@@ -4,6 +4,7 @@
 #include "note.h"
 #include "partition.h"
 #include <vector>
+#include <iostream>
 
 /*!
  * \class Analyze analyze.h
@@ -27,7 +28,7 @@ public:
     /*!
      * \brief Give the main note of what is recorded by the microphone
      */
-    void mainNote(int *diff);
+    void mainNote(Note *note, float *diff);
 
     /*!
      * \brief Method used to init the FMOD
@@ -37,7 +38,7 @@ public:
     /*!
      * \brief Give the note that correspond to the frequency
      */
-    Note *getNote(float frequency, int *diff);
+    Note *getNote(float frequency, float *diff);
 
     /*!
      * \brief Sort the table places with the values in spectrum

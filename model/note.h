@@ -30,9 +30,9 @@ public:
     std::string getName() const;
 
     //Setter of frequency
-    void setFrequency(int frequency);
+    void setFrequency(float frequency);
     //Getter of frequency
-    int getFrequency() const;
+    float getFrequency() const;
 
     //Play the note
     void play(float volume, float duration, FMOD::System *p_system, FMOD::Sound *p_sound);
