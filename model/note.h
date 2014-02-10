@@ -1,7 +1,7 @@
 #ifndef NOTE_H
 #define NOTE_H
 #include <string>
-#include <FMOD/fmod.hpp>
+#include <fmod.hpp>
 #include <unistd.h>
 
 /*!

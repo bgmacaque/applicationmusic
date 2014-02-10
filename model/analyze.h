@@ -1,6 +1,6 @@
 #ifndef ANALYZE_H
 #define ANALYZE_H
-#include <FMOD/fmod.hpp>
+#include <fmod.hpp>
 #include "note.h"
 #include <vector>
 #include <iostream>
