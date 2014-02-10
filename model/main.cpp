@@ -14,15 +14,18 @@ int main(int argc, char **argv)
     Analyze *a = new Analyze();
     Note *note = new Note();
     a->init(fmodlib->getSystem(), fmodlib->getSound());
-    usleep(200);
+    usleep(1000);
     int i = 0;
-    float diff;
-    for(i = 0 ; i < 50 ; i++){
+    float diff(0.0);
+    note->setName("C0");
+    while(note->getName() == "C0"){
         a->mainNote(note, &diff);
-        cout << "Note : " << note->getDisplay();
-        cout << ", différence : " << diff;
+//        cout << "Note : " << note->getDisplay();
+//        cout << ", différence : " << diff;
+//
         cout << endl;
         usleep(1000 * 1000);
+        diff = 0;
     }
     delete a;
     delete note;

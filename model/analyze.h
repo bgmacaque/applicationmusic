@@ -2,7 +2,6 @@
 #define ANALYZE_H
 #include <fmod.hpp>
 #include "note.h"
-#include "partition.h"
 #include <vector>
 #include <iostream>
 
@@ -35,6 +34,8 @@ public:
      */
     void init(FMOD::System *p_system, FMOD::Sound *p_sound);
 
+    int *placesForSpectrum();
+
     /*!
      * \brief Give the note that correspond to the frequency
      */
@@ -49,11 +50,6 @@ public:
      * \brief Method used in sort
      */
     int place(int places[], const float spectrum[], int inf, int sup);
-
-    /*!
-     * \brief Record a partition
-     */
-    void record(Partition tab);
 };
 
 #endif // ANALYZE_H
