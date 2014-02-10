@@ -24,6 +24,10 @@ std::string Partition::getName(){
     return m_name;
 }
 
+void Partition::record(Analyze *a){
+
+}
+
 void Partition::play(){
 
 }
