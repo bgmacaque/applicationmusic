@@ -7,23 +7,27 @@
 #include "fmodinit.h"
 using namespace std;
 
-int main()
+int main(int argc, char **argv)
 {
-//    Partition *p = new Partition();
+
     Analyze *a = new Analyze();
-    FModInit *fmodlib = new FModInit();
-    fmodlib->init();
-    int diff(0);
-    int i(0);
-    a->init(fmodlib->getSystem(), fmodlib->getSound());
-    for(i = 0 ; i < 500 ; i++){
-        a->mainNote(&diff);
-        cout << "Différence : " << diff << endl;
-        usleep(100);
-    }
-    cout << "FIN" << endl;
-    delete fmodlib;
-    delete a;
+    a->sort(0, 0, 0, 8191);
+    //    a->place(
+//    Partition *p = new Partition();
+//    Analyze *a = new Analyze();
+//    FModInit *fmodlib = new FModInit();
+//    fmodlib->init();
+//    int diff(0);
+//    int i(0);
+//    a->init(fmodlib->getSystem(), fmodlib->getSound());
+//    for(i = 0 ; i < 500 ; i++){
+//        a->mainNote(&diff);
+//        cout << "Différence : " << diff << endl;
+//        usleep(100);
+//    }
+//    cout << "FIN" << endl;
+//    delete fmodlib;
+//    delete a;
 //    Chord *c = new Chord();
 //    Note *n = new Note("A4", 440.0);
 //    Note *n2 = a->getNote(1337.0);

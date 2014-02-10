@@ -42,12 +42,12 @@ public:
     /*!
      * \brief Sort the table places with the values in spectrum
      */
-    void sort(int places[], float spectrum[], int size, int inf, int sup);
+    void sort(int places[], float spectrum[], int inf, int sup);
 
     /*!
      * \brief Method used in sort
      */
-    int place(float spectrum[], int size, int inf, int sup);
+    int place(int places[], const float spectrum[], int inf, int sup);
 
     /*!
      * \brief Record a partition

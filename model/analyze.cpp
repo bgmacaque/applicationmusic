@@ -96,36 +96,45 @@ void Analyze::mainNote(int *diff){
 //    delete channel;
 }
 
-void Analyze::sort(int places[], float spectrum[], int size, int inf, int sup){
+void Analyze::sort(int places[], float spectrum[], int inf, int sup){
     int index;
+    //If it's the first call
+    if(inf == 0 && sup == (SPECTRUM_SIZE - 1)){
+        places = new int[SPECTRUM_SIZE];
+        unsigned int i;
+        for(i = 0 ; i < SPECTRUM_SIZE ; i++){
+            places[i] = i;
+        cout << places[i] << endl;
+        }
+    }
     if(inf < sup){
         index = (inf + sup) / 2;
-        this->sort(places, spectrum, size, inf, index - 1);
-        this->sort(places, spectrum, size, index + 1, sup);
+        this->sort(places, spectrum, inf, index - 1);
+        this->sort(places, spectrum, index + 1, sup);
     }
 }
 
 
-int Analyze::place(float spectrum[], int size, int inf, int sup){
-    int inda = inf;
-    float temp;
-    float a = spectrum[inf];
-    inf--;
-    while(sup >= inf){
-        if(spectrum[inf] > a){
-            while(sup >= inf || spectrum[sup] > a){
-                sup--;
-            }
-            temp = spectrum[sup];
-            spectrum[sup] = spectrum[inf];
-            spectrum[inf] = temp;
-            sup--;
-        }
-        inf--;
-    }
-    temp = spectrum[sup];
-    spectrum[sup] = spectrum[inda];
-    spectrum[inda] = temp;
+int Analyze::place(int places[], const float spectrum[], int inf, int sup){
+//    int inda = inf;
+//    float temp;
+//    float a = spectrum[inf];
+//    inf--;
+//    while(sup >= inf){
+//        if(spectrum[inf] > a){
+//            while(sup >= inf || spectrum[sup] > a){
+//                sup--;
+//            }
+//            temp = spectrum[sup];
+//            spectrum[sup] = spectrum[inf];
+//            spectrum[inf] = temp;
+//            sup--;
+//        }
+//        inf--;
+//    }
+//    temp = spectrum[sup];
+//    spectrum[sup] = spectrum[inda];
+//    spectrum[inda] = temp;
 }
 
 
