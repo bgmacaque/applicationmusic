@@ -1,9 +1,8 @@
-INCLUDEPATH += "../"
-INCLUDEPATH += "../model/"
 TEMPLATE = app
 CONFIG += console
 
-LIBS += -L/ -lfmodex
+LIBS += -lfmodex
+INCLUDEPATH += "../model"
 
 HEADERS += \
     noskin.h \
