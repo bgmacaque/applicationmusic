@@ -7,43 +7,28 @@
 #include "fmodinit.h"
 using namespace std;
 
-int main()
+int main(int argc, char **argv)
 {
-//    Partition *p = new Partition();
-    Analyze *a = new Analyze();
     FModInit *fmodlib = new FModInit();
     fmodlib->init();
-    int diff(0);
-    int i(0);
-    for(i = 0 ; i < 5000 ; i++){
-        a->mainNote(fmodlib->getSystem(), fmodlib->getSound(), &diff);
-        cout << "Différence : " << diff << endl;
+    Analyze *a = new Analyze();
+    Note *note = new Note();
+    a->init(fmodlib->getSystem(), fmodlib->getSound());
+    usleep(1000);
+    int i = 0;
+    float diff(0.0);
+    note->setName("C0");
+    while(note->getName() == "C0"){
+        a->mainNote(note, &diff);
+//        cout << "Note : " << note->getDisplay();
+//        cout << ", différence : " << diff;
+//
+        cout << endl;
+        usleep(1000 * 1000);
+        diff = 0;
     }
-    delete fmodlib;
     delete a;
-//    Chord *c = new Chord();
-//    Note *n = new Note("A4", 440.0);
-//    Note *n2 = a->getNote(1337.0);
-
-//    c->addNote(n);
-//    c->addNote(n2);
-////    c->setDuration(10.0);
-////    c->setVolume(5.0);
-////    cout << c->save() << endl;
-//    p->addChord(c);
-//    Chord *c2 = new Chord();
-//    c2->addNote(n);
-//    p->addChord(c2);
-//    string path = "./partition.kebab";
-//    p->save(path.c_str());
-//    delete p;
-//    p = Partition::load(path.c_str());
-//    delete c;
-//    delete n;
-//    delete a;
-//    delete n2;
-//    delete p;
-//    delete c2;
+    delete note;
+    delete fmodlib;
     return 0;
 }
-

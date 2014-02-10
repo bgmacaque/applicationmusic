@@ -1,8 +1,6 @@
 #include "analyze.h"
-#include <iostream>
-#define SPECTRUM_SIZE 8192
 
-using namespace std;
+#define SPECTRUM_SIZE 16
 
 static const char *note[120] =
 {
@@ -35,41 +33,41 @@ static const float notefreq[120] =
 
 Analyze::Analyze(){
     //Init the tab
-    notes = new Note*[120];
+    m_notes = new Note*[120];
     int i(0);
     for(i = 0; i < 120; i++){
         //Init the notes
-        notes[i] = new Note(note[i], notefreq[i]);
+        m_notes[i] = new Note(note[i], notefreq[i]);
     }
 }
 
 Analyze::~Analyze(){
     int i(0);
     for(i = 0; i < 120; i++){
-        delete notes[i];
+        delete m_notes[i];
     }
-    delete[] notes;
+    delete[] m_notes;
 }
 
 
+void Analyze::init(FMOD::System *p_system, FMOD::Sound *p_sound){
+    m_system = p_system;
+    m_sound = p_sound;
+    m_channel = 0;
+    int result(0);
+    result = m_system->recordStart(0, m_sound, true);
+    result = m_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &m_channel);
+    result = m_channel->setVolume(0);
+}
 
 
-
-void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound, int *diff){
-    bool tune = true;
+void Analyze::mainNote(Note *note, float *diff){
     float spectrum[SPECTRUM_SIZE], max(0), freqMax(0);
-    int result(0), i(0), j(0), indexMax(0);
-    FMOD::Channel *channel = 0;
+    int result(0), i(0), indexMax(0);
     Note *n = 0;
-    result = p_system->recordStart(0, p_sound, true);
-
-    usleep(200);
-
-    result = p_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &channel);
-    result = channel->setVolume(0);
-    result = channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
+    result = m_channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
     if(result != FMOD_OK){
-        cout << result << endl;
+        std::cout << result << std::endl;
     }
     max = 0;
     freqMax = 0;
@@ -77,61 +75,80 @@ void Analyze::mainNote(FMOD::System *p_system, FMOD::Sound *p_sound, int *diff){
         if(spectrum[i] > max){
             max = spectrum[i];
             indexMax = i;
-//                cout << spectrum[i] << "," << max << "," << i<< endl;
         }
     }
-//        cout << n->getDisplay() << endl;
-    freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)8192);
+    freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)SPECTRUM_SIZE);
     n = getNote(freqMax, diff);
-    cout << freqMax << endl;
     if(n != 0){
-        cout << n->getDisplay() << endl;
+        note->setFrequency(n->getFrequency());
+        note->setName(n->getName());
+        if(n->getName() != "C0"){
+            int *places = this->placesForSpectrum();
+            this->sort(places, spectrum, 0, SPECTRUM_SIZE - 1);
+            for(i = 0 ; i < SPECTRUM_SIZE ; i++){
+                std::cout << spectrum[places[i]] << std::endl;
+            }
+            delete[] places;
+        }
     }
-    n = 0;
-    p_system->update();
-    usleep(1000);
+//    delete channel;
 }
 
-void Analyze::sort(int places[], float spectrum[], int size, int inf, int sup){
-    int index;
+
+int *Analyze::placesForSpectrum(){
+    int *places = new int[SPECTRUM_SIZE];
+    unsigned int i;
+    for(i = 0 ; i < SPECTRUM_SIZE ; i++){
+        places[i] = i;
+    }
+    return places;
+}
+
+void Analyze::sort(int places[], float spectrum[], int inf, int sup){
+    int index(0);
+    std::cout << "Sort call inf : " << inf << ", sup : " << sup << std::endl;
+    //If it's the first call
     if(inf < sup){
-        index = (inf + sup) / 2;
-        this->sort(places, spectrum, size, inf, index - 1);
-        this->sort(places, spectrum, size, index + 1, sup);
+        index = this->place(places, spectrum, inf, sup);
+        this->sort(places, spectrum, inf, index - 1);
+        this->sort(places, spectrum, index + 1, sup);
     }
 }
 
 
-int Analyze::place(float spectrum[], int size, int inf, int sup){
+int Analyze::place(int places[], const float spectrum[], int inf, int sup){
+    std::cout << "Yo" << std::endl;
+    float temp(0.0);
     int inda = inf;
-    float temp;
     float a = spectrum[inf];
-    inf--;
+
+
     while(sup >= inf){
-        if(spectrum[inf] > a){
-            while(sup >= inf || spectrum[sup] > a){
+        if(spectrum[places[inf]] > a){
+            while(sup >= inf || spectrum[places[inf]] > a){
                 sup--;
             }
-            temp = spectrum[sup];
-            spectrum[sup] = spectrum[inf];
-            spectrum[inf] = temp;
+            temp = places[sup];
+            places[sup] = places[inf];
+            places[inf] = temp;
             sup--;
         }
         inf--;
     }
-    temp = spectrum[sup];
-    spectrum[sup] = spectrum[inda];
-    spectrum[inda] = temp;
+    temp = places[sup];
+    places[sup] = places[inda];
+    places[inda] = temp;
+    return sup;
 }
 
 
 
-Note* Analyze::getNote(float frequency, int *diff){
+Note* Analyze::getNote(float frequency, float *diff){
     Note *n = 0;
-    if(frequency < (notes[0]->getFrequency() + notes[1]->getFrequency()) / 2){
-        return notes[0];
-    }else if(frequency > (notes[118]->getFrequency() + notes[119]->getFrequency()) / 2 ){
-        return notes[119];
+    if(frequency < (m_notes[0]->getFrequency() + m_notes[1]->getFrequency()) / 2){
+        return m_notes[0];
+    }else if(frequency > (m_notes[118]->getFrequency() + m_notes[119]->getFrequency()) / 2 ){
+        return m_notes[119];
     }
     int min(0), max(119), index(0);
     //Number of notes
@@ -140,11 +157,11 @@ Note* Analyze::getNote(float frequency, int *diff){
     while(!found && min <= max && !stop){
         index = (max + min) / 2;
         //Frequency of the note that being test
-        freqNote = notes[index]->getFrequency();
+        freqNote = m_notes[index]->getFrequency();
         //If we have found the frequency
         if(frequency == freqNote){
             found = true;
-            n = notes[index];
+            n = m_notes[index];
         }else{
             if(frequency < freqNote){
                 max = index - 1;
@@ -154,24 +171,25 @@ Note* Analyze::getNote(float frequency, int *diff){
         }
     }
     if(!found){
-        diffMin = frequency - notes[min]->getFrequency();
+        diffMin = frequency - m_notes[min]->getFrequency();
         if(diffMin < 0){
             diffMin = -diffMin;
         }
-        diffMax = frequency - notes[max]->getFrequency();
+        diffMax = frequency - m_notes[max]->getFrequency();
         if(diffMax < 0 ){
             diffMax = -diffMax;
         }
         if(diffMax <= diffMin){
-            n = notes[max];
+            n = m_notes[max];
             if(diff != 0){
                 *diff = diffMax;
-                cout << *diff << "," << diffMax << endl;
+//                std::cout << "Différence : " << *diff << ", note : " << m_notes[max]->getFrequency() << " fréquence : " <<  frequency << std::endl;
             }
         }else{
-            n = notes[min];
+            n = m_notes[min];
             if(diff != 0){
                 *diff = diffMin;
+//                std::cout << "Différence : " << *diff << ", note : " << m_notes[max]->getFrequency() << " fréquence : " <<  frequency << std::endl;
             }
         }
     }

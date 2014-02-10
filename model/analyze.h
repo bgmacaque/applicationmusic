@@ -2,8 +2,8 @@
 #define ANALYZE_H
 #include <fmod.hpp>
 #include "note.h"
-#include "partition.h"
 #include <vector>
+#include <iostream>
 
 /*!
  * \class Analyze analyze.h
@@ -15,7 +15,10 @@
 class Analyze{
 
 private:
-    Note **notes;
+    Note **m_notes;
+    FMOD::System *m_system;
+    FMOD::Sound *m_sound;
+    FMOD::Channel *m_channel;
 
 public:
     Analyze();
@@ -24,27 +27,29 @@ public:
     /*!
      * \brief Give the main note of what is recorded by the microphone
      */
-    void mainNote(FMOD::System *p_system, FMOD::Sound *p_sound, int *diff);
+    void mainNote(Note *note, float *diff);
+
+    /*!
+     * \brief Method used to init the FMOD
+     */
+    void init(FMOD::System *p_system, FMOD::Sound *p_sound);
+
+    int *placesForSpectrum();
 
     /*!
      * \brief Give the note that correspond to the frequency
      */
-    Note *getNote(float frequency, int *diff);
+    Note *getNote(float frequency, float *diff);
 
     /*!
      * \brief Sort the table places with the values in spectrum
      */
-    void sort(int places[], float spectrum[], int size, int inf, int sup);
+    void sort(int places[], float spectrum[], int inf, int sup);
 
     /*!
      * \brief Method used in sort
      */
-    int place(float spectrum[], int size, int inf, int sup);
-
-    /*!
-     * \brief Record a partition
-     */
-    void record(Partition tab);
+    int place(int places[], const float spectrum[], int inf, int sup);
 };
 
 #endif // ANALYZE_H

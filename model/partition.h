@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-
+#include "analyze.h"
 
 /*!
  * \class Partition partition.h
@@ -41,6 +41,8 @@ public:
     void play();
 
     void save(const char *path);
+
+    void record(Analyze *a);
 
     std::string toJSON();
 

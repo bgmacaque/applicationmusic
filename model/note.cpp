@@ -24,12 +24,12 @@ Note::Note(){
 
 /* @return the frequency of the note*/
 
-int Note::getFrequency() const{
+float Note::getFrequency() const{
     return m_frequency;
 }
 
 /* @void set the frenquency to the 'frequency' value*/
-void Note::setFrequency(int frequency){
+void Note::setFrequency(float frequency){
     m_frequency = frequency;
 }
 
