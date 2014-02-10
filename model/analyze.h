@@ -56,4 +56,3 @@ public:
 };
 
 #endif // ANALYZE_H
->>>>>>> Changes in Analyze, for graphical use
