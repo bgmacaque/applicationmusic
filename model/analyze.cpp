@@ -68,6 +68,9 @@ void Analyze::close(){
     m_system->recordStop(0);
 }
 
+Chord *Analyze::mainChord(int size_max){
+    return this->mainChord(size_max, 0, 16000.0f);
+}
 
 Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax){
     float spectrum[SPECTRUM_SIZE];
@@ -125,7 +128,7 @@ float Analyze::getFrequency(int placeInSpectrum){
 
 int *Analyze::placesForSpectrum(){
     int *places = new int[SPECTRUM_SIZE];
-    unsigned int i;
+    unsigned int i(0);
     for(i = 0 ; i < SPECTRUM_SIZE ; i++){
         places[i] = i;
     }
@@ -144,7 +147,7 @@ void Analyze::sort(int places[], float spectrum[], int inf, int sup){
 
 
 int Analyze::place(int places[], const float spectrum[], int inf, int sup){
-    float temp(0.0);
+    int temp(0);
     int inda = inf;
     float a = spectrum[places[inf]];
     inf++;
@@ -241,7 +244,6 @@ Note *Analyze::searchNote(std::string name){
             n = m_notes[i];
         }
         i++;
-
     }
     return n;
 }

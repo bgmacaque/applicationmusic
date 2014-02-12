@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     c->addNote(n2);
 //    cout << "FALSE : " << c->contains(n3) << endl;
 //    cout << "TRUE : " << c->contains(n1) << endl;
-    Partition *p = new Partition(60);
+    Partition *p = new Partition(240);
     FModInit *fmodlib = new FModInit();
     Analyze *a = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
     bool tune = true;

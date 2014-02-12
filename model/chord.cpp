@@ -64,6 +64,20 @@ std::string Chord::getDisplay(){
     return retour;
 }
 
+bool Chord::equals(Chord *c){
+    bool retour = true;
+    unsigned int i(0);
+    if(c->m_notes.size() != m_notes.size()){
+        retour = false;
+    }else{
+        //Checking every notes
+        for(i = 0 ; i < m_notes.size() ; i++){
+            retour = retour && (this->contains(c->m_notes.at(i)));
+        }
+    }
+    return retour;
+}
+
 //Return  a string of a saved chord
 std::string Chord::save(){
     std::string retour = "";
@@ -102,7 +116,7 @@ std::string Chord::save(){
 
 bool Chord::contains(Note *n){
     bool retour = false;
-    int i(0);
+    unsigned int i(0);
     while(i < m_notes.size() && !retour){
         if(*m_notes.at(i) == *n){
             retour = true;

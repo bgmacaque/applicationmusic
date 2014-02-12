@@ -34,9 +34,21 @@ void Partition::record(Analyze *a, bool *tune){
     Chord *c = 0;
     Chord *prec = 0;
     for(i = 0 ; i < 5000 ; i++){
+        //Get the main chord with the possible frenquencies of the instrument
         c = a->mainChord(6, 164.81, 2637.02);
-        cout << c->getDisplay() << endl;
-        //Sleeping for the shortest time (1 min / bpm / 16)
+        //If we have found a chord
+        if(prec != 0){
+            //If it isn't the same as before, we add it
+            if(!prec->equals(c)){
+                cout << "Add : " << c->getDisplay() << endl;
+                this->addChord(c);
+            }else{
+                //We have to add some duration to the previous chord
+
+            }
+        }
+        prec = c;
+        //Sleeping for the shortest time in music theory(1 min / bpm / 16)
         usleep(1000 * 1000 * 60 / (m_tempo * 16));
     }
     a->close();

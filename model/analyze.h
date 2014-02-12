@@ -43,6 +43,8 @@ public:
 
     Chord *mainChord(int size_max, float freqMin, float freqMax);
 
+    Chord *mainChord(int size_max);
+
     /*!
      * \brief Method used to init the FMOD
      */

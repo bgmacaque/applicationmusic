@@ -86,3 +86,7 @@ std::string Note::save(){
 bool operator==(Note const& n1, Note const& n2){
     return n1.equals(n2);
 }
+
+bool operator!=(Note const& n1, Note const& n2){
+    return !n1.equals(n2);
+}

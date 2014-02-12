@@ -56,6 +56,8 @@ public:
 
     std::string save();
 
+    bool equals(Chord *c);
+
 };
 
 #endif // CHORD_H

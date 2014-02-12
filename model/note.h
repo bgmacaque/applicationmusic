@@ -49,5 +49,6 @@ public:
 };
 
 bool operator==(Note const& n1, Note const& n2);
+bool operator!=(Note const& n1, Note const& n2);
 
 #endif // NOTE_H
