@@ -5,6 +5,7 @@
 FModInit::FModInit(){
     m_system = 0;
     m_sound = 0;
+    this->init();
 }
 
 FModInit::~FModInit(){

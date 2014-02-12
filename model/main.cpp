@@ -10,10 +10,14 @@ using namespace std;
 int main(int argc, char **argv)
 {
     Partition *p = new Partition(120);
-    Analyze *a = new Analyze();
+    FModInit *fmodlib = new FModInit();
+    Analyze *a = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
+
     bool tune = true;
     p->record(a, &tune);
+
     delete a;
+    delete fmodlib;
     delete p;
     return 0;
 }

@@ -2,6 +2,9 @@
 
 #define SPECTRUM_SIZE 8192
 
+//Juste during debug
+using namespace std;
+
 static const char *note[120] =
 {
     "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0",
@@ -31,7 +34,7 @@ static const float notefreq[120] =
 };
 
 
-Analyze::Analyze(){
+Analyze::Analyze(FMOD::System *p_system, FMOD::Sound *p_sound){
     //Init the tab
     m_notes = new Note*[120];
     int i(0);
@@ -39,6 +42,8 @@ Analyze::Analyze(){
         //Init the notes
         m_notes[i] = new Note(note[i], notefreq[i]);
     }
+    m_system = p_system;
+    m_sound = p_sound;
 }
 
 Analyze::~Analyze(){
@@ -50,19 +55,41 @@ Analyze::~Analyze(){
 }
 
 
-void Analyze::start(FMOD::System *p_system, FMOD::Sound *p_sound){
-    m_system = p_system;
-    m_sound = p_sound;
+void Analyze::start(){
     m_channel = 0;
     int result(0);
     result = m_system->recordStart(0, m_sound, true);
-    result = m_system->playSound(FMOD_CHANNEL_REUSE, p_sound, false, &m_channel);
+    result = m_system->playSound(FMOD_CHANNEL_REUSE, m_sound, false, &m_channel);
     result = m_channel->setVolume(0);
 }
+
+
+
+
+
+
+
 
 void Analyze::close(){
     m_system->recordStop(0);
 }
+
+
+Chord *Analyze::mainChord(int size_max){
+    float spectrum[SPECTRUM_SIZE];
+    int result(0), i(0);
+    int *places = this->placesForSpectrum();
+    result = m_channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
+    this->sort(places, spectrum, 0, SPECTRUM_SIZE - 1);
+    if(size_max == 49){
+        for( i = 0 ; i < SPECTRUM_SIZE ; i++){
+            cout << places[i] << "," << spectrum[places[i]] << endl;
+        }
+    }
+    cout << "Coucou" << endl;
+    delete[] places;
+}
+
 
 void Analyze::mainNote(Note *note, float *diff){
     float spectrum[SPECTRUM_SIZE], max(0), freqMax(0);
