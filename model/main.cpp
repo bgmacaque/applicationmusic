@@ -9,26 +9,25 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    FModInit *fmodlib = new FModInit();
-    fmodlib->init();
+//    FModInit *fmodlib = new FModInit();
+//    fmodlib->init();
+    int i(0);
     Analyze *a = new Analyze();
-    Note *note = new Note();
-    a->init(fmodlib->getSystem(), fmodlib->getSound());
-    usleep(1000);
-    int i = 0;
-    float diff(0.0);
-    note->setName("C0");
-    while(note->getName() == "C0"){
-        a->mainNote(note, &diff);
-//        cout << "Note : " << note->getDisplay();
-//        cout << ", différence : " << diff;
-//
-        cout << endl;
-        usleep(1000 * 1000);
-        diff = 0;
+//    a->init(fmodlib->getSystem(), fmodlib->getSound());
+    float spectrum[16] = {
+        64.5, 5.0, 10.6, 12.7, 13.0, 15.0, 9.0, 8.0, 3.0, 2.0, 32.0, 1.0, 48.0, 54.0, 12.3, 89.0
+    };
+
+    int places[16];
+    for( i = 0 ; i < 16 ; i++){
+        places[i] = i;
     }
+    a->sort(places, spectrum, 0, 15);
+    for( i = 0 ; i < 16 ; i ++){
+        cout << "Place : " << places[i] << ", fréq : " << spectrum[places[i]] << endl;
+    }
+//    delete spectrum;
     delete a;
-    delete note;
-    delete fmodlib;
+//    delete fmodlib;
     return 0;
 }

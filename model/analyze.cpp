@@ -1,6 +1,6 @@
 #include "analyze.h"
 
-#define SPECTRUM_SIZE 16
+#define SPECTRUM_SIZE 64
 
 static const char *note[120] =
 {
@@ -117,27 +117,29 @@ void Analyze::sort(int places[], float spectrum[], int inf, int sup){
 
 
 int Analyze::place(int places[], const float spectrum[], int inf, int sup){
-    std::cout << "Yo" << std::endl;
     float temp(0.0);
     int inda = inf;
-    float a = spectrum[inf];
-
-
+    float a = spectrum[places[inf]];
+    inf++;
     while(sup >= inf){
+
         if(spectrum[places[inf]] > a){
-            while(sup >= inf || spectrum[places[inf]] > a){
+            while(sup >= inf && spectrum[places[sup]] > a){
                 sup--;
             }
-            temp = places[sup];
-            places[sup] = places[inf];
-            places[inf] = temp;
-            sup--;
+            if(sup >= inf){
+                temp = places[sup];
+                places[sup] = places[inf];
+                places[inf] = temp;
+                sup--;
+            }
         }
-        inf--;
+        inf++;
     }
     temp = places[sup];
     places[sup] = places[inda];
     places[inda] = temp;
+    std::cout << sup << std::endl;
     return sup;
 }
 
