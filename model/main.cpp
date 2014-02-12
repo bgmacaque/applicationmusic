@@ -25,7 +25,6 @@ int main(int argc, char **argv)
     Analyze *a = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
     bool tune = true;
     p->record(a, &tune);
-
     delete p;
     delete a;
     delete fmodlib;

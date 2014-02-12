@@ -34,7 +34,7 @@ void Partition::record(Analyze *a, bool *tune){
     Chord *c = 0;
     Chord *prec = 0;
     for(i = 0 ; i < 5000 ; i++){
-        c = a->mainChord(6);
+        c = a->mainChord(6, 164.81, 2637.02);
         cout << c->getDisplay() << endl;
         //Sleeping for the shortest time (1 min / bpm / 16)
         usleep(1000 * 1000 * 60 / (m_tempo * 16));

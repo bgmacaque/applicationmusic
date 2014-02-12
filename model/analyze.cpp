@@ -69,7 +69,7 @@ void Analyze::close(){
 }
 
 
-Chord *Analyze::mainChord(int size_max){
+Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax){
     float spectrum[SPECTRUM_SIZE];
     int result(0), i(0);
     int *places = this->placesForSpectrum();
@@ -81,7 +81,7 @@ Chord *Analyze::mainChord(int size_max){
     while(i >= 0 && c->notesNumber() < size_max){
         n = this->getNote(this->getFrequency(places[i]));
 //        cout << n->getFrequency() << endl;
-        if(!c->contains(n)){
+        if(!c->contains(n) && n->getFrequency() >= freqMin && n->getFrequency() <= freqMax){
             c->addNote(n);
         }
         //        cout << spectrum[places[i]] << endl;
@@ -227,5 +227,21 @@ Note* Analyze::getNote(float frequency, float *diff){
 Note *Analyze::getNote(float frequency){
     float diff = 0;
     Note *n = this->getNote(frequency, &diff);
+    return n;
+}
+
+
+Note *Analyze::searchNote(std::string name){
+    Note *n = 0;
+    bool found = false;
+    int i(0);
+    while(i < 120 && !found){
+        if(m_notes[i]->getName().compare(name) == 0){
+            found = true;
+            n = m_notes[i];
+        }
+        i++;
+
+    }
     return n;
 }

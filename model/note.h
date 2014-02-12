@@ -45,6 +45,7 @@ public:
 
     //Return the string that describe the note in JSON(to save)
     std::string save();
+
 };
 
 bool operator==(Note const& n1, Note const& n2);

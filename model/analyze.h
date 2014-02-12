@@ -41,7 +41,7 @@ public:
      */
     void mainNote(Note *note, float *diff);
 
-    Chord *mainChord(int size_max);
+    Chord *mainChord(int size_max, float freqMin, float freqMax);
 
     /*!
      * \brief Method used to init the FMOD
@@ -58,6 +58,8 @@ public:
     Note *getNote(float frequency, float *diff);
 
     Note *getNote(float frequency);
+
+    Note *searchNote(std::string name);
 
     float getFrequency(int placeInSpectrum);
 

@@ -73,13 +73,16 @@ bool Note::equals(const Note &n) const{
     return retour;
 }
 
-bool operator==(Note const& n1, Note const& n2){
-    return n1.equals(n2);
-}
+
 
 //Return a string of a saved notes
 std::string Note::save(){
     std::string retour = "";
     retour += "\"" + m_name + "\"";
     return retour;
+}
+
+
+bool operator==(Note const& n1, Note const& n2){
+    return n1.equals(n2);
 }
