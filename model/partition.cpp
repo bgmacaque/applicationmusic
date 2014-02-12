@@ -24,8 +24,13 @@ std::string Partition::getName(){
     return m_name;
 }
 
-void Partition::record(Analyze *a){
+void Partition::record(Analyze *a, bool *tune){
+    int i(0);
+    for(i = 0 ; i < 50 ; i++){
+        std::cout << "Coucou" << std::endl;
 
+        usleep(1000 * 1000 * 60 / m_tempo);
+    }
 }
 
 void Partition::play(){

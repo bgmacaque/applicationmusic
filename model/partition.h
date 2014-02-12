@@ -42,11 +42,12 @@ public:
 
     void save(const char *path);
 
-    void record(Analyze *a);
+    void record(Analyze *a, bool *tune);
 
     std::string toJSON();
 
     std::string getName();
+
     void setName(std::string p_name);
 
     static Partition* load(const char *path);

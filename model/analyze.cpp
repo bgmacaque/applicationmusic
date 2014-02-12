@@ -1,6 +1,6 @@
 #include "analyze.h"
 
-#define SPECTRUM_SIZE 64
+#define SPECTRUM_SIZE 8192
 
 static const char *note[120] =
 {
@@ -50,7 +50,7 @@ Analyze::~Analyze(){
 }
 
 
-void Analyze::init(FMOD::System *p_system, FMOD::Sound *p_sound){
+void Analyze::start(FMOD::System *p_system, FMOD::Sound *p_sound){
     m_system = p_system;
     m_sound = p_sound;
     m_channel = 0;
@@ -60,6 +60,9 @@ void Analyze::init(FMOD::System *p_system, FMOD::Sound *p_sound){
     result = m_channel->setVolume(0);
 }
 
+void Analyze::close(){
+    m_system->recordStop(0);
+}
 
 void Analyze::mainNote(Note *note, float *diff){
     float spectrum[SPECTRUM_SIZE], max(0), freqMax(0);
@@ -82,14 +85,6 @@ void Analyze::mainNote(Note *note, float *diff){
     if(n != 0){
         note->setFrequency(n->getFrequency());
         note->setName(n->getName());
-        if(n->getName() != "C0"){
-            int *places = this->placesForSpectrum();
-            this->sort(places, spectrum, 0, SPECTRUM_SIZE - 1);
-            for(i = 0 ; i < SPECTRUM_SIZE ; i++){
-                std::cout << spectrum[places[i]] << std::endl;
-            }
-            delete[] places;
-        }
     }
 //    delete channel;
 }
@@ -106,7 +101,6 @@ int *Analyze::placesForSpectrum(){
 
 void Analyze::sort(int places[], float spectrum[], int inf, int sup){
     int index(0);
-    std::cout << "Sort call inf : " << inf << ", sup : " << sup << std::endl;
     //If it's the first call
     if(inf < sup){
         index = this->place(places, spectrum, inf, sup);
@@ -139,7 +133,6 @@ int Analyze::place(int places[], const float spectrum[], int inf, int sup){
     temp = places[sup];
     places[sup] = places[inda];
     places[inda] = temp;
-    std::cout << sup << std::endl;
     return sup;
 }
 
