@@ -1,17 +1,17 @@
 #include "noskin.h"
 
-NoSkin::NoSkin(Partition *p, int minWidth = 600, int minHeight = 200): QMainWindow()
+/*NoSkin::NoSkin(Partition *p, int minWidth = 600, int minHeight = 200): QMainWindow()
 {
     NoSkin(minWidth, minHeight);
     score = p;
-}
+}*/
 
 NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
 {
     //Then we create other stuff
     ///analyzer = new Analyze;
     ///score = new Partition;
-    icons_loc = new QString("../Images/Icons/");
+    icons_loc = new QString("../../Images/Icons/");
 
     //Now we set layout
     QVBoxLayout *main_lay = new QVBoxLayout(this);

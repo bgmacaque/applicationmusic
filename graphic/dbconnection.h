@@ -8,7 +8,6 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
-#include "partition.h"
 
 class DBConnection
 {
@@ -37,27 +36,27 @@ public:
      * \param p The partition to add
      * \return True if it succeeded, false in other cases
      */
-    bool insert(Partition p);
+    //bool insert(Partition p);
 
     /*!
      * \brief Update a partition the athentified user already created
      * \param p Tjhe new version of the partition
      * \return True if it succeeded, false in other case.
      */
-    bool update(Partition p);
+    //bool update(Partition p);
 
     /*!
      * \brief Select a particular partition of the authentified user with its id
      * \param id The id of the partition
      * \return The selected partition
      */
-    Partition select(int id);
+    //Partition select(int id);
 
     /*!
      * \brief Select all partitions of the authentified user.
      * \return A vector containing all partitions.
      */
-    std::vector<Partition> selectAll();
+    //std::vector<Partition> selectAll();
 };
 
 #endif // DBCONNECTION_H

@@ -33,7 +33,7 @@ DBConnection::DBConnection(std::string file)
     }
 }
 
-Partition DBConnection::select(int id)
+/*Partition DBConnection::select(int id)
 {
     QString q("SELECT * FROM Partitions WHERE part_id = :id");
 
@@ -59,3 +59,4 @@ bool DBConnection::insert(Partition p)
 
     return query.exec();
 }
+*/

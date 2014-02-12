@@ -13,8 +13,6 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QLineEdit>
-#include "partition.h"
-#include "analyze.h"
 
 
 /*!
@@ -114,12 +112,12 @@ private:
     /*!
      * \brief The partitiion currently showed
      */
-    Partition *score;
+    //Partition *score;
 
     /*!
      * \brief Analyze the input sound to determinate notes
      */
-     Analyze *analyzer;
+     //Analyze *analyzer;
 
      /*!
       * \brief A method to load all the icons of the top
@@ -148,12 +146,12 @@ public:
      * \brief Creates a window with the partition p
      * \param p
      */
-    NoSkin(Partition *p, int minHeight, int minWidth);
+    NoSkin(/*Partition *p,*/ int minHeight, int minWidth);
 
     /*!
      * \brief Creates a window without partitions.
      */
-    NoSkin(int minHeight, int minWidth);
+    //NoSkin(int minHeight, int minWidth);
 
     /*!
      * \brief Show the chord's window
@@ -169,7 +167,7 @@ public:
      * \brief Add a partition to the list
      * \param p The partition to add
      */
-    void addPartition(Partition p);
+    //void addPartition(Partition p);
 
     /*!
      * \brief Exports the current partition to the website when the user is connected.
@@ -183,7 +181,7 @@ public:
      * \return The partition we just imported
      * \exception NotJSON If the file is not a JSON text
      */
-    Partition import(QString path);
+    //Partition import(QString path);
 
     /*!
      * \brief Change the position of the playing's cursor
