@@ -32,7 +32,9 @@ public:
     /*!
      * \brief Method used to init the FMOD
      */
-    void init(FMOD::System *p_system, FMOD::Sound *p_sound);
+    void start(FMOD::System *p_system, FMOD::Sound *p_sound);
+
+    void close();
 
     int *placesForSpectrum();
 
