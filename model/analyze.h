@@ -57,6 +57,9 @@ public:
      */
     Note *getNote(float frequency, float *diff);
 
+    Note *getNote(float frequency);
+
+    float getFrequency(int placeInSpectrum);
 
 };
 

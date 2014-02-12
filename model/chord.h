@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "note.h"
+#include <iostream>
 
 /*!
  * \class Chord chord.h
@@ -44,6 +45,11 @@ public:
     void play(FMOD::System *p_system, FMOD::Sound *p_sound);
 
     void addNote(Note *n);
+
+    //Method return true if the chord contains the note
+    bool contains(Note *n);
+
+    int notesNumber() const;
 
     //Method used to display the chord(Debug)
     std::string getDisplay();

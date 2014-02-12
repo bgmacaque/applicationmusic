@@ -1,5 +1,9 @@
 #include "chord.h"
 
+//Just during debug
+using namespace std;
+
+
 Chord::Chord(std::vector<Note*> p_notes, float p_duration, float p_volume){
     m_notes = p_notes;
     m_volume = p_volume;
@@ -32,6 +36,10 @@ double Chord::getVolume() const{
 //Setter of the volume
 void Chord::setVolume(double volume){
     this->m_volume = volume;
+}
+
+int Chord::notesNumber() const{
+    return m_notes.size();
 }
 
 //Play every notes in the chord
@@ -89,6 +97,18 @@ std::string Chord::save(){
     }
     retour.append("}\n");
     retour.append("}");
+    return retour;
+}
+
+bool Chord::contains(Note *n){
+    bool retour = false;
+    int i(0);
+    while(i < m_notes.size() && !retour){
+        if(*m_notes.at(i) == *n){
+            retour = true;
+        }
+        i++;
+    }
     return retour;
 }
 

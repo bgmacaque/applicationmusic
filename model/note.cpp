@@ -66,6 +66,17 @@ std::string Note::getDisplay(){
     }
 }
 
+bool Note::equals(const Note &n) const{
+    bool retour = true;
+    retour = retour && (m_name.compare(n.m_name) == 0);
+    retour = retour && (m_frequency == n.m_frequency);
+    return retour;
+}
+
+bool operator==(Note const& n1, Note const& n2){
+    return n1.equals(n2);
+}
+
 //Return a string of a saved notes
 std::string Note::save(){
     std::string retour = "";

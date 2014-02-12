@@ -64,12 +64,6 @@ void Analyze::start(){
 }
 
 
-
-
-
-
-
-
 void Analyze::close(){
     m_system->recordStop(0);
 }
@@ -81,13 +75,21 @@ Chord *Analyze::mainChord(int size_max){
     int *places = this->placesForSpectrum();
     result = m_channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
     this->sort(places, spectrum, 0, SPECTRUM_SIZE - 1);
-    if(size_max == 49){
-        for( i = 0 ; i < SPECTRUM_SIZE ; i++){
-            cout << places[i] << "," << spectrum[places[i]] << endl;
+    Chord *c = new Chord();
+    Note *n = 0;
+    i = SPECTRUM_SIZE - 1;
+    while(i >= 0 && c->notesNumber() < size_max){
+        n = this->getNote(this->getFrequency(places[i]));
+//        cout << n->getFrequency() << endl;
+        if(!c->contains(n)){
+            c->addNote(n);
         }
+        //        cout << spectrum[places[i]] << endl;
+        i--;
     }
-    cout << "Coucou" << endl;
+//    cout << "Coucou" << endl;
     delete[] places;
+    return c;
 }
 
 
@@ -107,13 +109,17 @@ void Analyze::mainNote(Note *note, float *diff){
             indexMax = i;
         }
     }
-    freqMax = (float)indexMax * (((float)48000 / 2.0f) / (float)SPECTRUM_SIZE);
+    freqMax = this->getFrequency(indexMax);
     n = getNote(freqMax, diff);
     if(n != 0){
         note->setFrequency(n->getFrequency());
         note->setName(n->getName());
     }
 //    delete channel;
+}
+
+float Analyze::getFrequency(int placeInSpectrum){
+    return (float)placeInSpectrum * (((float)48000 / 2.0f) / (float)SPECTRUM_SIZE);
 }
 
 
@@ -215,5 +221,11 @@ Note* Analyze::getNote(float frequency, float *diff){
             }
         }
     }
+    return n;
+}
+
+Note *Analyze::getNote(float frequency){
+    float diff = 0;
+    Note *n = this->getNote(frequency, &diff);
     return n;
 }

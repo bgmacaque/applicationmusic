@@ -29,10 +29,13 @@ public:
     //Getter of name
     std::string getName() const;
 
+
     //Setter of frequency
     void setFrequency(float frequency);
     //Getter of frequency
     float getFrequency() const;
+
+    bool equals(Note const& n) const;
 
     //Play the note
     void play(float volume, float duration, FMOD::System *p_system, FMOD::Sound *p_sound);
@@ -43,5 +46,7 @@ public:
     //Return the string that describe the note in JSON(to save)
     std::string save();
 };
+
+bool operator==(Note const& n1, Note const& n2);
 
 #endif // NOTE_H

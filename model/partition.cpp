@@ -1,5 +1,8 @@
 #include "partition.h"
 
+//During debug only
+using namespace std;
+
 Partition::Partition(){
     m_tempo = 0;
 }
@@ -29,9 +32,11 @@ void Partition::record(Analyze *a, bool *tune){
     //Starting the record
     a->start();
     Chord *c = 0;
-    for(i = 0 ; i < 50 ; i++){
-        c = a->mainChord(i);
-
+    Chord *prec = 0;
+    for(i = 0 ; i < 5000 ; i++){
+        c = a->mainChord(6);
+        cout << c->getDisplay() << endl;
+        //Sleeping for the shortest time (1 min / bpm / 16)
         usleep(1000 * 1000 * 60 / (m_tempo * 16));
     }
     a->close();
