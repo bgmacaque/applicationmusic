@@ -1,8 +1,9 @@
 #include "dbconnection.h"
 
-DBConnection::DBConnection(std::string host, std::string dbname, std::string userName, std::string password, int port = 10000)
+DBConnection::DBConnection(std::string host, std::string dbname, std::string userName, std::string password, int port = 3306)
 {
-    base = new QSqlDatabase;
+    QSqlDatabase dbs = QSqlDatabase::addDatabase("QMYSQL");
+    base = &dbs;
     base->setHostName(QString(host.c_str()));
     base->setDatabaseName(dbname.c_str());
     base->setUserName(userName.c_str());
@@ -14,6 +15,7 @@ DBConnection::DBConnection(std::string host, std::string dbname, std::string use
 
 DBConnection::DBConnection(std::string file)
 {
+    this->id_user = -1;
     std::string host, db, usr, pwd, port;
     std::ifstream stream(file.c_str(), std::ios::in);
 
@@ -27,9 +29,20 @@ DBConnection::DBConnection(std::string file)
         std::getline(stream, port);
 
         //The we call the previous constructor
-        DBConnection(host, db, usr, pwd, atoi(port.c_str()));
+        //DBConnection();
+        QSqlDatabase dbs = QSqlDatabase::addDatabase("QMYSQL");
+        base = &dbs;
+        base->setHostName(QString(host.c_str()));
+        base->setDatabaseName(QString(db.c_str()));
+        base->setUserName(QString(usr.c_str()));
+        base->setPassword(QString(pwd.c_str()));
+        base->setPort(atoi(port.c_str()));
+
+        base->open();
         stream.close();
 
+    }else{
+        QMessageBox::warning(NULL, "Fichier", "Impossible de charger le fichier de configuration de la base de données");
     }
 }
 
@@ -60,3 +73,34 @@ bool DBConnection::insert(Partition p)
     return query.exec();
 }
 */
+
+void DBConnection::connectUser(QString login, QString pwd)
+{
+    if(base->isOpen()){
+
+        QString rq("SELECT id FROM Users WHERE nickname=:login AND password = :password");
+        QSqlQuery *query = new QSqlQuery(*base);
+        query->prepare(rq);
+
+        query->bindValue(":login", login);
+        query->bindValue(":password", pwd);
+
+        query->exec();
+
+
+        if(query->first())
+        {
+            this->id_user = query->boundValue(0).toInt();
+        }else{
+            this->id_user = -1;
+        }
+
+    }else{
+        QMessageBox::critical(NULL, "Erreur", "Impossible de se connecter à la base de données");
+    }
+}
+
+int DBConnection::getUserId()
+{
+    return this->id_user;
+}

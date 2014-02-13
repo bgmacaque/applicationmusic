@@ -14,6 +14,5 @@ int main(int argc, char **argv)
     //Configuration *test = new Configuration(new QString("Cémoi"), new QString("toto666"), false, true, 5);
     //test->save();
 
-
     return app->exec();
 }

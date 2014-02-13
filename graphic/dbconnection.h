@@ -8,11 +8,14 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QMessageBox>
+#include <qsql_mysql.h>
 
 class DBConnection
 {
 private:
     QSqlDatabase* base;
+    int id_user;
 
 public:
     /*!
@@ -57,6 +60,16 @@ public:
      * \return A vector containing all partitions.
      */
     //std::vector<Partition> selectAll();
+
+    /*!
+     * \brief To connect a user to the database
+     * \param user The login of the user
+     * \param pwd Password of the user
+     * \return The id of the user, or -1 if no user was found with this combination
+     */
+    void connectUser(QString user, QString pwd);
+
+    int getUserId();
 };
 
 #endif // DBCONNECTION_H

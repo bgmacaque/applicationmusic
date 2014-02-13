@@ -3,18 +3,17 @@
 Configuration::Configuration()
 {
     path = "../user.conf";
-    if(!load())
-    {
-        username = new QString("");
+    username = new QString("");
+    password = new QString("");
 
-        password_saved = false;
-        reloging_after_error = false;
+    password_saved = false;
+    reloging_after_error = false;
+    login_at_start = false;
 
-        reloging_after = false;
-    }
+    reloging_after = false;
 }
 
-Configuration::Configuration(QString u, QString pwd, bool pwd_saved, bool relg_after_err, int rlg_after):username(&u), password(&pwd), password_saved(pwd_saved), reloging_after_error(relg_after_err), reloging_after(rlg_after)
+Configuration::Configuration(QString u, QString pwd, bool pwd_saved, bool lg_strt, bool relg_after_err, int rlg_after):username(&u), password(&pwd), password_saved(pwd_saved), login_at_start(lg_strt),reloging_after_error(relg_after_err), reloging_after(rlg_after)
 {
     path = "../user.conf";
 }
@@ -25,12 +24,13 @@ bool Configuration::load()
 
     if(config)
     {
-        std::string usr, pwd, pwd_saved, rlg_after_err, rlg_after;
+        std::string usr, pwd, pwd_saved, lg_str, rlg_after_err, rlg_after;
 
         //We read all data
         std::getline(config, usr);
         std::getline(config, pwd);
         std::getline(config, pwd_saved);
+        std::getline(config, lg_str);
         std::getline(config, rlg_after_err);
         std::getline(config, rlg_after);
 
@@ -43,6 +43,11 @@ bool Configuration::load()
             password_saved = true;
         else
             password_saved = false;
+
+        if(lg_str == "1")
+            login_at_start = true;
+        else
+            login_at_start = false;
 
         if(rlg_after_err == "1")
             reloging_after_error = true;
@@ -64,18 +69,18 @@ bool Configuration::load()
 
 bool Configuration::save()
 {
-    std::ofstream config(path.c_str(), std::ios::out | std::ios::trunc);
+    std::ofstream conf(path.c_str(), std::ios::out | std::ios::trunc);
 
-    if(config){
+    if(conf){
 
-        config << username->toStdString() << std::endl;
-        config << password->toStdString() << std::endl;
-        config << password_saved << std::endl;
-        //config << getDecryptedPass() << std::endl;
-        config << reloging_after_error << std::endl;
-        config << reloging_after << std::endl;
+        conf << username->toStdString() << std::endl;
+        conf << password->toStdString() << std::endl;
+        conf << password_saved << std::endl;
+        conf << login_at_start << std::endl;
+        conf << reloging_after_error << std::endl;
+        conf << reloging_after << std::endl;
 
-        config.close();
+        conf.close();
         return true;
     }
 
@@ -139,6 +144,11 @@ bool Configuration::getRelogingAfterError()
 QString* Configuration::getUserName()
 {
     return this->username;
+}
+
+bool Configuration::getLogAtStart()
+{
+    return this->login_at_start;
 }
 
 //QString* Configuration::getDecryptedPass()

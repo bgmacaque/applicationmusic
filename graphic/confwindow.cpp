@@ -6,6 +6,7 @@ ConfWindow::ConfWindow(NoSkin* parent):QMainWindow()
     pages = new QStackedWidget(this);
     tabs = new QToolBar("Nav");
     tabs->setMovable(false);
+    tabs->setStyleSheet("QToolBar {background-color : #dcdcdc;} ");
 
     this->loadTabs();
 
@@ -23,8 +24,8 @@ ConfWindow::ConfWindow(NoSkin* parent):QMainWindow()
     pages->setCurrentWidget(page_connection);
 
     //We laod preexisting configs
-    config = new Configuration();
-    if(config->load())
+    parent->config = new Configuration();
+    if(parent->config->load())
     {
         this->setConfig();
     }
@@ -99,6 +100,8 @@ void ConfWindow::link()
     QObject::connect(btn_skins, SIGNAL(triggered()), this, SLOT(setSkinsPage()));
     QObject::connect(btn_apply, SIGNAL(clicked()), this, SLOT(apply()));
     QObject::connect(relogin_after_errors, SIGNAL(clicked(bool)), this, SLOT(activeRelogTime(bool)));
+    QObject::connect(username, SIGNAL(textChanged(QString)), this, SLOT(activeAll()));
+    QObject::connect(password, SIGNAL(textChanged(QString)), this, SLOT(activeSavePass()));
 }
 
 
@@ -123,21 +126,57 @@ void ConfWindow::setSkinsPage()
 
 void ConfWindow::apply()
 {
-    config = new Configuration(username->text(), password->text(), pass_saved->isChecked(), relogin_after_errors->isChecked(), reloging_after->value());
-    config->save();
+    Configuration *c;
+    if(!username->text().isEmpty())
+        c = new Configuration(username->text(), password->text(), pass_saved->isChecked(), login_at_start->isChecked(),relogin_after_errors->isChecked(), reloging_after->value());
+    else
+        c = new Configuration();
+
+    c->save();
+    parent->reloadConf();
+
     this->close();
 }
 
 void ConfWindow::setConfig()
 {
-    username->setText(*config->getUserName());
-    //password->setText(*config->getDecryptedPass());
-    reloging_after->setValue(config->getRelogingAfter());
-    relogin_after_errors->setChecked(config->getRelogingAfterError());
-    pass_saved->setChecked(config->getPasswordSaved());
+    username->setText(*parent->config->getUserName());
+    if(!activeAll())
+    {
+        password->setText(*parent->config->getPassword());
+        login_at_start->setChecked(parent->config->getLogAtStart());
+        reloging_after->setValue(parent->config->getRelogingAfter());
+        relogin_after_errors->setChecked(parent->config->getRelogingAfterError());
+        if(activeSavePass())
+            pass_saved->setChecked(parent->config->getPasswordSaved());
+        else
+            pass_saved->setChecked(false);
+    }
 }
 
 void ConfWindow::activeRelogTime(bool activated)
 {
     this->reloging_after->setEnabled(activated);
+}
+
+bool ConfWindow::activeAll()
+{
+        bool disabled = username->text().isEmpty();
+
+        password->setDisabled(disabled);
+        activeSavePass();
+        relogin_after_errors->setDisabled(disabled);
+        reloging_after->setDisabled(disabled || !relogin_after_errors->isChecked());
+        login_at_start->setDisabled(disabled);
+
+        return disabled;
+}
+
+bool ConfWindow::activeSavePass()
+{
+    bool possible = !password->text().isEmpty();
+    pass_saved->setEnabled(possible);
+    pass_saved->setChecked(possible);
+
+    return possible;
 }

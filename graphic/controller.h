@@ -3,6 +3,7 @@
 
 #include "noskin.h"
 #include "confwindow.h"
+#include <QMessageBox>
 
 /*!
  * \class Controller controller.h
@@ -38,6 +39,11 @@ public slots:
     void record();
     void save();
     void openConf();
+    /*!
+     * \brief Try to connect the user to the website
+     * \exception NotConnected If it doesn't work
+     */
+    void connectToWeb();
 };
 
 #endif // CONTROLLER_H

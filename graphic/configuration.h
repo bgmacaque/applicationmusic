@@ -23,6 +23,7 @@ private:
 
     bool password_saved;
     bool reloging_after_error;
+    bool login_at_start;
 
     int reloging_after;
 
@@ -30,7 +31,7 @@ private:
 
 public:
     Configuration();
-    Configuration(QString u, QString pwd, bool pwd_saved, bool relg_after_err, int rlg_after);
+    Configuration(QString u, QString pwd, bool pwd_saved, bool lg_strt,bool relg_after_err, int rlg_after);
 
     /*!
      * \brief Saves the current configuration in a config file
@@ -55,6 +56,7 @@ public:
     QString* getUserName();
     QString* getPassword();
     bool getPasswordSaved();
+    bool getLogAtStart();
     bool getRelogingAfterError();
     int getRelogingAfter();
 

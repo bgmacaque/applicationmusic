@@ -11,6 +11,12 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     //Then we create other stuff
     ///analyzer = new Analyze;
     ///score = new Partition;
+    connection = new DBConnection("../../database.conf");
+    config = new Configuration();
+
+    //We tried to load previous configs if they exist
+    config->load();
+
     icons_loc = new QString("../../Images/Icons/");
 
     //Now we set layout
@@ -130,4 +136,15 @@ QToolBar* NoSkin::createBottomBar()
     bottom->setStyleSheet("QToolBar {background-color : #dcdcdc;} ");
 
     return bottom;
+}
+
+Configuration* NoSkin::getConf()
+{
+    return this->config;
+}
+
+void NoSkin::reloadConf()
+{
+    this->config = new Configuration();
+    this->config->load();
 }

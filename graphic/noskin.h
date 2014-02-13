@@ -14,6 +14,8 @@
 #include <QSpinBox>
 #include <QLineEdit>
 
+#include "dbconnection.h"
+#include "configuration.h"
 
 /*!
  * \class noSkin noskin.h
@@ -26,7 +28,19 @@
 class NoSkin:QMainWindow
 {
 friend class Controller;
+friend class ConfWindow;
 private:
+
+/*!
+ * \brief Represents the configurations of the user
+ */
+    Configuration* config;
+
+    /*!
+     * \brief An object to represent the connection with the database
+     */
+    DBConnection *connection;
+
     /*!
      * \brief Save the current partition (JSON text)
      */
@@ -190,12 +204,6 @@ public:
     int changePlayBackPosition(int pos);
 
     /*!
-     * \brief Try to connect the user to the website
-     * \exception NotConnected If it doesn't work
-     */
-    bool connectToWeb();
-
-    /*!
      * \brief Change the record's cursor position
      * \param position The new position of the cursor
      */
@@ -210,6 +218,10 @@ public:
      * \brief The location of the icons
      */
     QString* icons_loc;
+
+    Configuration* getConf();
+
+    void reloadConf();
 
 };
 

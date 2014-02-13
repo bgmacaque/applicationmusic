@@ -11,6 +11,7 @@
 #include <QGroupBox>
 #include <QPushButton>
 #include <QSpinBox>
+
 #include "noskin.h"
 #include "configuration.h"
 
@@ -32,11 +33,6 @@ private:
      * \brief The parent of the window (in order to apply modifications)
      */
     NoSkin* parent;
-
-    /*!
-     * \brief Represents the configurations of the user
-     */
-    Configuration* config;
 
     /*!
      * \brief Contains all pages of the window
@@ -70,6 +66,7 @@ private:
     QCheckBox* relogin_after_errors;
 
     QSpinBox* reloging_after;
+
 
     //The options page
 
@@ -135,6 +132,17 @@ public slots:
      * \brief To active time of, relogging or  not
      */
     void activeRelogTime(bool activated);
+
+    /*!
+     * \brief Active all components if it can be (when the username is not emty).
+     *  \return The state of components : true if enabled, false else
+     */
+    bool activeAll();
+
+    /*!
+     * \brief Enable pass_saved if a password is set.
+     */
+    bool activeSavePass();
 };
 
 #endif // CONFWINDOW_H
