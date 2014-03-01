@@ -9,7 +9,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QMessageBox>
-#include <qsql_mysql.h>
+//#include <qsql_mysql.h>
 
 class DBConnection
 {

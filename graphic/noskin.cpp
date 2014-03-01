@@ -26,15 +26,14 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     topBar = this->createTopBar();
     this->addToolBar(topBar);
 
+    g_score = new GraphicScore(this, 5);
+
     bottomBar = this->createBottomBar();
     this->addToolBar(Qt::BottomToolBarArea, bottomBar);
 
-    //We add the right bar
-    //main_lay->addLayout(this->noteModifier());
-
     //Finally, we define the window parameters
     this->setMinimumSize(QSize(minWidth, minHeight));
-    this->setLayout(main_lay);
+    this->setCentralWidget(g_score);
     this->show();
 }
 
@@ -112,6 +111,7 @@ QToolBar* NoSkin::createBottomBar()
     lay->addWidget(choice_name);
     lay->addWidget(choice_difficulty);
     lay->addWidget(choice_tempo);
+    lay->addWidget(new GraphicNote(NULL, 5));
 
     choice_name->setPlaceholderText(QString("Nom de la partition"));
 

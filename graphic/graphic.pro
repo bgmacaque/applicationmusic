@@ -7,6 +7,8 @@ HEADERS += \
     confwindow.h \
     configuration.h \
     dbconnection.h \
+    graphicnote.h \
+    graphicscore.h \
 
 
 SOURCES += \
@@ -16,6 +18,8 @@ SOURCES += \
     confwindow.cpp \
     configuration.cpp \
     dbconnection.cpp \
+    graphicnote.cpp \
+    graphicscore.cpp \
 
 
 QT += core gui

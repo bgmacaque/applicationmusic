@@ -55,6 +55,7 @@ void Controller::connectToWeb()
 {
     if(frame->connection)
     {
+
         QString *u_n = frame->getConf()->getUserName(), *pwd = frame->getConf()->getPassword();
 
         if(u_n && pwd){

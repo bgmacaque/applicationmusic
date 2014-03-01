@@ -2,8 +2,7 @@
 
 DBConnection::DBConnection(std::string host, std::string dbname, std::string userName, std::string password, int port = 3306)
 {
-    QSqlDatabase dbs = QSqlDatabase::addDatabase("QMYSQL");
-    base = &dbs;
+    base = new QSqlDatabase();
     base->setHostName(QString(host.c_str()));
     base->setDatabaseName(dbname.c_str());
     base->setUserName(userName.c_str());
@@ -28,15 +27,21 @@ DBConnection::DBConnection(std::string file)
         std::getline(stream, pwd);
         std::getline(stream, port);
 
+        //QMessageBox::information(NULL, "Toto", QString((host+" || "+db+" || "+usr+" || "+pwd+" || "+port).c_str()));
+
         //The we call the previous constructor
         //DBConnection();
-        QSqlDatabase dbs = QSqlDatabase::addDatabase("QMYSQL");
-        base = &dbs;
+        //base = new QSqlDatabase();
+        QSqlDatabase dbase = QSqlDatabase::addDatabase("QMYSQL");
+
+        base = &dbase;
         base->setHostName(QString(host.c_str()));
         base->setDatabaseName(QString(db.c_str()));
         base->setUserName(QString(usr.c_str()));
         base->setPassword(QString(pwd.c_str()));
         base->setPort(atoi(port.c_str()));
+
+
 
         base->open();
         stream.close();
