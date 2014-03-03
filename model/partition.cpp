@@ -7,8 +7,10 @@ Partition::Partition(){
     m_tempo = 0;
 }
 
-Partition::Partition(int p_tempo){
+Partition::Partition(int p_tempo, float p_lowStep, float p_highStep){
     m_tempo = p_tempo;
+    m_lowStep = p_lowStep;
+    m_highStep = p_highStep;
 }
 
 std::vector<Chord*> Partition::getChords() const{
@@ -33,18 +35,26 @@ void Partition::record(Analyze *a, bool *tune){
     a->start();
     Chord *c = 0;
     Chord *prec = 0;
+    float maxVolume;
     for(i = 0 ; i < 5000 ; i++){
         //Get the main chord with the possible frenquencies of the instrument
-        c = a->mainChord(6, 164.81, 2637.02);
+        c = a->mainChord(6, 164.81, 2637.02, &maxVolume);
         //If we have found a chord
         if(prec != 0){
             //If it isn't the same as before, we add it
-            if(!prec->equals(c)){
-                cout << "Add : " << c->getDisplay() << endl;
-                this->addChord(c);
+            if(!prec->equals(c) && !c->isEmpty()){
+                //If the volume is lower than the highstep
+                if(maxVolume < m_highStep){
+                    //We add some duration
+                    cout << "Duration " << endl;
+                }else{
+                    //If the volume is higher than the highstep
+                    cout << "Add : " << c->getDisplay() << endl;
+                    this->addChord(c);
+                }
             }else{
                 //We have to add some duration to the previous chord
-
+                cout << "Not the same" << endl;
             }
         }
         prec = c;

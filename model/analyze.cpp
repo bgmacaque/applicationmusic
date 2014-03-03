@@ -60,7 +60,7 @@ void Analyze::start(){
     int result(0);
     result = m_system->recordStart(0, m_sound, true);
     result = m_system->playSound(FMOD_CHANNEL_REUSE, m_sound, false, &m_channel);
-    result = m_channel->setVolume(0);
+//    result = m_channel->setVolume(0);
 }
 
 
@@ -68,11 +68,11 @@ void Analyze::close(){
     m_system->recordStop(0);
 }
 
-Chord *Analyze::mainChord(int size_max){
-    return this->mainChord(size_max, 0, 16000.0f);
+Chord *Analyze::mainChord(int size_max, float *maxVolume){
+    return this->mainChord(size_max, 0, 16000.0f, maxVolume);
 }
 
-Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax){
+Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax, float *maxVolume){
     float spectrum[SPECTRUM_SIZE];
     int result(0), i(0);
     int *places = this->placesForSpectrum();
@@ -81,16 +81,22 @@ Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax){
     Chord *c = new Chord();
     Note *n = 0;
     i = SPECTRUM_SIZE - 1;
-    while(i >= 0 && c->notesNumber() < size_max){
-        n = this->getNote(this->getFrequency(places[i]));
+    bool stop = false;
+    while(i >= 0 && c->notesNumber() < size_max && !stop){
 //        cout << n->getFrequency() << endl;
-        if(!c->contains(n) && n->getFrequency() >= freqMin && n->getFrequency() <= freqMax){
-            c->addNote(n);
+        cout << spectrum[places[i]] << endl;
+        if(spectrum[places[i]] < 0.025){
+            stop = true;
+        }else{
+            n = this->getNote(this->getFrequency(places[i]));
+            if(!c->contains(n) && n->getFrequency() >= freqMin && n->getFrequency() <= freqMax){
+                c->addNote(n);
+            }
+            i--;
         }
         //        cout << spectrum[places[i]] << endl;
-        i--;
     }
-//    cout << "Coucou" << endl;
+    *maxVolume = spectrum[places[0]];
     delete[] places;
     return c;
 }
@@ -102,7 +108,7 @@ void Analyze::mainNote(Note *note, float *diff){
     Note *n = 0;
     result = m_channel->getSpectrum(spectrum, SPECTRUM_SIZE, 0, FMOD_DSP_FFT_WINDOW_TRIANGLE);
     if(result != FMOD_OK){
-        std::cout << result << std::endl;
+        std::cout << "Erreur : " << result << std::endl;
     }
     max = 0;
     freqMax = 0;
@@ -112,13 +118,13 @@ void Analyze::mainNote(Note *note, float *diff){
             indexMax = i;
         }
     }
+    cout << "Volume max " << spectrum[indexMax] << endl;
     freqMax = this->getFrequency(indexMax);
     n = getNote(freqMax, diff);
     if(n != 0){
         note->setFrequency(n->getFrequency());
         note->setName(n->getName());
     }
-//    delete channel;
 }
 
 float Analyze::getFrequency(int placeInSpectrum){

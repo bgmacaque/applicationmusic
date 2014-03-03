@@ -20,6 +20,10 @@ Chord::Chord(float p_duration, float p_volume){
     m_duration = p_duration;
 }
 
+bool Chord::isEmpty(){
+    return m_notes.size() == 0;
+}
+
 //Getter of the duration
 double Chord::getDuration() const{
     return this->m_duration;

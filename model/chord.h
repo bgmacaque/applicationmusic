@@ -58,6 +58,8 @@ public:
 
     bool equals(Chord *c);
 
+    bool isEmpty();
+
 };
 
 #endif // CHORD_H

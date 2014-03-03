@@ -41,9 +41,9 @@ public:
      */
     void mainNote(Note *note, float *diff);
 
-    Chord *mainChord(int size_max, float freqMin, float freqMax);
+    Chord *mainChord(int size_max, float freqMin, float freqMax, float *maxVolume);
 
-    Chord *mainChord(int size_max);
+    Chord *mainChord(int size_max, float *maxVolume);
 
     /*!
      * \brief Method used to init the FMOD

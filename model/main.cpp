@@ -9,18 +9,30 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+
+//    FModInit *fmodlib = new FModInit();
+//    Analyze *a = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
+//    Note *n = new Note("A4", 440.0);
+//    float diff;
+//    a->start();
+
+//    while(true){
+//        a->mainNote(n, &diff);
+//        usleep(1000);
+//    }
+//    a->close();
+//    delete a;
+//    delete fmodlib;
+//    delete n;
+
+
+
     Note *n1 = new Note("A4", 440.0);
     Note *n2 = new Note("A5", 880.0);
     Note *n3 = new Note("A6", 1760.0);
     Note *n4 = new Note("A4", 440.0);
 
-    Chord *c = new Chord(5.0, 0.9);
-
-    c->addNote(n1);
-    c->addNote(n2);
-//    cout << "FALSE : " << c->contains(n3) << endl;
-//    cout << "TRUE : " << c->contains(n1) << endl;
-    Partition *p = new Partition(240);
+    Partition *p = new Partition(240, 0.025, 0.025);
     FModInit *fmodlib = new FModInit();
     Analyze *a = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
     bool tune = true;
@@ -32,7 +44,6 @@ int main(int argc, char **argv)
     delete n2;
     delete n3;
     delete n4;
-    delete c;
 
 //    Partition *p = new Partition(120);
 //    FModInit *fmodlib = new FModInit();
@@ -44,5 +55,5 @@ int main(int argc, char **argv)
 //    delete a;
 //    delete fmodlib;
 //    delete p;
-//    return 0;
+    return 0;
 }
