@@ -11,13 +11,13 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     //Then we create other stuff
     ///analyzer = new Analyze;
     ///score = new Partition;
-    connection = new DBConnection("../../database.conf");
+    connection = new DBConnection("../database.conf");
     config = new Configuration();
 
     //We tried to load previous configs if they exist
     config->load();
 
-    icons_loc = new QString("../../Images/Icons/");
+    icons_loc = new QString("../Images/Icons/");
 
     //Now we set layout
     QVBoxLayout *main_lay = new QVBoxLayout(this);

@@ -18,7 +18,6 @@
 #include "configuration.h"
 #include "graphicnote.h"
 #include "graphicscore.h"
-#include "../model/partition.h"
 
 /*!
  * \class noSkin noskin.h
@@ -129,7 +128,7 @@ private:
     /*!
      * \brief The partitiion currently showed
      */
-    Partition *score;
+    //Partition *score;
 
     GraphicScore *g_score;
 

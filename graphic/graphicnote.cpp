@@ -36,3 +36,16 @@ void GraphicNote::paintEvent(QPaintEvent *event)
     else
         painter->drawText(QRect((this->width() - 27)/2, 0, this->width()-10, this->height() - 10), QString(chiffre.c_str()));
 }
+
+void GraphicNote::mousePressEvent(QMouseEvent *event)
+{
+    drager = new QDrag(this);
+    QMimeData *data = new QMimeData;
+    data->setText(number+"");
+    drager->setMimeData(data);
+    QPixmap pixmap(this->size());
+    this->render(&pixmap);
+    drager->setPixmap(pixmap);
+    drager->exec();
+    setAcceptDrops(true);
+}
