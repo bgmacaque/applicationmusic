@@ -24,10 +24,14 @@ private:
 
     std::string m_name;
 
+    float m_lowStep;
+    float m_highStep;
+
 public:
     //Constructor that initialize an empty partition
     Partition();
-    Partition(int tempo);
+    Partition(int tempo, float p_lowStep, float p_highStep);
+
     //Display the partition in text format (debug)
     std::string getDisplay();
 
