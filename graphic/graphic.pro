@@ -9,6 +9,7 @@ HEADERS += \
     dbconnection.h \
     graphicnote.h \
     graphicscore.h \
+    positionnednote.h
 
 
 SOURCES += \
@@ -20,6 +21,7 @@ SOURCES += \
     dbconnection.cpp \
     graphicnote.cpp \
     graphicscore.cpp \
+    positionnednote.cpp
 
 
 QT += core gui

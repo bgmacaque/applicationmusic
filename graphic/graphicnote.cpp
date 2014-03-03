@@ -41,7 +41,7 @@ void GraphicNote::mousePressEvent(QMouseEvent *event)
 {
     drager = new QDrag(this);
     QMimeData *data = new QMimeData;
-    data->setText(number+"");
+    data->setText(QString::number(number));
     drager->setMimeData(data);
     QPixmap pixmap(this->size());
     this->render(&pixmap);
