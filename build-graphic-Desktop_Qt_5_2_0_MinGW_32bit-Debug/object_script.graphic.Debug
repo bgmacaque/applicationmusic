@@ -1,0 +1,13 @@
+INPUT(
+./debug\noskin.o
+./debug\test.o
+./debug\controller.o
+./debug\confwindow.o
+./debug\configuration.o
+./debug\dbconnection.o
+./debug\graphicnote.o
+./debug\graphicscore.o
+./debug\positionnednote.o
+./debug\moc_controller.o
+./debug\moc_confwindow.o
+);

@@ -1,0 +1,13 @@
+INPUT(
+./release\noskin.o
+./release\test.o
+./release\controller.o
+./release\confwindow.o
+./release\configuration.o
+./release\dbconnection.o
+./release\graphicnote.o
+./release\graphicscore.o
+./release\positionnednote.o
+./release\moc_controller.o
+./release\moc_confwindow.o
+);

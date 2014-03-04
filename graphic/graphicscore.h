@@ -22,6 +22,7 @@ protected:
     void dropEvent(QDropEvent *de);
     void dragMoveEvent(QDragMoveEvent *de);
     void dragEnterEvent(QDragEnterEvent *de);
+    void mousePressEvent(QMouseEvent *event);
 
 };
 

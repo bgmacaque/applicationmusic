@@ -1,7 +1,8 @@
 #include "graphicnote.h"
 
-GraphicNote::GraphicNote(QWidget *parent, int num) : QWidget(parent), number(num)
+GraphicNote::GraphicNote(QWidget *p, int num) : QWidget(p), number(num)
 {
+    parent = p;
     this->setMinimumSize(35, 25);
     this->setMaximumSize(35, 25);
     this->repaint();
@@ -48,4 +49,17 @@ void GraphicNote::mousePressEvent(QMouseEvent *event)
     drager->setPixmap(pixmap);
     drager->exec();
     setAcceptDrops(true);
+
+    if(parent)
+        delete this;
+}
+
+int GraphicNote::getNumber()
+{
+    return this->number;
+}
+
+QDrag* GraphicNote::getDrager()
+{
+    return this->drager;
 }

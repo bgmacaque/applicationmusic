@@ -17,10 +17,13 @@ private:
     int number;
     QPainter *painter;
     QDrag *drager;
+    QWidget *parent;
 
 public:
     GraphicNote(QWidget *parent, int num);
     void paintEvent(QPaintEvent *event);
+    int getNumber();
+    QDrag* getDrager();
 
 protected:
     void mousePressEvent(QMouseEvent *event);
