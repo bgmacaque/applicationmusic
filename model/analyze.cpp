@@ -84,7 +84,7 @@ Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax, float *max
     bool stop = false;
     while(i >= 0 && c->notesNumber() < size_max && !stop){
 //        cout << n->getFrequency() << endl;
-        cout << spectrum[places[i]] << endl;
+//        cout << spectrum[places[i]] << endl;
         if(spectrum[places[i]] < 0.025){
             stop = true;
         }else{

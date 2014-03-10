@@ -24,6 +24,10 @@ bool Chord::isEmpty(){
     return m_notes.size() == 0;
 }
 
+void Chord::addDuration(double p_duration){
+    m_duration += p_duration;
+}
+
 //Getter of the duration
 double Chord::getDuration() const{
     return this->m_duration;

@@ -41,6 +41,8 @@ public:
     //Setter of the volume
     void setVolume(double volume);
 
+    void addDuration(double p_duration);
+
     //Method which allows to play notes 
     void play(FMOD::System *p_system, FMOD::Sound *p_sound);
 

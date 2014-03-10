@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include "note.h"
 #include <vector>
@@ -32,7 +33,7 @@ int main(int argc, char **argv)
     Note *n3 = new Note("A6", 1760.0);
     Note *n4 = new Note("A4", 440.0);
 
-    Partition *p = new Partition(240, 0.025, 0.025);
+    Partition *p = new Partition(120, 0.025, 0.025);
     FModInit *fmodlib = new FModInit();
     Analyze *a = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
     bool tune = true;

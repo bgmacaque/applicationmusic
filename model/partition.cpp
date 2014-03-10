@@ -21,6 +21,13 @@ void Partition::addChord(Chord *chord){
     this->m_chords.push_back(chord);
 }
 
+void Partition::addDurationLastChord(double p_duration){
+    if(!m_chords.empty()){
+        Chord *c = m_chords.at(m_chords.size() - 1);
+        c->addDuration(p_duration);
+    }
+}
+
 void Partition::setName(std::string p_name){
     m_name = p_name;
 }
@@ -36,6 +43,7 @@ void Partition::record(Analyze *a, bool *tune){
     Chord *c = 0;
     Chord *prec = 0;
     float maxVolume;
+    double step = m_tempo / 16;
     for(i = 0 ; i < 5000 ; i++){
         //Get the main chord with the possible frenquencies of the instrument
         c = a->mainChord(6, 164.81, 2637.02, &maxVolume);
@@ -46,15 +54,16 @@ void Partition::record(Analyze *a, bool *tune){
                 //If the volume is lower than the highstep
                 if(maxVolume < m_highStep){
                     //We add some duration
-                    cout << "Duration " << endl;
+                    this->addDurationLastChord(step);
                 }else{
                     //If the volume is higher than the highstep
-                    cout << "Add : " << c->getDisplay() << endl;
                     this->addChord(c);
                 }
             }else{
                 //We have to add some duration to the previous chord
-                cout << "Not the same" << endl;
+                if(!c->isEmpty()){
+                    this->addDurationLastChord(step);
+                }
             }
         }
         prec = c;

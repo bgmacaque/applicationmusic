@@ -54,6 +54,8 @@ public:
 
     void setName(std::string p_name);
 
+    void addDurationLastChord(double p_duration);
+
     static Partition* load(const char *path);
 };
 
