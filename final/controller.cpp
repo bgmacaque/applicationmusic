@@ -11,6 +11,7 @@ Controller::Controller(NoSkin *f) : frame(f)
     fmodlib = new FModInit();
     analyze = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
     recordThread = new RecordThread(partition, analyze);
+    frame->btn_save->setEnabled(false);
 }
 
 void Controller::active()
@@ -19,6 +20,7 @@ void Controller::active()
     QObject::connect(frame->btn_record_pause, SIGNAL(triggered()), this, SLOT(record()));
     QObject::connect(frame->btn_options, SIGNAL(triggered()), this, SLOT(openConf()));
     QObject::connect(frame->btn_refresh, SIGNAL(triggered()), this,SLOT(connectToWeb()));
+    QObject::connect(frame->btn_save, SIGNAL(triggered()), this, SLOT(save()));
 }
 
 
@@ -40,7 +42,10 @@ void Controller::record()
     if(recording){
         recording = false;
         frame->btn_record_pause->setIcon(QIcon(*frame->icons_loc+"record.png"));
-        recordThread->stop();
+        partition = recordThread->stop();
+        saved = false;
+        frame->btn_save->setEnabled(true);
+        std::cout << partition->toJSON() << std::endl;
     }else{
         recording = true;
         recordThread->start();
@@ -53,7 +58,8 @@ void Controller::save()
     saved = true;
 
     //We will save here the file
-
+    std::string name = "Partition.tab";
+    partition->save(name);
     frame->btn_save->setEnabled(false);
 }
 

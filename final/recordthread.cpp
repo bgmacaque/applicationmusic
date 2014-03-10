@@ -23,17 +23,22 @@ void RecordThread::run(){
     while(record){
         //Get the main chord with the possible frenquencies of the instrument
         c = m_analyze->mainChord(6, 164.81, 2637.02, &maxVolume);
+        c->setVolume(maxVolume);
         //If we have found a chord
         if(prec != 0){
             //If it isn't the same as before, we add it
+            cout << maxVolume << endl;
             if(!prec->equals(c) && !c->isEmpty()){
                 //If the volume is lower than the highstep
                 if(maxVolume < m_partition->getHighStep()){
                     //We add some duration
                     m_partition->addDurationLastChord(step);
-                }else{
+               }else{
                     //If the volume is higher than the highstep
+                    c->setDuration(m_partition->getTempo() / 16);
                     m_partition->addChord(c);
+                    cout << m_partition->getDisplay() << endl;
+                    cout << c->getDisplay() << endl;
                 }
             }else{
                 //We have to add some duration to the previous chord
@@ -45,7 +50,7 @@ void RecordThread::run(){
         prec = c;
         //Sleeping for the shortest time in music theory(1 min / bpm / 16)
         usleep(1000 * 1000 * 60 / (m_partition->getTempo() * 16));
-        cout << "RECORDING" << endl;
+//        cout << "RECORDING" << endl;
     }
 
 }
@@ -55,4 +60,5 @@ Partition *RecordThread::stop(){
     record = false;
     this->quit();
     m_analyze->close();
+    return m_partition;
 }

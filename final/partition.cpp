@@ -5,14 +5,12 @@ using namespace std;
 
 Partition::Partition(){
     m_tempo = 0;
-    m_record = false;
 }
 
 Partition::Partition(int p_tempo, float p_lowStep, float p_highStep){
     m_tempo = p_tempo;
     m_lowStep = p_lowStep;
     m_highStep = p_highStep;
-    m_record = false;
 }
 
 std::vector<Chord*> Partition::getChords() const{
@@ -38,9 +36,6 @@ std::string Partition::getName(){
     return m_name;
 }
 
-void Partition::startRecord(Analyze *a){
-
-}
 
 float Partition::getHighStep() const{
     return m_highStep;
@@ -50,9 +45,6 @@ int Partition::getTempo(){
     return m_tempo;
 }
 
-void Partition::stopRecord(){
-    m_record = false;
-}
 
 void Partition::startPlay(){
 
@@ -79,8 +71,8 @@ std::string Partition::toJSON(){
     return retour;
 }
 
-void Partition::save(const char *path){
-    std::ofstream file(path, std::ios::out | std::ios::trunc);
+void Partition::save(string path){
+    std::ofstream file(path.c_str(), std::ios::out | std::ios::trunc);
 
     if(file.is_open()){
         //Opening the partition

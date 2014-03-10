@@ -28,8 +28,6 @@ private:
 
     float m_highStep;
 
-    bool m_record;
-
 public:
     //Constructor that initialize an empty partition
     Partition();
@@ -49,13 +47,9 @@ public:
 
     void stopPlay();
 
-    void save(const char *path);
+    void save(std::string path);
 
     float getHighStep() const;
-
-    void startRecord(Analyze *a);
-
-    void stopRecord();
 
     std::string toJSON();
 
