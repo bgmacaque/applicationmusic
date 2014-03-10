@@ -7,7 +7,10 @@ Controller::Controller(NoSkin *f) : frame(f)
     playing = false;
     recording = false;
     saved = true;
-    partition = new Partition(0, 0.025, 0.025);
+    partition = new Partition(120, 0.025, 0.025);
+    fmodlib = new FModInit();
+    analyze = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
+    recordThread = new RecordThread(partition, analyze);
 }
 
 void Controller::active()
@@ -17,6 +20,7 @@ void Controller::active()
     QObject::connect(frame->btn_options, SIGNAL(triggered()), this, SLOT(openConf()));
     QObject::connect(frame->btn_refresh, SIGNAL(triggered()), this,SLOT(connectToWeb()));
 }
+
 
 void Controller::play()
 {
@@ -36,8 +40,10 @@ void Controller::record()
     if(recording){
         recording = false;
         frame->btn_record_pause->setIcon(QIcon(*frame->icons_loc+"record.png"));
+        recordThread->stop();
     }else{
         recording = true;
+        recordThread->start();
         frame->btn_record_pause->setIcon(QIcon(*frame->icons_loc+"pause_record.png"));
     }
 }
@@ -84,4 +90,11 @@ void Controller::connectToWeb()
     }else{
         QMessageBox::information(frame, "Connexion", "Nous n'avons pu vous connecter à la base de données");
     }
+}
+
+Controller::~Controller(){
+    delete partition;
+    delete analyze;
+    delete fmodlib;
+    delete recordThread;
 }

@@ -4,6 +4,8 @@
 #include "noskin.h"
 #include "confwindow.h"
 #include "partition.h"
+#include "fmodinit.h"
+#include "recordthread.h"
 #include <QMessageBox>
 
 /*!
@@ -27,6 +29,9 @@ private:
     bool saved;
     NoSkin *frame;
     Partition *partition;
+    Analyze *analyze;
+    FModInit *fmodlib;
+    RecordThread *recordThread;
 
 public:
     Controller(NoSkin *frame);
@@ -35,6 +40,7 @@ public:
      * \brief The function that active the controller
      */
     void active();
+    ~Controller();
 
 public slots:
     void play();

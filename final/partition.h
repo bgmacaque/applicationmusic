@@ -25,7 +25,10 @@ private:
     std::string m_name;
 
     float m_lowStep;
+
     float m_highStep;
+
+    bool m_record;
 
 public:
     //Constructor that initialize an empty partition
@@ -45,9 +48,14 @@ public:
     void startPlay();
 
     void stopPlay();
+
     void save(const char *path);
 
-    void record(Analyze *a, bool *tune);
+    float getHighStep() const;
+
+    void startRecord(Analyze *a);
+
+    void stopRecord();
 
     std::string toJSON();
 
@@ -56,6 +64,8 @@ public:
     void setName(std::string p_name);
 
     void addDurationLastChord(double p_duration);
+
+    int getTempo();
 
     static Partition* load(const char *path);
 };

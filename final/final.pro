@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     dbconnection.cpp \
     graphicnote.cpp \
     graphicscore.cpp \
-    positionnednote.cpp
+    positionnednote.cpp \
+    recordthread.cpp
 
 HEADERS += \
     note.h \
@@ -31,7 +32,8 @@ HEADERS += \
     dbconnection.h \
     graphicnote.h \
     graphicscore.h \
-    positionnednote.h
+    positionnednote.h \
+    recordthread.h
 
 QT += core gui
 QT += sql
