@@ -24,7 +24,7 @@ bool Chord::isEmpty(){
     return m_notes.size() == 0;
 }
 
-void Chord::addDuration(double p_duration){
+void Chord::addDuration(float p_duration){
     m_duration += p_duration;
 }
 
@@ -33,7 +33,7 @@ double Chord::getDuration() const{
     return this->m_duration;
 }
 //Setter of the duration
-void Chord::setDuration(double duration){
+void Chord::setDuration(float duration){
     this->m_duration = duration;
 }
 
@@ -42,7 +42,7 @@ double Chord::getVolume() const{
     return this->m_volume;
 }
 //Setter of the volume
-void Chord::setVolume(double volume){
+void Chord::setVolume(float volume){
     this->m_volume = volume;
 }
 

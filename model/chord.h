@@ -34,14 +34,14 @@ public:
     //Getter of the duration
     double getDuration() const;
     //Setter of the duration
-    void setDuration(double duration);
+    void setDuration(float duration);
 
     //Getter of the volume
     double getVolume() const;
     //Setter of the volume
-    void setVolume(double volume);
+    void setVolume(float volume);
 
-    void addDuration(double p_duration);
+    void addDuration(float p_duration);
 
     //Method which allows to play notes 
     void play(FMOD::System *p_system, FMOD::Sound *p_sound);
