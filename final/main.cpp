@@ -1,4 +1,24 @@
+/*
 
+
+  TODO :
+   Faire une classe tablature qui fait correspondre les notes d'une partition
+   à la position sur la guitare
+   Faire une classe corde qui gère les notes jouables sur une corde de la guitare
+   (de la plus petite à la plus grande note, liste de notes)
+   Faire un algo qui prends un accord en entrée et donne l'accord sous forme de position de note
+   Il regardera sur quelle corde l'accord est jouable
+   Elle associe donc la note à la position
+   Faire une classe gamme (liste de plusieurs note) et faire des attributs statiques
+   correspondant à des gammes connues
+   Faire une classe solo permettant de générer un solo aléatoirement en fonction de la gamme
+   Faire le JSON qui fonctionne
+   Faire la lecture d'une partition.
+   On prends un petit son qu'on lit en boucle jusqu'à ce que la durée est finie
+   ça devrait marcher
+   Tester la connexion de la base de données en locale
+
+*/
 //#include <iostream>
 //#include "note.h"
 //#include <vector>

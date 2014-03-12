@@ -33,7 +33,7 @@ void RecordThread::run(){
                 if(maxVolume < m_partition->getHighStep()){
                     //We add some duration
                     m_partition->addDurationLastChord(step);
-               }else{
+                }else{
                     //If the volume is higher than the highstep
                     c->setDuration(m_partition->getTempo() / 16);
                     m_partition->addChord(c);
