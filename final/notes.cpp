@@ -51,12 +51,14 @@ Notes::Notes(){
 }
 
 
+
 Notes::~Notes(){
     int i(0);
     for(i = 0; i < 120; i++){
         delete m_notes[i];
     }
     delete[] m_notes;
+    m_instance = NULL;
 }
 
 Notes *Notes::get_instance(){
@@ -70,7 +72,22 @@ Note **Notes::getNotes() const{
     return m_notes;
 }
 
-Note *Notes::searchNote(string name) const{
+Note **Notes::getNotesFrets(std::string noteName, int nbFrets) const{
+    Note **retour = 0;
+    int index = this->getIndex(noteName);
+    if(index != -1){
+        int i(0);
+        int j(0);
+        retour = new Note*[nbFrets];
+        for(i = index; i < index + nbFrets ; i++){
+            retour[j] = m_notes[i];
+            j++;
+        }
+    }
+    return retour;
+}
+
+Note *Notes::searchNote(std::string name) const{
     Note *n = 0;
     bool found = false;
     int i(0);
@@ -82,6 +99,20 @@ Note *Notes::searchNote(string name) const{
         i++;
     }
     return n;
+}
+
+int Notes::getIndex(std::string name) const{
+    int index = -1;
+    bool found = false;
+    int i(0);
+    while(i < 120 && !found){
+        if(m_notes[i]->getName().compare(name) == 0){
+            found = true;
+            index = i;
+        }
+        i++;
+    }
+    return index;
 }
 
 void Notes::kill(){
