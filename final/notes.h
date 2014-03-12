@@ -5,12 +5,13 @@
 class Notes{
 
 private:
-    Note **m_notes;
-    static Notes *m_instance;
+//    Note **m_notes;
     Notes();
+    static Notes *m_instance;
 
 public:
     static Notes *get_instance();
+
 };
 
 
