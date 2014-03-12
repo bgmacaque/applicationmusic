@@ -4,6 +4,8 @@
 #include "configuration.h"
 #include <QLayout>
 #include <iostream>
+#include "notes.h"
+
 
 using namespace std;
 
@@ -11,7 +13,9 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-    Analyze *analyze = new Analyze();
+    Notes *notes = Notes::get_instance();
+    Notes *notes2 = Notes::get_instance();
+//    Analyze *analyze = new Analyze();
     for( ; ; ){
 
     }
