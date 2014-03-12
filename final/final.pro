@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     recordthread.cpp \
     guitarstring.cpp \
     notes.cpp \
-    fret.cpp
+    fret.cpp \
+    guitar.cpp
 
 HEADERS += \
     note.h \
@@ -39,7 +40,8 @@ HEADERS += \
     recordthread.h \
     guitarstring.h \
     notes.h \
-    fret.h
+    fret.h \
+    guitar.h
 
 QT += core gui
 QT += sql

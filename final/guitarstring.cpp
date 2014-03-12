@@ -17,10 +17,8 @@ GuitarString::GuitarString(std::string p_name, std::string p_noteName, int p_nbF
         int i(0);
         for(i = 0 ; i < p_nbFrets ; i++){
             m_frets[i] = new Fret(i, notes[i]);
-            cout << m_frets[i]->getNote()->getName() << "," << m_frets[i]->getNumber() << endl;
         }
         m_highFrequency = m_frets[p_nbFrets - 1]->getNote()->getFrequency();
-
     }else{
         m_lowFrequency = 0;
         m_highFrequency = 0;

@@ -5,20 +5,22 @@
 #include <QLayout>
 #include <iostream>
 #include "notes.h"
-#include "guitarstring.h"
 
+#include "guitar.h"
 using namespace std;
 
 
 int main(int argc, char **argv)
 {
-    GuitarString *gs = new GuitarString("E", "E3", 25);
-    Note *n = new Note("A4", 440.0);
+    Guitar *g = Guitar::get_instance();
+    //    GuitarString *gs = new GuitarString("E", "E3", 25);
+//    Note *n = new Note("A4", 440.0);
 //    cout << gs->playable(n) << endl;
 
-    delete n;
+//    delete n;
     Notes::kill();
-    delete gs;
+    Guitar::kill();
+//    delete gs;
     //    for( ; ; ){
 
 //    }
