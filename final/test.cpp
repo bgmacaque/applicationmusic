@@ -5,17 +5,16 @@
 #include <QLayout>
 #include <iostream>
 #include "notes.h"
-
+#include "guitarstring.h"
 
 using namespace std;
 
 
 int main(int argc, char **argv)
 {
-
-    Notes *notes = Notes::get_instance();
-    Notes *notes2 = Notes::get_instance();
-//    Analyze *analyze = new Analyze();
+    GuitarString *gs = new GuitarString("E", 100.0, 300.0);
+    Note *n = new Note("A4", 440.0);
+    cout << gs->playable(n) << endl;
     for( ; ; ){
 
     }

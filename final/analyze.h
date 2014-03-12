@@ -4,6 +4,7 @@
 #include "note.h"
 #include <vector>
 #include <iostream>
+#include "notes.h"
 #include "chord.h"
 
 /*!
@@ -16,7 +17,6 @@
 class Analyze{
 
 private:
-    Note **m_notes;
     FMOD::System *m_system;
     FMOD::Sound *m_sound;
     FMOD::Channel *m_channel;
@@ -50,6 +50,9 @@ public:
      */
     void start();
 
+    /*!
+     * \brief Methode used to close the channel
+     */
     void close();
 
 
@@ -60,8 +63,6 @@ public:
     Note *getNote(float frequency, float *diff);
 
     Note *getNote(float frequency);
-
-    Note *searchNote(std::string name);
 
     float getFrequency(int placeInSpectrum);
 

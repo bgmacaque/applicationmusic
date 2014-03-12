@@ -5,13 +5,16 @@
 class Notes{
 
 private:
-//    Note **m_notes;
+    Note **m_notes;
     Notes();
+    ~Notes();
     static Notes *m_instance;
 
 public:
     static Notes *get_instance();
-
+    static void kill();
+    Note **getNotes() const;
+    Note *searchNote(std::string name) const;
 };
 
 

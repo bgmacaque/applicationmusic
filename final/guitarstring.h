@@ -6,11 +6,15 @@ class GuitarString{
 
 
 private:
-    Analyze *m_analyze;
+    float m_lowFrequency;
+    float m_highFrequency;
+    std::string m_name;
 
 public:
-    GuitarString(Analyze *analyze);
+    GuitarString(std::string p_name, float p_lowFrequency, float p_highFrequency);
     ~GuitarString();
+
+    bool playable(Note *n) const;
 };
 
 #endif // GUITARSTRING_H
