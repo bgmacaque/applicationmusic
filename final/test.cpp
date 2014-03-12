@@ -3,9 +3,18 @@
 
 #include "configuration.h"
 #include <QLayout>
+#include <iostream>
+
+using namespace std;
+
 
 int main(int argc, char **argv)
 {
+
+    Analyze *analyze = new Analyze();
+    for( ; ; ){
+
+    }
     QApplication *app = new QApplication(argc, argv);
     NoSkin *frame = new NoSkin(600, 200);
     Controller *c = new Controller(frame);
