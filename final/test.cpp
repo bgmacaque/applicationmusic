@@ -12,6 +12,9 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    Notes *notes = Notes::get_instance();
+    cout << notes->searchNote("E3")->getFrequency() << endl;
+    Notes::kill();
 //    Guitar *g = Guitar::get_instance();
 //    GuitarString *gs = new GuitarString("E", "E3", 25);
 //    Note *n = new Note("A4", 440.0);

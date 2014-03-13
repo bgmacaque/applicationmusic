@@ -34,10 +34,14 @@ Fret **Guitar::getFrets(Chord *chord) const{
     int j=0;
     std::vector<Note*> notes = chord->getNotes();
     Fret **frets = new Fret*[chord->notesNumber()];
+    Fret *fret;
     for (i = 0 ; i < chord->notesNumber() ; i++){
         while(j < m_nbStrings){
             if(m_strings[j]->playable( notes.at(i) )){
-                frets[i] = m_strings[j]->getFret(notes.at(i));
+                fret = m_strings[j]->getFret(notes.at(i));
+                if(fret != 0){
+                    frets[i] = fret;
+                }
             }
             j++;
         }
