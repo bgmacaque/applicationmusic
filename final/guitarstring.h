@@ -16,6 +16,7 @@ private:
 
 public:
     GuitarString(std::string p_name, std::string p_noteName, int p_nbFrets);
+    GuitarString();
     ~GuitarString();
 
     Fret *getFret(Note *n) const;
