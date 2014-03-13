@@ -1,5 +1,5 @@
 #include "graphicscore.h"
-
+#include <iostream>
 GraphicScore::GraphicScore(QWidget *parent, int nb_line) : QWidget(parent)
 {
     nb_lines = nb_line;
@@ -65,10 +65,9 @@ void GraphicScore::dropEvent(QDropEvent *de)
     // Unpack dropped data and handle it the way you want
     //qDebug("Contents: %s", de->mimeData()->text().toLatin1().data());
     //QMessageBox::information(NULL, "Infos", de->mimeData()->text());
-    GraphicNote *n = new GraphicNote(this, de->mimeData()->text().toInt());
-    QPoint p = de->pos();
-    notes->push_back(new PositionnedNote(this, n, &p));
-    n->move(de->pos());
+    int x = de->pos().x();
+    int y = de->pos().y();
+    this->addNote(x, y, de->mimeData()->text().toInt());
 }
 
 void GraphicScore::addNote(int x, int y, int number){
@@ -76,6 +75,26 @@ void GraphicScore::addNote(int x, int y, int number){
     QPoint *p = new QPoint(x, y);
     notes->push_back(new PositionnedNote(this, n, p));
     n->move(*p);
+}
+
+void GraphicScore::addTablature(Tablature *t){
+    std::vector<FrettedChord*> tabFrets = t->getFrets();
+    int i(0);
+    int j(0);
+    FrettedChord *fc;
+    Fret **frets;
+    Fret *fret;
+//    int number;
+    for(i = 0 ; i < tabFrets.size() ; i++){
+        fc = tabFrets.at(i);
+        frets = fc->getFrets();
+        for(j = 0 ; j < fc->getNumberFrets() ; j++){
+//            fret = frets[j];
+//            number = fret->getNumber();
+            addNote(i + 1, j + 1, frets[j]->getNumber());
+        }
+    }
+    std::cout << "AJOUT" << std::endl;
 }
 
 void GraphicScore::mousePressEvent(QMouseEvent *event)

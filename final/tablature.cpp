@@ -13,3 +13,7 @@ void Tablature::toTab(Partition *p){
         m_frets.push_back(new FrettedChord(chord));
     }
 }
+
+std::vector<FrettedChord*> Tablature::getFrets() const{
+    return m_frets;
+}

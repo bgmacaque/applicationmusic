@@ -16,10 +16,11 @@
 class FrettedChord{
 private:
     Fret **m_frets;
-
+    int m_numberFrets;
 public:
     FrettedChord(Chord *c);
     Fret **getFrets();
+    int getNumberFrets();
 };
 
 #endif // FRETTEDCHORD_H

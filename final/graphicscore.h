@@ -4,6 +4,7 @@
 #include <QPainter>
 #include "graphicnote.h"
 #include "positionnednote.h"
+#include "tablature.h"
 
 /*!
  * \class GraphicScore graphicscore.h
@@ -26,6 +27,7 @@ public:
     GraphicScore(QWidget *parent, int nb_line);
     GraphicScore(QWidget *parent, int nb_line, std::vector<PositionnedNote *> *n);
     void paintEvent(QPaintEvent *event);
+    void addTablature(Tablature *t);
 
 protected:
     void dropEvent(QDropEvent *de);
@@ -33,6 +35,7 @@ protected:
     void dragEnterEvent(QDragEnterEvent *de);
     void mousePressEvent(QMouseEvent *event);
     void addNote(int x, int y, int number);
+
 };
 
 #endif // GRAPHICSCORE_H
