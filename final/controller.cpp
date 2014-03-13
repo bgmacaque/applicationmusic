@@ -31,7 +31,7 @@ void Controller::play()
         playing = false;
         frame->btn_play_pause->setIcon(QIcon(*frame->icons_loc+"play.png"));
         partition->stopPlay();
-        tablature->toTab(partition);
+
     }else{
         playing = true;
         frame->btn_play_pause->setIcon(QIcon(*frame->icons_loc+"pause_play.png"));
@@ -47,7 +47,9 @@ void Controller::record()
         partition = recordThread->stop();
         saved = false;
         frame->btn_save->setEnabled(true);
-        std::cout << partition->toJSON() << std::endl;
+//        std::cout << partition->toJSON() << std::endl;
+        tablature->toTab(partition);
+        frame->setTablature(tablature);
     }else{
         recording = true;
         recordThread->start();

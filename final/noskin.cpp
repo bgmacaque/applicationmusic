@@ -37,6 +37,12 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     this->show();
 }
 
+void NoSkin::setTablature(Tablature *t){
+    g_score->addTablature(t);
+}
+
+
+
 QToolBar* NoSkin::createTopBar()
 {
     this->loadTopIcons();

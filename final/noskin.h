@@ -207,6 +207,8 @@ public:
      */
     int changePlayBackPosition(int pos);
 
+    void setTablature(Tablature *t);
+
     /*!
      * \brief Change the record's cursor position
      * \param position The new position of the cursor
