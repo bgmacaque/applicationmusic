@@ -1,5 +1,7 @@
 #include "graphicscore.h"
 #include <iostream>
+
+
 GraphicScore::GraphicScore(QWidget *parent, int nb_line) : QWidget(parent)
 {
     nb_lines = nb_line;
@@ -83,7 +85,6 @@ void GraphicScore::addTablature(Tablature *t){
     int j(0);
     FrettedChord *fc;
     Fret **frets;
-    Fret *fret;
 //    int number;
     for(i = 0 ; i < tabFrets.size() ; i++){
         fc = tabFrets.at(i);
@@ -91,10 +92,13 @@ void GraphicScore::addTablature(Tablature *t){
         for(j = 0 ; j < fc->getNumberFrets() ; j++){
 //            fret = frets[j];
 //            number = fret->getNumber();
-            addNote(i + 1, j + 1, frets[j]->getNumber());
+//            std::cout << j << std::endl;
+//            std::cout << "Fret number : " << frets[j]->getNumber() << std::endl;
+//            addNote(i + 1, j + 1, frets[j]->getNumber());
+            std::cout << "AJOUT" << std::endl;
         }
     }
-    std::cout << "AJOUT" << std::endl;
+
 }
 
 void GraphicScore::mousePressEvent(QMouseEvent *event)
