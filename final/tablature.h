@@ -2,6 +2,7 @@
 #define TABLATURE_H
 #include <vector>
 #include "frettedchord.h"
+#include "partition.h"
 
 class Tablature{
 private:
@@ -9,7 +10,7 @@ private:
 
 public:
     Tablature();
-
+    void toTab(Partition *p);
 };
 
 #endif // TABLATURE_H

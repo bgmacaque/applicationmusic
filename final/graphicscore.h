@@ -32,7 +32,7 @@ protected:
     void dragMoveEvent(QDragMoveEvent *de);
     void dragEnterEvent(QDragEnterEvent *de);
     void mousePressEvent(QMouseEvent *event);
-
+    void addNote(int x, int y, int number);
 };
 
 #endif // GRAPHICSCORE_H

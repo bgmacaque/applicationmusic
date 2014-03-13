@@ -71,6 +71,13 @@ void GraphicScore::dropEvent(QDropEvent *de)
     n->move(de->pos());
 }
 
+void GraphicScore::addNote(int x, int y, int number){
+    GraphicNote *n = new GraphicNote(this, number);
+    QPoint *p = new QPoint(x, y);
+    notes->push_back(new PositionnedNote(this, n, p));
+    n->move(*p);
+}
+
 void GraphicScore::mousePressEvent(QMouseEvent *event)
 {
     //We delete the selected note

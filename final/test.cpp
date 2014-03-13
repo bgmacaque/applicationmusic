@@ -6,20 +6,28 @@
 #include <iostream>
 #include "notes.h"
 
-//#include "guitar.h"
+#include "guitar.h"
 using namespace std;
 
 
 int main(int argc, char **argv)
 {
-//    Guitar *g = Guitar::get_instance();
-    //    GuitarString *gs = new GuitarString("E", "E3", 25);
-//    Note *n = new Note("A4", 440.0);
+    Guitar *g = Guitar::get_instance();
+    GuitarString *gs = new GuitarString("E", "E3", 25);
+    Note *n = new Note("A4", 440.0);
 //    cout << gs->playable(n) << endl;
+    Partition *p = new Partition(240, 0.025, 0.025);
+    Chord *c = new Chord();
+    c->addNote(n);
+    p->addChord(c);
 
-//    delete n;
-//    Notes::kill();
-//    Guitar::kill();
+
+    delete n;
+    delete c;
+    delete p;
+    delete gs;
+    Notes::kill();
+    Guitar::kill();
 //    delete gs;
 
 

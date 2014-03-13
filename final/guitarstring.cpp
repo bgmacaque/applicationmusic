@@ -4,6 +4,9 @@
 #include <iostream>
 using namespace std;
 
+GuitarString::GuitarString(){
+
+}
 
 GuitarString::GuitarString(std::string p_name, std::string p_noteName, int p_nbFrets){
     m_name = p_name;

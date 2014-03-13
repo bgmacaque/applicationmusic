@@ -6,7 +6,9 @@
 #include "partition.h"
 #include "fmodinit.h"
 #include "recordthread.h"
+#include "controller.h"
 #include <QMessageBox>
+#include "tablature.h"
 
 /*!
  * \class Controller controller.h
@@ -32,6 +34,7 @@ private:
     Analyze *analyze;
     FModInit *fmodlib;
     RecordThread *recordThread;
+    Tablature *tablature;
 
 public:
     Controller(NoSkin *frame);
