@@ -18,11 +18,30 @@
 class Configuration
 {
 private:
+
+    /*!
+     * \brief The username of the user
+     */
     QString* username;
+
+    /*!
+     * \brief The password of the user
+     */
     QString* password;
 
+    /*!
+     * \brief True if the password has been saved
+     */
     bool password_saved;
+
+    /*!
+     * \brief True if the application should reloging after an error
+     */
     bool reloging_after_error;
+
+    /*!
+     * \brief True if the application should log at start
+     */
     bool login_at_start;
 
     int reloging_after;
@@ -45,19 +64,59 @@ public:
      */
      bool load();
 
-    //We define all the setters
+    /*!
+     * \brief Setter for the username
+     */
     void setUserName(QString *usr);
+
+    /*!
+     * \brief Setter for the password
+     */
     void setPassword(QString *pwd);
+
+    /*!
+     * \brief Setter for the password saving state
+     */
     void setPasswordSaved(bool state);
+
+    /*!
+     * \brief Setter for the reloging after error behavior
+     */
     void setRelogingAfterError(bool state);
+
+    /*!
+     * \brief The duration in time of the chord
+     */
     void setRelogingAfter(int minutes);
 
-    //We define all getters
+    /*!
+     * \brief Getter for the username
+     */
     QString* getUserName();
+
+    /*!
+     * \brief Getter for the password
+     */
     QString* getPassword();
+
+    /*!
+     * \brief Getter for the password saved statement
+     */
     bool getPasswordSaved();
+
+    /*!
+     * \brief Getter for the logging at start behavior
+     */
     bool getLogAtStart();
+
+    /*!
+     * \brief Getter for the reloging after error behavior statement
+     */
     bool getRelogingAfterError();
+
+    /*!
+     * \brief Getter for the
+     */
     int getRelogingAfter();
 
     //A special getter to get the decrypted password
