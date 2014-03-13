@@ -44,34 +44,75 @@ private:
      */
     QToolBar *tabs;
 
-    //All buttons to navigate (will be in the tab)
+    /*!
+     * \brief Button to connect
+     */
     QAction* btn_connection;
+
+    /*!
+     * \brief Button to access the option
+     */
     QAction* btn_options;
+
+    /*!
+     * \brief Button for the skins
+     */
     QAction* btn_skins;
 
+    /*!
+     * \brief Button to apply change
+     */
     QPushButton* btn_apply;
 
-    //All pages of the window
+    /*!
+     * \brief Screen of the connection
+     */
     QWidget* page_connection;
+
+    /*!
+     * \brief Screen of the options
+     */
     QWidget* page_options;
+
+    /*!
+     * \brief Screen for the skins
+     */
     QWidget* page_skins;
 
-    //The authentification page
+    /*!
+     * \brief Layout for the connection
+     */
     QFormLayout *layout_connection;
+
+    /*!
+     * \brief Input field for the username
+     */
     QLineEdit* username;
+
+    /*!
+     * \brief Input field for the password
+     */
     QLineEdit* password;
 
+    /*!
+     * \brief Box to inform the application if the user want his password to be saved
+     */
     QCheckBox* pass_saved;
+
+    /*!
+     * \brief Box to inform the application if the user want to launch at start
+     */
     QCheckBox* login_at_start;
+
+    /*!
+     * \brief Box to inform the application if the user wants to relog after an error
+     */
     QCheckBox* relogin_after_errors;
 
+    /*!
+     * \brief SpinBox for the time between two relogging try
+     */
     QSpinBox* reloging_after;
-
-
-    //The options page
-
-
-    //The skins page
 
     /*!
      * \brief Loads tabs to navigate between pages
