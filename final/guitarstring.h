@@ -4,6 +4,18 @@
 #include "notes.h"
 #include <vector>
 
+/*!
+ * \class GuitarString guitarstring.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief This class represent a single string of the guitar
+ * \brief The attribut m_lowFrequency is the minimum frequency on this string
+ * \brief The attribut m_highFrequency is the maximum frequency on this string
+ * \brief The attribut m_name is for convenient purpose,
+ * \brief The user is free to rename the String to his convenience
+ */\
+
 class GuitarString{
 
 

@@ -11,6 +11,14 @@
 #include <QMessageBox>
 //#include <qsql_mysql.h>
 
+/*!
+ * \class DBConnection dbconnection.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief This class provide the connection to the QSqlDataBase
+ */
+
 class DBConnection
 {
 private:

@@ -25,8 +25,8 @@
  * \version 1.0
  * \date 07 december 2012
  * \brief This class is used to represent all windows, no matter its layout.
- *
  */
+
 class NoSkin:QMainWindow
 {
 friend class Controller;

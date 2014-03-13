@@ -5,6 +5,15 @@
 #include "graphicnote.h"
 #include "positionnednote.h"
 
+/*!
+ * \class GraphicScore graphicscore.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief
+ * \brief
+ */\
+
 class GraphicScore : public QWidget
 {
 
