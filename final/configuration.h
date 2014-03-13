@@ -115,7 +115,7 @@ public:
     bool getRelogingAfterError();
 
     /*!
-     * \brief Getter for the
+     * \brief Getter for the timing between two relog
      */
     int getRelogingAfter();
 
