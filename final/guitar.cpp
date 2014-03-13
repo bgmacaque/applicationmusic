@@ -9,12 +9,12 @@ Guitar *Guitar::m_instance = NULL;
 Guitar::Guitar(){
     m_nbStrings = 6;
     m_strings = new GuitarString*[m_nbStrings];
-    m_strings[0] = new GuitarString("E", "E3", 25);
-    m_strings[1] = new GuitarString("A", "A4", 25);
-    m_strings[2] = new GuitarString("D", "D4", 25);
-    m_strings[3] = new GuitarString("G", "G4", 25);
-    m_strings[4] = new GuitarString("B", "B5", 25);
-    m_strings[5] = new GuitarString("e", "E5", 25);
+    m_strings[0] = new GuitarString("E", "E2", 25);
+    m_strings[1] = new GuitarString("A", "A2", 25);
+    m_strings[2] = new GuitarString("D", "D3", 25);
+    m_strings[3] = new GuitarString("G", "G3", 25);
+    m_strings[4] = new GuitarString("B", "B3", 25);
+    m_strings[5] = new GuitarString("e", "E4", 25);
 }
 
 Guitar::~Guitar(){
@@ -35,7 +35,7 @@ Fret **Guitar::getFrets(Chord *chord) const{
     std::vector<Note*> notes = chord->getNotes();
     Fret **frets = new Fret*[chord->notesNumber()];
     Fret *fret;
-    for (i = 0 ; i < chord->notesNumber() ; i++){
+    while(i < chord->notesNumber() && j < m_nbStrings){
         while(j < m_nbStrings){
             if(m_strings[j]->playable( notes.at(i) )){
                 fret = m_strings[j]->getFret(notes.at(i));
@@ -45,8 +45,16 @@ Fret **Guitar::getFrets(Chord *chord) const{
             }
             j++;
         }
+        i++;
     }
-    return frets;
+    Fret **retour = new Fret*[i];
+    if(i != chord->notesNumber()){
+        std::cout << "PAS BIEN " << std::endl;
+        for(j = 0 ; j < i ; j++){
+            retour[j] = frets[j];
+        }
+    }
+    return retour;
 }
 
 Guitar *Guitar::get_instance(){
