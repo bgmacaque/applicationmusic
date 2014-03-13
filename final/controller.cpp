@@ -12,6 +12,7 @@ Controller::Controller(NoSkin *f) : frame(f)
     analyze = new Analyze(fmodlib->getSystem(), fmodlib->getSound());
     recordThread = new RecordThread(partition, analyze);
     frame->btn_save->setEnabled(false);
+    tablature = new Tablature();
 }
 
 void Controller::active()
@@ -30,6 +31,7 @@ void Controller::play()
         playing = false;
         frame->btn_play_pause->setIcon(QIcon(*frame->icons_loc+"play.png"));
         partition->stopPlay();
+        tablature->toTab(partition);
     }else{
         playing = true;
         frame->btn_play_pause->setIcon(QIcon(*frame->icons_loc+"pause_play.png"));
