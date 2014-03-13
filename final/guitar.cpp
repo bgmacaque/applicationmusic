@@ -30,19 +30,23 @@ void Guitar::kill(){
 }
 
 Fret **Guitar::getFrets(Chord *chord) const{
-    int i;
-    int j=0;
+    int i = 0;
+    int j = 0;
     std::vector<Note*> notes = chord->getNotes();
     Fret **frets = new Fret*[chord->notesNumber()];
     Fret *fret;
+    bool found = false;
     while(i < chord->notesNumber() && j < m_nbStrings){
-        while(j < m_nbStrings){
+        found = false;
+        while(j < m_nbStrings && !found){
             if(m_strings[j]->playable( notes.at(i) )){
                 fret = m_strings[j]->getFret(notes.at(i));
                 if(fret != 0){
                     frets[i] = fret;
+                    found = true;
                 }
             }
+            std::cout << "[" << frets[i]->getNote()->getName() << "[" << std::endl;
             j++;
         }
         i++;
@@ -52,6 +56,7 @@ Fret **Guitar::getFrets(Chord *chord) const{
         std::cout << "PAS BIEN " << std::endl;
         for(j = 0 ; j < i ; j++){
             retour[j] = frets[j];
+            std::cout << retour[j]->getNote()->getName() << std::endl;
         }
     }
     return retour;

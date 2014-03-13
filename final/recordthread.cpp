@@ -27,7 +27,7 @@ void RecordThread::run(){
         //If we have found a chord
         if(prec != 0){
             //If it isn't the same as before, we add it
-            cout << maxVolume << endl;
+//            cout << maxVolume << endl;
             if(!prec->equals(c) && !c->isEmpty()){
                 //If the volume is lower than the highstep
                 if(maxVolume < m_partition->getHighStep()){
@@ -37,7 +37,6 @@ void RecordThread::run(){
                     //If the volume is higher than the highstep
                     c->setDuration(m_partition->getTempo() / 16);
                     m_partition->addChord(c);
-                    cout << m_partition->getDisplay() << endl;
                     cout << c->getDisplay() << endl;
                 }
             }else{
@@ -52,7 +51,6 @@ void RecordThread::run(){
         usleep(1000 * 1000 * 60 / (m_partition->getTempo() * 16));
 //        cout << "RECORDING" << endl;
     }
-
 }
 
 Partition *RecordThread::stop(){
