@@ -22,7 +22,7 @@ void RecordThread::run(){
     double step = m_partition->getTempo() / 16;
     while(record){
         //Get the main chord with the possible frenquencies of the instrument
-        c = m_analyze->mainChord(6, 164.81, 2637.02, &maxVolume);
+        c = m_analyze->mainChord(6, 82.41, 1318.51, &maxVolume);
         c->setVolume(maxVolume);
         //If we have found a chord
         if(prec != 0){
