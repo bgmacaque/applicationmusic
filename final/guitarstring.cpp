@@ -46,7 +46,7 @@ Fret *GuitarString::getFret(Note *n) const{
         }
         i++;
     }
-    return Fret;
+    return f;
 }
 
 bool GuitarString::playable(Note *n) const{
