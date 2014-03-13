@@ -11,7 +11,7 @@
 #include <QMessageBox>
 
 /*!
- * \class Graphicnote graphicnote.h
+ * \class GraphicNote graphicnote.h
  * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
  * \version 1.0
  * \date 07 december 2012

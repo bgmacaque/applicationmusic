@@ -12,7 +12,9 @@
  * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
  * \version 1.0
  * \date 07 december 2012
- * \brief Class that represent a partition
+ * \brief This class that represent a partition
+ * \brief The attribut m_tempo represents the tempo of this partition
+ * \brief The attribut m_chords is a vector of chords that are meaned to be played
  */
 class Partition{
 

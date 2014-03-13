@@ -9,8 +9,11 @@
  * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
  * \version 1.0
  * \date 07 december 2012
- * \brief Class that represent a Note
+ * \brief This class that represents a Note
+ * \brief The attribut m_frequency represents the frequency of this note
+ * \brief The attribut m_name stand for the note name (ex: #E #A)
  */
+
 class Note{
 
 private:

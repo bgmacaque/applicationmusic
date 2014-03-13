@@ -16,52 +16,92 @@ class Chord{
 
 private:
 
-    //The duration in time of the chord
+    /*!
+     * \brief The duration in time of the chord
+     */
     float m_duration;
-    //The volume of the chord
+    /*!
+     * \brief The volume of the chord
+     */
     float m_volume;
 
 protected:
-    //The notes of the chord
+    /*!
+     * \brief The notes of the chord
+     */
     std::vector<Note*> m_notes;
 
 public:
-    //Constructor of a chord
+    /*!
+     * \brief The constructors of a chord
+     */
     Chord(std::vector<Note*> p_notes, float p_duration, float p_volume);
     Chord();
     Chord(float p_duration, float p_volume);
 
-    //Getter of the duration
+    /*!
+     * \brief Getter of the duration
+     */
     double getDuration() const;
-    //Setter of the duration
+
+    /*!
+     * \brief Setter of the duration
+     */
+
     void setDuration(float duration);
 
-    //Getter of the volume
+    /*!
+     * \brief Getter of the volume
+     */
     double getVolume() const;
-    //Setter of the volume
+
+    /*!
+     * \brief Setter of the volume
+     */
     void setVolume(float volume);
 
+    /*!
+     * \brief Add p_duration to the current chord duration
+     */
     void addDuration(float p_duration);
 
-    //Method which allows to play notes 
+    /*!
+     * \brief Method to play the chord with FMOD
+     */
     void play(FMOD::System *p_system, FMOD::Sound *p_sound);
 
+    /*!
+     * \brief Add a note to the current chord
+     */
     void addNote(Note *n);
 
-    //Method return true if the chord contains the note
+    /*!
+     * \brief Return true if the note in paramters is in this chord
+     */
     bool contains(Note *n);
 
+    /*!
+     * \brief The number of notes in the Chord
+     */
     int notesNumber() const;
 
+    /*!
+     * \brief Getter for the vector composed by all the notes in the chord
+     */
     std::vector<Note*> getNotes() const;
 
-    //Method used to display the chord(Debug)
     std::string getDisplay();
 
     std::string save();
 
+    /*!
+     * \brief Return true if the chord contains the same notes
+     */
     bool equals(Chord *c);
 
+    /*!
+     * \brief Return true if the chord contains no notes
+     */
     bool isEmpty();
 
 };

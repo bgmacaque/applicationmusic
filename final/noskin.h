@@ -20,7 +20,7 @@
 #include "graphicscore.h"
 
 /*!
- * \class noSkin noskin.h
+ * \class NoSkin noskin.h
  * \author ALBERT Vincent, GERRIER Théo, NAJIMI Adonis, STERN Valentin
  * \version 1.0
  * \date 07 december 2012

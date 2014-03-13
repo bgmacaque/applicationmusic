@@ -2,6 +2,16 @@
 #define NOTES_H
 #include "note.h"
 
+/*!
+ * \class Notes notes.h
+ * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
+ * \version 1.0
+ * \date 07 december 2012
+ * \brief This class represents all the notes available
+ * \brief The attribut **m_notes is the array of all the notes available
+ * \brief The static attribut *m_instance is the single instance of all the notes available
+ */\
+
 class Notes{
 
 private:
