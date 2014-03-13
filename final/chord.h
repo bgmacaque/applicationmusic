@@ -53,6 +53,8 @@ public:
 
     int notesNumber() const;
 
+    std::vector<Note*> getNotes() const;
+
     //Method used to display the chord(Debug)
     std::string getDisplay();
 

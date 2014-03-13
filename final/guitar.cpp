@@ -8,6 +8,7 @@ Guitar *Guitar::m_instance = NULL;
 
 Guitar::Guitar(){
     cout << "Construction " << endl;
+    m_nbStrings = 6;
 }
 
 Guitar::~Guitar(){
@@ -18,15 +19,20 @@ void Guitar::kill(){
     delete m_instance;
 }
 
-*Fret[]::get_frets(*chord chord){
+Fret **Guitar::getFrets(Chord *chord) const{
     int i;
     int j=0;
-    *Fret[] frets=new *Fret[chord.length];
-    for (i=0;i<chord.length;i++){
-        for (j=0;j<6;j++){
-            if (m_instance.strings[j].playable) frets[i]=m_instance.strings[j].get_fret();
+    std::vector<Note*> notes = chord->getNotes();
+    Fret **frets = new Fret*[chord->notesNumber()];
+    for (i = 0 ; i < chord->notesNumber() ; i++){
+        while(j < m_nbStrings){
+            if(m_strings[j]->playable( notes.at(i) )){
+                frets[i] = m_strings[j]->getFret(notes.at(i));
+            }
+            j++;
         }
     }
+    return frets;
 }
 
 Guitar *Guitar::get_instance(){

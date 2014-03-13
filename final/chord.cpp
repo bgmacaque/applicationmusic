@@ -28,6 +28,10 @@ void Chord::addDuration(float p_duration){
     m_duration += p_duration;
 }
 
+std::vector<Note*> Chord::getNotes() const{
+    return m_notes;
+}
+
 //Getter of the duration
 double Chord::getDuration() const{
     return this->m_duration;
