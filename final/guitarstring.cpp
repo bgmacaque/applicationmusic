@@ -35,6 +35,20 @@ GuitarString::~GuitarString(){
     delete[] m_frets;
 }
 
+Fret *GuitarString::getFret(Note *n) const{
+    int i(0);
+    Fret *f = 0;
+    bool found = false;
+    while(i < m_nbFrets && !found){
+        if(m_frets[i]->getNote()->getName().compare(n->getName()) == 0){
+            found = true;
+            f = m_frets[i];
+        }
+        i++;
+    }
+    return Fret;
+}
+
 bool GuitarString::playable(Note *n) const{
     return n->getFrequency() >= m_lowFrequency && n->getFrequency() <= m_highFrequency;
 }
