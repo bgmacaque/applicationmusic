@@ -3,6 +3,7 @@
 #include <string>
 #include <fmod.hpp>
 #include <unistd.h>
+#include <QString>
 
 /*!
  * \class Note note.h
@@ -47,7 +48,7 @@ public:
     std::string getDisplay();
 
     //Return the string that describe the note in JSON(to save)
-    std::string save();
+    QString stringify();
 
 };
 

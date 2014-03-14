@@ -92,7 +92,7 @@ public:
 
     std::string getDisplay();
 
-    std::string save();
+    QString stringify();
 
     /*!
      * \brief Return true if the chord contains the same notes

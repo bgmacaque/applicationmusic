@@ -91,23 +91,23 @@ bool Chord::equals(Chord *c){
 }
 
 //Return  a string of a saved chord
-std::string Chord::save(){
-    std::string retour = "";
-    std::string volume = "\"volume\" : ";
-    std::string duration = "\"duration\" : ";
+QString Chord::stringify(){
+    QString retour = "";
+    QString volume = "\"volume\" : ";
+    QString duration = "\"duration\" : ";
     unsigned int i;
 
 
     if(!m_volume){
-        volume += "0";
+        volume.append("0");
     }else{
-        volume += m_volume;
+        volume.append(QString::number(m_volume));
     }
-    volume += ", ";
+    volume.append(", ");
     if(!m_duration){
-        duration += "0";
+        duration.append("0");
     }else{
-        duration += m_duration;
+        duration.append(QString::number(m_duration));
     }
     duration.append(", ");
     retour.append("{\n");
@@ -116,7 +116,7 @@ std::string Chord::save(){
     retour.append("\t\"notes\" : ");
     retour.append("{");
     for(i = 0; i < m_notes.size() ; i++){
-        retour += m_notes.at(i)->save();
+        retour.append(m_notes.at(i)->stringify());
         if(i != m_notes.size() - 1){
             retour.append(",");
         }

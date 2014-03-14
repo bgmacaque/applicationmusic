@@ -12,9 +12,21 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    Notes *notes = Notes::get_instance();
-    cout << notes->searchNote("E6")->getFrequency() << endl;
-    Notes::kill();
+
+    Partition *p = new Partition(240, 0.025, 0.075);
+    Note *n = new Note("A4", 440);
+    Chord *chord = new Chord();
+    chord->setVolume(0.7586);
+    chord->setDuration(0.76546);
+    chord->addNote(n);
+    p->addChord(chord);
+    cout << p->stringify().toStdString() << endl;
+    delete chord;
+    delete n;
+    delete p;
+//    Notes *notes = Notes::get_instance();
+//    cout << notes->searchNote("E6")->getFrequency() << endl;
+//    Notes::kill();
 //    Guitar *g = Guitar::get_instance();
 //    GuitarString *gs = new GuitarString("E", "E3", 25);
 //    Note *n = new Note("A4", 440.0);
@@ -38,10 +50,10 @@ int main(int argc, char **argv)
     //    for( ; ; ){
 
 //    }
-    QApplication *app = new QApplication(argc, argv);
-    NoSkin *frame = new NoSkin(600, 200);
-    Controller *c = new Controller(frame);
-    c->active();
+//    QApplication *app = new QApplication(argc, argv);
+//    NoSkin *frame = new NoSkin(600, 200);
+//    Controller *c = new Controller(frame);
+//    c->active();
 
 //    QMainWindow *main=  new QMainWindow();
 //    main->setMinimumHeight(300);
@@ -56,6 +68,6 @@ int main(int argc, char **argv)
     //Testing the creation of a config file
     //Configuration *test = new Configuration(new QString("Cémoi"), new QString("toto666"), false, true, 5);
     //test->save();
-//    return 0;
-    return app->exec();
+    return 0;
+//    return app->exec();
 }

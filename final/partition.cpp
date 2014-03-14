@@ -76,7 +76,7 @@ void Partition::save(string path){
 
     if(file.is_open()){
         //Opening the partition
-        file << this->toJSON();
+        file << this->stringify().toStdString();
         file.close();
     }
 }

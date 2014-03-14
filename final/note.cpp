@@ -76,9 +76,11 @@ bool Note::equals(const Note &n) const{
 
 
 //Return a string of a saved notes
-std::string Note::save(){
-    std::string retour = "";
-    retour += "\"" + m_name + "\"";
+QString Note::stringify(){
+    QString retour = "";
+    retour.append("\"");
+    retour.append(QString::fromStdString(m_name));
+    retour.append("\"");
     return retour;
 }
 
