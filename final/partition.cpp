@@ -54,20 +54,20 @@ void Partition::stopPlay(){
 
 }
 
-std::string Partition::toJSON(){
-    std::string retour = "";
-    retour += "{\n";
-    retour += "\t\"Chords\" : \n\t{\n";
+QString Partition::stringify(){
+    QString retour = "";
+    retour.append("{\n");
+    retour.append("\t\"Chords\" : \n\t{\n");
     unsigned int i;
     for(i = 0; i < m_chords.size() ; i++){
-        retour += m_chords.at(i)->save();
+        retour.append(m_chords.at(i)->stringify());
         if(i != m_chords.size() - 1){
-            retour += ",";
+            retour.append(",");
         }
-        retour += "\n";
+        retour.append("\n");
     }
-    retour += "\t}\n";
-    retour += "}\n";
+    retour.append("\t}\n");
+    retour.append("}\n");
     return retour;
 }
 

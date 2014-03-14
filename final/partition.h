@@ -7,6 +7,8 @@
 #include <fstream>
 #include "analyze.h"
 #include <QObject>
+#include <QString>
+
 /*!
  * \class Partition partition.h
  * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
@@ -17,7 +19,7 @@
  * \brief The attribut m_chords is a vector of chords that are meaned to be played
  */
 class Partition : public QObject{
-Q_OBJECT
+
 private:
     //Chords that are in the partition
     std::vector<Chord*> m_chords;
@@ -53,7 +55,7 @@ public:
 
     float getHighStep() const;
 
-    QString toJSON();
+    QString stringify();
 
     std::string getName();
 
