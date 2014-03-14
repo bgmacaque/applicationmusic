@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     fret.cpp \
     guitar.cpp \
     tablature.cpp \
-    frettedchord.cpp
+    frettedchord.cpp \
+    filereader.cpp
 
 HEADERS += \
     note.h \
@@ -45,7 +46,8 @@ HEADERS += \
     fret.h \
     guitar.h \
     tablature.h \
-    frettedchord.h
+    frettedchord.h \
+    filereader.h
 
 QT += core gui
 QT += sql

@@ -86,18 +86,27 @@ void Partition::save(string path){
     }
 }
 
-Partition *Partition::load(const char *path, bool *returnError){
+Partition *Partition::load(const char *path){
     Partition *p = new Partition();
-    std::ifstream file(path, std::ios::in);
+    FileReader *fr = new FileReader(path);
     std::string word;
-    bool error = false;
-    unsigned int level(0);
-    if(file.is_open()){
-        while( file >> word && !error){
-
-        }
+    word = fr->next();
+    if(word.compare("{") != 0){
+        throw "Parse error";
     }
-    *returnError = error;
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("name") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    delete fr;
     return p;
 }
 

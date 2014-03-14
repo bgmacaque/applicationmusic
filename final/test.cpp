@@ -12,9 +12,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    bool error;
-    Partition *p = Partition::load("./partition.tab", &error);
-    cout << error << endl;
+    Partition *p = Partition::load("./partition.tab");
     delete p;
 //    Partition *p = new Partition(240, 0.025, 0.075);
 //    p->setName("COUCOU");

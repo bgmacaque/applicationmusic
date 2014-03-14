@@ -8,6 +8,8 @@
 #include "analyze.h"
 #include <QObject>
 #include <QString>
+#include "filereader.h"
+
 
 /*!
  * \class Partition partition.h
@@ -65,7 +67,7 @@ public:
 
     int getTempo();
 
-    static Partition* load(const char *path, bool *error);
+    static Partition* load(const char *path);
 
 };
 
