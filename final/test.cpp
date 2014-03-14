@@ -12,18 +12,26 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-
-    Partition *p = new Partition(240, 0.025, 0.075);
-    Note *n = new Note("A4", 440);
-    Chord *chord = new Chord();
-    chord->setVolume(0.7586);
-    chord->setDuration(0.76546);
-    chord->addNote(n);
-    p->addChord(chord);
-    cout << p->stringify().toStdString() << endl;
-    delete chord;
-    delete n;
+    bool error;
+    Partition *p = Partition::load("./partition.tab", &error);
+    cout << error << endl;
     delete p;
+//    Partition *p = new Partition(240, 0.025, 0.075);
+//    p->setName("COUCOU");
+//    Note *n = new Note("A4", 440);
+//    Chord *chord = new Chord();
+//    Note *n2 = new Note("A5", 880);
+//    chord->addNote(n2);
+//    chord->setVolume(0.7586);
+//    chord->setDuration(0.76546);
+//    chord->addNote(n);
+//    p->addChord(chord);
+//    p->addChord(chord);
+//    p->save("./partition.tab");
+//    cout << p->stringify().toStdString() << endl;
+//    delete chord;
+//    delete n;
+//    delete p;
 //    Notes *notes = Notes::get_instance();
 //    cout << notes->searchNote("E6")->getFrequency() << endl;
 //    Notes::kill();

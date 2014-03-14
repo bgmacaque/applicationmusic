@@ -93,36 +93,36 @@ bool Chord::equals(Chord *c){
 //Return  a string of a saved chord
 QString Chord::stringify(){
     QString retour = "";
-    QString volume = "\"volume\" : ";
-    QString duration = "\"duration\" : ";
+    QString volume = " \" volume \" : ";
+    QString duration = " \" duration \" : ";
     unsigned int i;
 
 
     if(!m_volume){
-        volume.append("0");
+        volume.append(" 0 ");
     }else{
         volume.append(QString::number(m_volume));
     }
-    volume.append(", ");
+    volume.append(" , ");
     if(!m_duration){
-        duration.append("0");
+        duration.append(" 0 ");
     }else{
         duration.append(QString::number(m_duration));
     }
-    duration.append(", ");
-    retour.append("{\n");
-    retour.append("\t" + volume + "\n");
-    retour.append("\t" + duration + "\n");
-    retour.append("\t\"notes\" : ");
-    retour.append("{");
+    duration.append(" , ");
+    retour.append(" { ");
+    retour.append(volume);
+    retour.append(duration);
+    retour.append(" \" notes \" : ");
+    retour.append(" { ");
     for(i = 0; i < m_notes.size() ; i++){
         retour.append(m_notes.at(i)->stringify());
         if(i != m_notes.size() - 1){
-            retour.append(",");
+            retour.append(" , ");
         }
     }
-    retour.append("}\n");
-    retour.append("}");
+    retour.append(" } ");
+    retour.append(" } ");
     return retour;
 }
 

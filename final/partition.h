@@ -65,7 +65,8 @@ public:
 
     int getTempo();
 
-    static Partition* load(const char *path);
+    static Partition* load(const char *path, bool *error);
+
 };
 
 #endif // PARTITION_H

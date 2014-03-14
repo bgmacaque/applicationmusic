@@ -56,18 +56,23 @@ void Partition::stopPlay(){
 
 QString Partition::stringify(){
     QString retour = "";
-    retour.append("{\n");
-    retour.append("\t\"Chords\" : \n\t{\n");
+    retour.append("{ ");
+    retour.append(" \" name \" : \" ");
+    retour.append(QString::fromStdString(m_name));
+    retour.append(" \" , ");
+    retour.append(" \" tempo \" : \" ");
+    retour.append(QString::number(m_tempo));
+    retour.append(" \" , ");
+    retour.append(" \" chords \" : [ ");
     unsigned int i;
     for(i = 0; i < m_chords.size() ; i++){
         retour.append(m_chords.at(i)->stringify());
         if(i != m_chords.size() - 1){
-            retour.append(",");
+            retour.append(" , ");
         }
-        retour.append("\n");
     }
-    retour.append("\t}\n");
-    retour.append("}\n");
+    retour.append(" ] ");
+    retour.append(" } ");
     return retour;
 }
 
@@ -81,29 +86,18 @@ void Partition::save(string path){
     }
 }
 
-Partition *Partition::load(const char *path){
+Partition *Partition::load(const char *path, bool *returnError){
     Partition *p = new Partition();
     std::ifstream file(path, std::ios::in);
-    std::string line;
+    std::string word;
+    bool error = false;
     unsigned int level(0);
     if(file.is_open()){
+        while( file >> word && !error){
 
-        while(std::getline(file, line)){
-//            std::cout << line << std::endl;
-            if(line.compare("{")){
-                level++;
-            }
-
-            if(1){
-                level = level - 1;
-            }
-//            std::cout << level << std::endl;
         }
-        if(level != 0){
-//            std::cout << "JSON parse error" << std::endl;
-        }
-        file.close();
     }
+    *returnError = error;
     return p;
 }
 
