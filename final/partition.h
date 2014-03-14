@@ -53,7 +53,7 @@ public:
 
     float getHighStep() const;
 
-    std::string toJSON();
+    QString toJSON();
 
     std::string getName();
 
