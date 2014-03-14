@@ -106,10 +106,61 @@ Partition *Partition::load(const char *path){
     if(word.compare("\"") != 0){
         throw "Parse error";
     }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(fr->isNotJsonString(word)){
+        //Here we have the name
+        p->m_name = word;
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(",") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("tempo") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(fr->isNotJsonString(word)){
+        p->m_tempo = atoi(word.c_str());
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    //HERE WE WILL HAVE THE CHORD
+    cout << p->stringify().toStdString() << endl;
     delete fr;
     return p;
 }
-
 std::string Partition::getDisplay(){
     unsigned int i;
     std::string retour("");

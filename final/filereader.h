@@ -12,6 +12,7 @@ public:
     ~FileReader();
     std::string next();
     std::string getCurrent();
+    bool isNotJsonString(std::string s);
 };
 
 #endif // FILEREADER_H

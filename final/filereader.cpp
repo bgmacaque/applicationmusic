@@ -20,3 +20,14 @@ std::string FileReader::next(){
 std::string FileReader::getCurrent(){
     return m_current;
 }
+
+bool FileReader::isNotJsonString(std::string s){
+    bool retour = true;
+    retour &= (s.compare("{") != 0 );
+    retour &= (s.compare("}") != 0 );
+    retour &= (s.compare("\"") != 0 );
+    retour &= (s.compare("[") != 0);
+    retour &= (s.compare("]") != 0);
+    retour &= (s.compare(":") != 0);
+    return retour;
+}
