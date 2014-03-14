@@ -44,7 +44,7 @@ void GraphicScore::paintEvent(QPaintEvent *event)
     }
 
     //Finally we draw notes
-    for(int i=0; i<notes->size(); i++){
+    for(unsigned int i = 0 ; i < notes->size() ; i++){
         PositionnedNote *current = notes->at(i);
         current->repaint();
     }

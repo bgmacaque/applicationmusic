@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include "analyze.h"
-
+#include <QObject>
 /*!
  * \class Partition partition.h
  * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
@@ -16,8 +16,8 @@
  * \brief The attribut m_tempo represents the tempo of this partition
  * \brief The attribut m_chords is a vector of chords that are meaned to be played
  */
-class Partition{
-
+class Partition : public QObject{
+Q_OBJECT
 private:
     //Chords that are in the partition
     std::vector<Chord*> m_chords;
