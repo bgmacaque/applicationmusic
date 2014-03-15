@@ -165,24 +165,26 @@ Chord *Chord::parse(FileReader *fr){
     if(word.compare(":") != 0){
         throw "Parse error";
     }
-    word = fr->next();
-    if(word.compare("\"") != 0){
-        throw "Parse error";
-    }
+//    word = fr->next();
+//    if(word.compare("\"") != 0){
+//        throw "Parse error";
+//    }
     word = fr->next();
     if(fr->isNotJsonString(word)){
         retour->setVolume(::atof(word.c_str()));
     }else{
         throw "Parse error";
     }
-    word = fr->next();
-    if(word.compare("\"") != 0){
-        throw "Parse error";
-    }
+
+//    word = fr->next();
+//    if(word.compare("\"") != 0){
+//        throw "Parse error";
+//    }
     word = fr->next();
     if(word.compare(",") != 0){
         throw "Parse error";
     }
+
     word = fr->next();
     if(word.compare("\"") != 0){
         throw "Parse error";
@@ -191,10 +193,12 @@ Chord *Chord::parse(FileReader *fr){
     if(word.compare("duration") != 0){
         throw "Parse error";
     }
+
     word = fr->next();
     if(word.compare("\"") != 0){
         throw "Parse error";
     }
+
     word = fr->next();
     if(word.compare(":") != 0){
         throw "Parse error";
@@ -242,6 +246,7 @@ Chord *Chord::parse(FileReader *fr){
         bool hasNextNote = true;
         while(hasNextNote){
             if(word.compare("\"") != 0){
+                cout << "CACA" << endl;
                 throw "Parse error";
             }
             word = fr->next();
@@ -258,15 +263,23 @@ Chord *Chord::parse(FileReader *fr){
             }
             word = fr->next();
             if(word.compare(",") != 0){
-                hasNextNote = false;
-            }else if(word.compare("}") != 0){
-                throw "Parse error";
+                if(word.compare("}") != 0){
+                    throw "Parse error";
+                }else{
+                    hasNextNote = false;
+                }
+            }else{
+                word = fr->next();
             }
         }
     }else if(word.compare("}") != 0){
         throw "Parse error";
     }
     if(fr->getCurrent().compare("}") != 0){
+        throw "Parse error";
+    }
+    word  = fr->next();
+    if(word.compare("}") != 0){
         throw "Parse error";
     }
     return retour;

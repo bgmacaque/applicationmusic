@@ -12,8 +12,14 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    Partition *p = Partition::load("./partition.tab");
-    delete p;
+    try{
+        Partition *p = Partition::load("./partition.tab");
+        delete p;
+    }catch(const char * MSG){
+        std::cout << MSG << endl;
+    }
+
+
 //    Partition *p = new Partition(240, 0.025, 0.075);
 //    p->setName("COUCOU");
 //    Note *n = new Note("A4", 440);
