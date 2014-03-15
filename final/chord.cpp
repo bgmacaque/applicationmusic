@@ -141,3 +141,133 @@ bool Chord::contains(Note *n){
 void Chord::addNote(Note *n){
     m_notes.push_back(n);
 }
+
+
+Chord *Chord::parse(FileReader *fr){
+    Chord *retour = new Chord();
+    if(fr->getCurrent().compare("{") != 0){
+        throw "Parse error";
+    }
+    std::string word;
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("volume") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0 ){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(fr->isNotJsonString(word)){
+        retour->setVolume(::atof(word.c_str()));
+    }else{
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(",") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("duration") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+//    word = fr->next();
+//    if(word.compare("\"") != 0){
+//        throw "Parse error";
+//    }
+    word = fr->next();
+    if(fr->isNotJsonString(word)){
+        retour->setDuration(::atof(word.c_str()));
+    }else{
+        throw "Parse error";
+    }
+//    word = fr->next();
+//    if(word.compare("\"") != 0){
+//        throw "Parse error";
+//    }
+    word = fr->next();
+    if(word.compare(",") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("notes") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("{") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") == 0){
+        bool hasNextNote = true;
+        while(hasNextNote){
+            if(word.compare("\"") != 0){
+                throw "Parse error";
+            }
+            word = fr->next();
+            if(fr->isNotJsonString(word)){
+                //WE HAVE TO VERIFY HERE IF IT'S A NOTE
+                Notes *notes = Notes::get_instance();
+                retour->addNote(notes->searchNote(word));
+            }else{
+                throw "Parse error";
+            }
+            word = fr->next();
+            if(word.compare("\"") != 0){
+                throw "Parse error";
+            }
+            word = fr->next();
+            if(word.compare(",") != 0){
+                hasNextNote = false;
+            }else if(word.compare("}") != 0){
+                throw "Parse error";
+            }
+        }
+    }else if(word.compare("}") != 0){
+        throw "Parse error";
+    }
+    if(fr->getCurrent().compare("}") != 0){
+        throw "Parse error";
+    }
+    return retour;
+}

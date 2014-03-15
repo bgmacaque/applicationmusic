@@ -3,7 +3,9 @@
 #include <vector>
 #include <string>
 #include "note.h"
+#include "notes.h"
 #include <iostream>
+#include "filereader.h"
 
 /*!
  * \class Chord chord.h
@@ -103,6 +105,8 @@ public:
      * \brief Return true if the chord contains no notes
      */
     bool isEmpty();
+
+    static Chord *parse(FileReader *fr);
 
 };
 

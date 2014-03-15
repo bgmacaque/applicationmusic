@@ -156,7 +156,55 @@ Partition *Partition::load(const char *path){
         throw "Parse error";
     }
     word = fr->next();
-    //HERE WE WILL HAVE THE CHORD
+    if(word.compare(",") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("chords") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("[") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("{") == 0){
+        bool hasNextChord = true;
+        while(hasNextChord){
+            p->addChord(Chord::parse(fr));
+            word = fr->next();
+            if(word.compare("]") == 0){
+                hasNextChord = false;
+            }else if(word.compare(",") != 0){
+                cout << "CACA" << endl;
+                throw "Parse error";
+            }else{
+                word = fr->next();
+            }
+        }
+    }else if(word.compare("]") != 0){
+        throw "Parse error";
+    }
+    if(fr->getCurrent().compare("]") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("}") != 0){
+        throw "Parse error";
+    }
+
     cout << p->stringify().toStdString() << endl;
     delete fr;
     return p;
