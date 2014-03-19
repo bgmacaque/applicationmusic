@@ -3,7 +3,7 @@
 
   TODO :
 
-    PLACE : ASSOCIE UN NUMERO DE PLACE AVEC UNE NOTE
+   PLACE : ASSOCIE UN NUMERO DE PLACE AVEC UNE NOTE
 
    Faire une classe tablature qui fait correspondre les notes d'une partition
    à la position sur la guitare

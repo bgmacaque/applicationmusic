@@ -18,9 +18,13 @@ GuitarString::GuitarString(std::string p_name, std::string p_noteName, int p_nbF
         Note **notes = INotes->getNotesFrets(p_noteName, p_nbFrets);
         m_frets = new Fret*[p_nbFrets];
         int i(0);
+
+//        std::cout << p_name << std::endl;
         for(i = 0 ; i < p_nbFrets ; i++){
             m_frets[i] = new Fret(i, notes[i]);
+//            std::cout << m_frets[i]->getNote()->getName() << std::endl;
         }
+//        std::cout << "--------------" << std::endl;
         m_highFrequency = m_frets[p_nbFrets - 1]->getNote()->getFrequency();
     }else{
         m_lowFrequency = 0;
@@ -53,5 +57,7 @@ Fret *GuitarString::getFret(Note *n) const{
 }
 
 bool GuitarString::playable(Note *n) const{
+//    std::cout << n->getFrequency() << ", low" << m_lowFrequency << std::endl;
+//    std::cout << n->getFrequency() << ", high" << m_highFrequency << std::endl;
     return n->getFrequency() >= m_lowFrequency && n->getFrequency() <= m_highFrequency;
 }

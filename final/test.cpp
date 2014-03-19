@@ -5,21 +5,26 @@
 #include <QLayout>
 #include <iostream>
 #include "notes.h"
-
+#include "fret.h"
 #include "guitar.h"
 using namespace std;
 
 
 int main(int argc, char **argv)
 {
-    try{
-        Partition *p = Partition::load("./partition.tab");
-        delete p;
-    }catch(const char * MSG){
-        std::cout << MSG << endl;
-    }
-
-
+//    Note *n1 = new Note("A4", 440.0);
+//    Note *n2 = new Note("B8", 7902.13);
+//    Chord *c = new Chord(0.56, 0.75);
+//    c->addNote(n1);
+//    c->addNote(n2);
+//    FrettedChord *frets = new FrettedChord(c);
+//    cout << "Number frets : " << frets->getNumberFrets() << endl;
+//    delete c;
+//    delete n1;
+//    delete n2;
+//    delete frets;
+//    Notes::kill();
+//    Guitar::kill();
 //    Partition *p = new Partition(240, 0.025, 0.075);
 //    p->setName("COUCOU");
 //    Note *n = new Note("A4", 440);
@@ -62,10 +67,10 @@ int main(int argc, char **argv)
     //    for( ; ; ){
 
 //    }
-//    QApplication *app = new QApplication(argc, argv);
-//    NoSkin *frame = new NoSkin(600, 200);
-//    Controller *c = new Controller(frame);
-//    c->active();
+    QApplication *app = new QApplication(argc, argv);
+    NoSkin *frame = new NoSkin(600, 200);
+    Controller *c = new Controller(frame);
+    c->active();
 
 //    QMainWindow *main=  new QMainWindow();
 //    main->setMinimumHeight(300);
@@ -80,6 +85,9 @@ int main(int argc, char **argv)
     //Testing the creation of a config file
     //Configuration *test = new Configuration(new QString("Cémoi"), new QString("toto666"), false, true, 5);
     //test->save();
+//    return 0;
+    app->exec();
+    Notes::kill();
+    Guitar::kill();
     return 0;
-//    return app->exec();
 }

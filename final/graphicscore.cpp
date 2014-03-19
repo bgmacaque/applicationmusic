@@ -94,7 +94,7 @@ void GraphicScore::addTablature(Tablature *t){
 //            number = fret->getNumber();
 //            std::cout << j << std::endl;
             std::cout << "Fret number : " << frets[j]->getNumber() << std::endl;
-//            addNote(i + 1, j + 1, frets[j]->getNumber());
+            addNote(i + 1, j + 1, frets[j]->getNumber());
 //            std::cout << "AJOUT" << std::endl;
         }
     }

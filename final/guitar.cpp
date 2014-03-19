@@ -29,7 +29,7 @@ void Guitar::kill(){
     delete m_instance;
 }
 
-Fret **Guitar::getFrets(Chord *chord) const{
+Fret **Guitar::getFrets(Chord *chord, int *realSize) const{
     int i = 0;
     int j = 0;
     std::vector<Note*> notes = chord->getNotes();
@@ -46,18 +46,24 @@ Fret **Guitar::getFrets(Chord *chord) const{
                     found = true;
                 }
             }
-            std::cout << "[" << frets[i]->getNote()->getName() << "[" << std::endl;
             j++;
         }
-        i++;
+        if(found){
+            i++;
+        }
     }
+
     Fret **retour = new Fret*[i];
-    if(i != chord->notesNumber()){
-        std::cout << "PAS BIEN " << std::endl;
+    std::cout << "I : " << i << std::endl;
+    if(i < chord->notesNumber()){
         for(j = 0 ; j < i ; j++){
             retour[j] = frets[j];
-            std::cout << retour[j]->getNote()->getName() << std::endl;
+            std::cout << "NOTE : " << retour[j]->getNote()->getName() << std::endl;
         }
+        *realSize = i;
+    }else{
+        *realSize = chord->getNotes().size();
+        retour = frets;
     }
     return retour;
 }

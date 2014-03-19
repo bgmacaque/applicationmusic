@@ -26,7 +26,7 @@ private:
 public:
     static Guitar *get_instance();
     static void kill();
-    Fret **getFrets(Chord *c) const;
+    Fret **getFrets(Chord *c, int *realSize) const;
 };
 
 #endif // GUITARE_H
