@@ -42,7 +42,7 @@ void GraphicNeedle::paintEvent(QPaintEvent *event)
     }
 }*/
 
-int GraphicNeedle::posX()
+qreal GraphicNeedle::posX()
 {
     return this->position;
 }
@@ -51,8 +51,8 @@ void GraphicNeedle::goForward()
 {
     int x = position_x, y = position_y;
 
-    position_x = qCos(0.1) * (x - this->width()/2) - qSin(1) * (y - 0) + x;
-    position_y = qSin(0.1) * (x - this->width()/2) + qCos(1) * (y - 0) + y;
+    position_x = qCos(1) * (x - this->width()/2) - qSin(1) * (y - 0) + this->width()/2;
+    position_y = qSin(1) * (x - this->width()/2) + qCos(1) * (y - 0) + 0;
 
     position++;
 
@@ -62,8 +62,9 @@ void GraphicNeedle::goBack()
 {
     int x = position_x, y = position_y;
 
-    position_x = qCos(-0.1) * (x - this->width()/2) - qSin(-1) * (y - 0) + x;
-    position_y = qSin(-0.1) * (x - this->width()/2) + qCos(-1) * (y - 0) + y;
+    position_x = qCos(-1) * (x - this->width()/2) - qSin(-1) * (y - 0) + this->width()/2;
+    position_y = qSin(-1) * (x - this->width()/2) + qCos(-1) * (y - 0) + 0;
 
     position--;
+
 }

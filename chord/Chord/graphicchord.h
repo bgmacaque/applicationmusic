@@ -27,7 +27,7 @@ public:
       * \brief setTo places the chord to the note selected
       */
      void setTo(std::string note, int dest_needle);
-     void needleGoTo(int pos);
+     void needleGoTo(qreal pos);
      void sleep(int ms);
      //void paintEvent(QPaintEvent *event);
 

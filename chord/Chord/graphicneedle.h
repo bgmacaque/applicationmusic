@@ -13,7 +13,7 @@ private:
     QPainter *painter;
     int position_x;
     int position_y;
-    int position;
+    qreal position;
 
 public:
     GraphicNeedle(QWidget *parent = 0);
@@ -25,7 +25,7 @@ public slots:
     //void goTo(int rotation);
     void goBack();
     void goForward();
-    int posX();
+    qreal posX();
     
 };
 
