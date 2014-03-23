@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QVBoxLayout>
+#include <QTime>
+#include <QCoreApplication>
+#include "graphicneedle.h"
 
 class GraphicChord : public QWidget
 {
@@ -13,6 +17,7 @@ private:
     std::vector<std::string> *notes;
 
     QLabel *note_label;
+    GraphicNeedle *note_needle;
 
 
 public:
@@ -21,7 +26,10 @@ public:
      /*!
       * \brief setTo places the chord to the note selected
       */
-     void setTo(std::string note);
+     void setTo(std::string note, int dest_needle);
+     void needleGoTo(int pos);
+     void sleep(int ms);
+     //void paintEvent(QPaintEvent *event);
 
 };
 

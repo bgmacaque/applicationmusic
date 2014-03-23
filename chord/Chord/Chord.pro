@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        graphicchord.cpp
+        graphicchord.cpp \
+    graphicneedle.cpp
 
-HEADERS  += graphicchord.h
+HEADERS  += graphicchord.h \
+    graphicneedle.h
 
 FORMS    += graphicchord.ui
