@@ -26,7 +26,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     topBar = this->createTopBar();
     this->addToolBar(topBar);
 
-    g_score = new GraphicScore(this, 5);
+    g_score = new GraphicScore(this, 6);
 
     bottomBar = this->createBottomBar();
     this->addToolBar(Qt::BottomToolBarArea, bottomBar);

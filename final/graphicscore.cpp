@@ -81,21 +81,15 @@ void GraphicScore::addNote(int x, int y, int number){
 
 void GraphicScore::addTablature(Tablature *t){
     std::vector<FrettedChord*> tabFrets = t->getFrets();
-    int i(0);
+    int unsigned i(0);
     int j(0);
     FrettedChord *fc;
     Fret **frets;
-//    int number;
     for(i = 0 ; i < tabFrets.size() ; i++){
         fc = tabFrets.at(i);
         frets = fc->getFrets();
         for(j = 0 ; j < fc->getNumberFrets() ; j++){
-//            fret = frets[j];
-//            number = fret->getNumber();
-//            std::cout << j << std::endl;
-            std::cout << "Fret number : " << frets[j]->getNumber() << std::endl;
-            addNote(i + 1, j + 1, frets[j]->getNumber());
-//            std::cout << "AJOUT" << std::endl;
+            addNote(i * 30, ((j*2)+1)*(100/12), frets[j]->getNumber());
         }
     }
 
