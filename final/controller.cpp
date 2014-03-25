@@ -22,9 +22,16 @@ void Controller::active()
     QObject::connect(frame->btn_options, SIGNAL(triggered()), this, SLOT(openConf()));
     QObject::connect(frame->btn_refresh, SIGNAL(triggered()), this,SLOT(connectToWeb()));
     QObject::connect(frame->btn_save, SIGNAL(triggered()), this, SLOT(save()));
-
+    QObject::connect(frame->btn_export, SIGNAL(triggered()), this, SLOT(upload()));
 }
 
+void Controller::upload(){
+    if(frame->connection->getUserId() != -1 ){
+        frame->connection->insert(partition);
+    }else{
+        //Not connected
+    }
+}
 
 void Controller::play()
 {
@@ -79,12 +86,11 @@ void Controller::connectToWeb()
     {
         QString *u_n = frame->getConf()->getUserName(), *pwd = frame->getConf()->getPassword();
 
-        std::cout << "CACA APRES " << std::endl;
         if(u_n && pwd){
             if((u_n->size() > 0) && (pwd->size() > 0)){
 
                 frame->connection->connectUser(*frame->config->getUserName(), *frame->config->getPassword());
-
+                std::cout << "YEAH" << std::endl;
                 if(frame->connection->getUserId() == -1)
                 {
                     QMessageBox::information(frame, "Connexion", "Vous n'êtes pas connecté !");

@@ -89,6 +89,12 @@ public slots:
     void play();
 
     /*!
+     * \brief Upload the partition on the web if the user is connected
+     *
+     */
+    void upload();
+
+    /*!
      * \brief If recording, stop the recording process
      * \brief Else start recording
      */
