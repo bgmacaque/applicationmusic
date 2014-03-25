@@ -9,6 +9,7 @@
 #include "controller.h"
 #include <QMessageBox>
 #include "tablature.h"
+#include <QInputDialog>
 
 /*!
  * \class Controller controller.h
@@ -93,6 +94,9 @@ public slots:
      *
      */
     void upload();
+
+
+    void changeTempo(int tempo);
 
     /*!
      * \brief If recording, stop the recording process

@@ -98,6 +98,8 @@ void NoSkin::loadBottomIcons()
     choice_name = new QLineEdit(this);
     choice_difficulty = new QComboBox(this);
     choice_tempo = new QSpinBox(this);
+    choice_tempo->setMaximum(1000);
+    choice_tempo->setValue(120);
 }
 
 QToolBar* NoSkin::createBottomBar()

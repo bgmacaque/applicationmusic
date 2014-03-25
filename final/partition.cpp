@@ -28,6 +28,11 @@ void Partition::addDurationLastChord(double p_duration){
     }
 }
 
+
+void Partition::setTempo(int tempo){
+    m_tempo = tempo;
+}
+
 void Partition::setName(std::string p_name){
     m_name = p_name;
 }

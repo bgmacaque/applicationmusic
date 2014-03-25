@@ -69,13 +69,14 @@ DBConnection::DBConnection(std::string file)
 */
 bool DBConnection::insert(Partition *p)
 {
-    std::cout << "COUCOU" << std::endl;
-    QString q("INSERT INTO Tabs(name, file) VALUES (:name, :file)");
+    QString q("INSERT INTO Tabs(name, file, user_id, note) VALUES (:name, :file, :user_id, :note)");
     QSqlQuery query(base);
 
     query.prepare(q);
     query.bindValue(":name", QString::fromStdString(p->getName()));
     query.bindValue(":file", p->stringify());
+    query.bindValue(":user_id", this->id_user);
+    query.bindValue(":note", 0);
 
     return query.exec();
 }
