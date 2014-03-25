@@ -12,6 +12,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     ///analyzer = new Analyze;
     ///score = new Partition;
     connection = new DBConnection("../database.conf");
+//    connection->connectUser("a","a");
     config = new Configuration();
 
     //We tried to load previous configs if they exist

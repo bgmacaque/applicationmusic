@@ -22,6 +22,7 @@ void Controller::active()
     QObject::connect(frame->btn_options, SIGNAL(triggered()), this, SLOT(openConf()));
     QObject::connect(frame->btn_refresh, SIGNAL(triggered()), this,SLOT(connectToWeb()));
     QObject::connect(frame->btn_save, SIGNAL(triggered()), this, SLOT(save()));
+
 }
 
 
@@ -76,9 +77,9 @@ void Controller::connectToWeb()
 {
     if(frame->connection)
     {
-
         QString *u_n = frame->getConf()->getUserName(), *pwd = frame->getConf()->getPassword();
 
+        std::cout << "CACA APRES " << std::endl;
         if(u_n && pwd){
             if((u_n->size() > 0) && (pwd->size() > 0)){
 
