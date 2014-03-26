@@ -1,15 +1,15 @@
 #include "dbconnection.h"
+#include <iostream>
 
 DBConnection::DBConnection(std::string host, std::string dbname, std::string userName, std::string password, int port = 3306)
 {
-    base = new QSqlDatabase();
-    base->setHostName(QString(host.c_str()));
-    base->setDatabaseName(dbname.c_str());
-    base->setUserName(userName.c_str());
-    base->setPassword(password.c_str());
-    base->setPort(port);
-
-    base->open();
+    base = QSqlDatabase::addDatabase("QMYSQL");
+    base.setHostName(QString(host.c_str()));
+    base.setDatabaseName(dbname.c_str());
+    base.setUserName(userName.c_str());
+    base.setPassword(password.c_str());
+    base.setPort(port);
+    base.open();
 }
 
 DBConnection::DBConnection(std::string file)
@@ -32,18 +32,19 @@ DBConnection::DBConnection(std::string file)
         //The we call the previous constructor
         //DBConnection();
         //base = new QSqlDatabase();
-        QSqlDatabase dbase = QSqlDatabase::addDatabase("QMYSQL");
+        base = QSqlDatabase::addDatabase("QMYSQL");
 
-        base = &dbase;
-        base->setHostName(QString(host.c_str()));
-        base->setDatabaseName(QString(db.c_str()));
-        base->setUserName(QString(usr.c_str()));
-        base->setPassword(QString(pwd.c_str()));
-        base->setPort(atoi(port.c_str()));
-
+        base.setHostName(QString(host.c_str()));
+        base.setDatabaseName(QString(db.c_str()));
+        base.setUserName(QString(usr.c_str()));
+        base.setPassword(QString(pwd.c_str()));
+        base.setPort(atoi(port.c_str()));
 
 
-        base->open();
+
+        if(!base.open()){
+            std::cout << "Erreur de connection à la base de données" << std::endl;
+        }
         stream.close();
 
     }else{
@@ -65,26 +66,27 @@ DBConnection::DBConnection(std::string file)
     Partition *p; //= new Partition(0);
     return *p;
 }
-
-bool DBConnection::insert(Partition p)
+*/
+bool DBConnection::insert(Partition *p)
 {
-    QString q("INSERT INTO Partitions(part_name, part_file) VALUES (:part_name, :part_file)");
-    QSqlQuery query(*base);
+    QString q("INSERT INTO Tabs(name, file, user_id, note) VALUES (:name, :file, :user_id, :note)");
+    QSqlQuery query(base);
 
     query.prepare(q);
-    query.bindValue(":part_name", p.getName().c_str());
-    query.bindValue(":part_file", p.toJSON().c_str());
+    query.bindValue(":name", QString::fromStdString(p->getName()));
+    query.bindValue(":file", p->stringify());
+    query.bindValue(":user_id", this->id_user);
+    query.bindValue(":note", 0);
 
     return query.exec();
 }
-*/
 
 void DBConnection::connectUser(QString login, QString pwd)
 {
-    if(base->isOpen()){
+    if(base.isOpen()){
 
-        QString rq("SELECT id FROM Users WHERE nickname=:login AND password = :password");
-        QSqlQuery *query = new QSqlQuery(*base);
+        QString rq("SELECT id FROM Users WHERE nickname = :login AND password = :password");
+        QSqlQuery *query = new QSqlQuery(base);
         query->prepare(rq);
 
         query->bindValue(":login", login);
@@ -95,11 +97,10 @@ void DBConnection::connectUser(QString login, QString pwd)
 
         if(query->first())
         {
-            this->id_user = query->boundValue(0).toInt();
+            this->id_user = query->value(0).toInt();
         }else{
             this->id_user = -1;
         }
-
     }else{
         QMessageBox::critical(NULL, "Erreur", "Impossible de se connecter à la base de données");
     }

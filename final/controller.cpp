@@ -22,8 +22,35 @@ void Controller::active()
     QObject::connect(frame->btn_options, SIGNAL(triggered()), this, SLOT(openConf()));
     QObject::connect(frame->btn_refresh, SIGNAL(triggered()), this,SLOT(connectToWeb()));
     QObject::connect(frame->btn_save, SIGNAL(triggered()), this, SLOT(save()));
+    QObject::connect(frame->btn_export, SIGNAL(triggered()), this, SLOT(upload()));
+    QObject::connect(frame->choice_tempo, SIGNAL(valueChanged(int)), this, SLOT(changeTempo(int)));
 }
 
+void Controller::changeTempo(int tempo){
+    partition->setTempo(tempo);
+}
+
+void Controller::upload(){
+    if(frame->connection->getUserId() == -1 ){
+        frame->connection->connectUser(*frame->getConf()->getUserName(), *frame->getConf()->getPassword());
+    }
+    if(frame->connection->getUserId() != -1 ){
+        bool ok = true;
+        while(partition->getName().compare("") == 0 && ok){
+            QString partitionName = QInputDialog::getText(frame, "Upload", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
+            if(ok){
+                partition->setName(partitionName.toStdString());
+            }
+        }
+        if(ok){
+            if(frame->connection->insert(partition)){
+                QMessageBox::information(frame, "Upload","Upload effectué avec succés");
+            }
+        }
+    }else{
+        QMessageBox::information(frame, "Connexion", "Vous n'êtes pas connectés!");
+    }
+}
 
 void Controller::play()
 {
@@ -47,7 +74,6 @@ void Controller::record()
         partition = recordThread->stop();
         saved = false;
         frame->btn_save->setEnabled(true);
-//        std::cout << partition->toJSON() << std::endl;
         tablature->toTab(partition);
         frame->setTablature(tablature);
     }else{
@@ -59,11 +85,20 @@ void Controller::record()
 
 void Controller::save()
 {
-    saved = true;
+    bool ok = true;
+    while(partition->getName().compare("") == 0 && ok){
+        QString partitionName = QInputDialog::getText(frame, "Upload", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
+        if(ok){
+            partition->setName(partitionName.toStdString());
+
+        }
+    }
 
     //We will save here the file
-    std::string name = "Partition.tab";
+    std::string name = partition->getName() + ".tab";
     partition->save(name);
+
+    saved = true;
     frame->btn_save->setEnabled(false);
 }
 
@@ -76,14 +111,13 @@ void Controller::connectToWeb()
 {
     if(frame->connection)
     {
-
         QString *u_n = frame->getConf()->getUserName(), *pwd = frame->getConf()->getPassword();
 
         if(u_n && pwd){
             if((u_n->size() > 0) && (pwd->size() > 0)){
 
                 frame->connection->connectUser(*frame->config->getUserName(), *frame->config->getPassword());
-
+                std::cout << "YEAH" << std::endl;
                 if(frame->connection->getUserId() == -1)
                 {
                     QMessageBox::information(frame, "Connexion", "Vous n'êtes pas connecté !");

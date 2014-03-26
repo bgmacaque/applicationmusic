@@ -9,6 +9,7 @@
 #include "controller.h"
 #include <QMessageBox>
 #include "tablature.h"
+#include <QInputDialog>
 
 /*!
  * \class Controller controller.h
@@ -87,6 +88,15 @@ public slots:
      * \brief Else pause it
      */
     void play();
+
+    /*!
+     * \brief Upload the partition on the web if the user is connected
+     *
+     */
+    void upload();
+
+
+    void changeTempo(int tempo);
 
     /*!
      * \brief If recording, stop the recording process

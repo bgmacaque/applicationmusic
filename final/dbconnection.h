@@ -9,6 +9,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QMessageBox>
+#include <partition.h>
 //#include <qsql_mysql.h>
 
 /*!
@@ -22,7 +23,7 @@
 class DBConnection
 {
 private:
-    QSqlDatabase* base;
+    QSqlDatabase base;
     int id_user;
 
 public:
@@ -47,7 +48,7 @@ public:
      * \param p The partition to add
      * \return True if it succeeded, false in other cases
      */
-    //bool insert(Partition p);
+    bool insert(Partition *p);
 
     /*!
      * \brief Update a partition the athentified user already created

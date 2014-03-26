@@ -12,6 +12,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     ///analyzer = new Analyze;
     ///score = new Partition;
     connection = new DBConnection("../database.conf");
+//    connection->connectUser("a","a");
     config = new Configuration();
 
     //We tried to load previous configs if they exist
@@ -26,7 +27,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     topBar = this->createTopBar();
     this->addToolBar(topBar);
 
-    g_score = new GraphicScore(this, 5);
+    g_score = new GraphicScore(this, 6);
 
     bottomBar = this->createBottomBar();
     this->addToolBar(Qt::BottomToolBarArea, bottomBar);
@@ -97,6 +98,8 @@ void NoSkin::loadBottomIcons()
     choice_name = new QLineEdit(this);
     choice_difficulty = new QComboBox(this);
     choice_tempo = new QSpinBox(this);
+    choice_tempo->setMaximum(1000);
+    choice_tempo->setValue(120);
 }
 
 QToolBar* NoSkin::createBottomBar()
