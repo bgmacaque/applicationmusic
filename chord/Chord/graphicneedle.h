@@ -25,7 +25,11 @@ public slots:
     //void goTo(int rotation);
     void goBack();
     void goForward();
-    qreal posX();
+    qreal pos();
+    int x();
+    int y();
+    void setX(int x);
+    void setY(int y);
     
 };
 

@@ -31,17 +31,27 @@ void GraphicChord::setTo(std::string note, int dest_needle)
 
 void GraphicChord::needleGoTo(qreal pos)
 {
-    while(note_needle->posX()!=pos){
+    while(note_needle->x()!=pos){
 
         //We modify the position of the needle
-        if(note_needle->posX() < pos)
-            note_needle->goForward();
-        else
-            note_needle->goBack();
+        if(note_needle->x() > pos){
+            if(note_needle->y()<=this->height())
+                note_needle->goForward();
+            else
+                note_needle->setX(30);
+        }else if(note_needle->x() < pos ){
+
+            if(note_needle->y()<=this->height())
+                note_needle->goBack();
+            else
+                note_needle->setX(this->width()-30);
+
+        }
+
+        std::cout << note_needle->x() << std::endl;
 
         note_needle->update();
-        sleep(5);
-
+        sleep(800);
     }
 }
 

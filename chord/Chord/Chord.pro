@@ -19,4 +19,4 @@ SOURCES += main.cpp\
 HEADERS  += graphicchord.h \
     graphicneedle.h
 
-FORMS    += graphicchord.ui
+FORMS    +=
