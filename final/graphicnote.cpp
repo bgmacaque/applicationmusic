@@ -9,6 +9,10 @@ GraphicNote::GraphicNote(QWidget *p, int num) : QWidget(p), number(num)
     this->show();
 }
 
+void GraphicNote::setParent(QWidget *p_parent){
+    parent = p_parent;
+}
+
 void GraphicNote::paintEvent(QPaintEvent *event)
 {
     painter = new QPainter(this);

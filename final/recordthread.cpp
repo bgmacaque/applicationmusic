@@ -13,13 +13,15 @@ RecordThread::RecordThread(Partition *p_partition, Analyze *p_analyze){
 void RecordThread::run(){
 //    m_partition->startRecord(m_analyze);
     record = true;
-    int i(0);
     //Starting the record
     m_analyze->start();
     Chord *c = 0;
     Chord *prec = 0;
     float maxVolume;
     double step = m_partition->getTempo() / 16;
+    int i(0);
+    FrettedChord *cfrets;
+    Fret **frets;
     while(record){
         //Get the main chord with the possible frenquencies of the instrument
         c = m_analyze->mainChord(6, 82.41, 1318.51, &maxVolume);

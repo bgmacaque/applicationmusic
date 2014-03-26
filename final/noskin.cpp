@@ -6,8 +6,9 @@
     score = p;
 }*/
 
-NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
+NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
 {
+
     //Then we create other stuff
     ///analyzer = new Analyze;
     ///score = new Partition;
@@ -27,22 +28,36 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 200) : QMainWindow()
     topBar = this->createTopBar();
     this->addToolBar(topBar);
 
-    g_score = new GraphicScore(this, 6);
-
     bottomBar = this->createBottomBar();
     this->addToolBar(Qt::BottomToolBarArea, bottomBar);
 
+    g_score = new GraphicScore(this, 6, this->width(), this->height() - topBar->height() - bottomBar->height());
     //Finally, we define the window parameters
     this->setMinimumSize(QSize(minWidth, minHeight));
+
     this->setCentralWidget(g_score);
+    g_score->setMinimumSize(this->width(), this->calculateScoreHeight());
+    g_score->setMaximumSize(this->width(), this->calculateScoreHeight());
     this->show();
+
+    //DEBUG
+    g_score->addNote(1 * g_score->width() / 16, (0 + 1) * g_score->height() / 7 - 9, 24);
+
 }
 
 void NoSkin::setTablature(Tablature *t){
     g_score->addTablature(t);
 }
 
+int NoSkin::calculateScoreHeight() const{
+    return this->height() - topBar->height() - bottomBar->height();
+}
 
+void NoSkin::resizeEvent(QResizeEvent *event){
+    g_score->setMaximumSize(this->width(), this->calculateScoreHeight());
+    g_score->setMinimumSize(this->width(), this->calculateScoreHeight());
+    g_score->repaint();
+}
 
 QToolBar* NoSkin::createTopBar()
 {

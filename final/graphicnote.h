@@ -33,6 +33,7 @@ public:
     void paintEvent(QPaintEvent *event);
     int getNumber();
     QDrag* getDrager();
+    void setParent(QWidget *p_parent);
 
 protected:
     void mousePressEvent(QMouseEvent *event);

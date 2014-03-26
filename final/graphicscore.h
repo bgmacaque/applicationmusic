@@ -24,17 +24,19 @@ private:
     int nb_lines;
 
 public:
-    GraphicScore(QWidget *parent, int nb_line);
+    GraphicScore(QWidget *parent, int nb_line, int width, int height);
     GraphicScore(QWidget *parent, int nb_line, std::vector<PositionnedNote *> *n);
     void paintEvent(QPaintEvent *event);
     void addTablature(Tablature *t);
+    void addNote(int x, int y, int number);
+    void resizeEvent(QResizeEvent *event);
 
 protected:
     void dropEvent(QDropEvent *de);
     void dragMoveEvent(QDragMoveEvent *de);
     void dragEnterEvent(QDragEnterEvent *de);
     void mousePressEvent(QMouseEvent *event);
-    void addNote(int x, int y, int number);
+
 
 };
 

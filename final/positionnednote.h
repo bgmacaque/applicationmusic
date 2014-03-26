@@ -25,6 +25,7 @@ public:
     GraphicNote *getNote();
     QPoint *getPos();
     void paintEvent(QPaintEvent *event);
+    void setPosition(QPoint *point);
 };
 
 #endif // POSITIONNEDNOTE_H

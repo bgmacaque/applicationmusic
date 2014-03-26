@@ -2,50 +2,71 @@
 #include <iostream>
 
 
-GraphicScore::GraphicScore(QWidget *parent, int nb_line) : QWidget(parent)
+GraphicScore::GraphicScore(QWidget *parent, int nb_line, int width, int height) : QWidget(parent)
 {
     nb_lines = nb_line;
     notes = new std::vector<PositionnedNote *>();
 
-    this->setMinimumSize(600, 100);
-    this->setMaximumSize(600, 100);
-
+    this->setMinimumSize(width, height);
+    this->setMaximumSize(width, height);
     setAcceptDrops(true);
 
     this->repaint();
     this->show();
 }
 
-GraphicScore::GraphicScore(QWidget *parent, int nb_line, std::vector<PositionnedNote *> *n) : QWidget(parent)
-{
-    nb_lines = nb_line;
-    notes = n;
+//GraphicScore::GraphicScore(QWidget *parent, int nb_line, std::vector<PositionnedNote *> *n) : QWidget(parent)
+//{
+//    nb_lines = nb_line;
+//    notes = n;
 
 
-    this->setMinimumSize(600, 100);
-    this->setMaximumSize(600, 100);
+//    this->setMinimumSize(600, 120);
+//    this->setMaximumSize(600, 120);
 
-    this->repaint();
-    this->show();
-}
+//    this->repaint();
+//    this->show();
+//}
 
 void GraphicScore::paintEvent(QPaintEvent *event)
 {
     painter = new QPainter(this);
-    painter->setBrush(QBrush(QColor(255, 230, 155)));
+    painter->setBrush(QBrush(QColor(255, 255, 255)));
     painter->drawRect(0, 0, this->width(), this->height());
 
     //Now we trace lines
     painter->setBrush(QBrush(QColor(255, 0, 0)));
-    painter->setPen(QColor(154, 0, 0));
+    painter->setPen(QColor(0, 0, 0));
     for(int i=0; i<nb_lines; i++)
     {
-        painter->drawLine(0, this->height()/nb_lines * (i+1), this->width(), this->height()/nb_lines * (i+1));
+        painter->drawLine(0, this->height()/(nb_lines+1) * (i+1), this->width(), this->height()/(nb_lines+1) * (i+1));
     }
 
     //Finally we draw notes
     for(unsigned int i = 0 ; i < notes->size() ; i++){
         PositionnedNote *current = notes->at(i);
+        current->repaint();
+    }
+}
+
+
+void GraphicScore::resizeEvent(QResizeEvent *event){
+    int currentY(0);
+    QSize old = event->oldSize();
+    QSize newe = event->size();
+    float divY(0);
+//    if(old.height() < newe.height()){
+//        divY = (float)newe.height() / (float)old.height();
+//    }else{
+//        divY = (float)old.height() / (float)newe.height();
+//    }
+    divY = (float)old.height() / (float)newe.height();
+    float newY(0);
+    for(unsigned int i = 0 ; i < notes->size() ; i++){
+        PositionnedNote *current = notes->at(i);
+        currentY = current->getPos()->y();
+        newY = divY * (float)currentY;
+        current->setPosition(new QPoint(current->getPos()->x(), newY));
         current->repaint();
     }
 }
@@ -89,11 +110,13 @@ void GraphicScore::addTablature(Tablature *t){
         fc = tabFrets.at(i);
         frets = fc->getFrets();
         for(j = 0 ; j < fc->getNumberFrets() ; j++){
-            addNote(i * 30, ((j*2)+1)*(100/12), frets[j]->getNumber());
+            std::cout << this->height() << std::endl;
+            addNote(i * this->width() / 16, (j + 1) * this->height() / 7 - 9, frets[j]->getNumber());
         }
     }
-
 }
+
+
 
 void GraphicScore::mousePressEvent(QMouseEvent *event)
 {

@@ -125,17 +125,9 @@ private:
      */
     QToolBar *bottomBar;
 
-    /*!
-     * \brief The partitiion currently showed
-     */
-    //Partition *score;
 
     GraphicScore *g_score;
 
-    /*!
-     * \brief Analyze the input sound to determinate notes
-     */
-     //Analyze *analyzer;
 
      /*!
       * \brief A method to load all the icons of the top
@@ -219,6 +211,10 @@ public:
      * \brief Record input sounds.
      */
     void record();
+
+    void resizeEvent(QResizeEvent *event);
+
+    int calculateScoreHeight() const;
 
     /*!
      * \brief The location of the icons

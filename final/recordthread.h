@@ -4,6 +4,8 @@
 #include <QThread>
 #include "partition.h"
 #include <iostream>
+#include "graphicscore.h"
+#include "frettedchord.h"
 
 /*!
  * \class RecordThread recordthread.h

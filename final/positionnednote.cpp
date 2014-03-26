@@ -14,6 +14,11 @@ QPoint* PositionnedNote::getPos()
     return position;
 }
 
+void PositionnedNote::setPosition(QPoint *point){
+    position = point;
+    note->move(*point);
+}
+
 void PositionnedNote::paintEvent(QPaintEvent *event)
 {
     note->repaint();
