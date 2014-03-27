@@ -12,7 +12,7 @@ GraphicScore::GraphicScore(QWidget *parent, int nb_line, int width, int height) 
     tabVisible = false;
     this->repaint();
     this->show();
-    maxTime = 16;
+    maxTime = 64;
     time = 0;
 }
 
@@ -66,6 +66,18 @@ void GraphicScore::paintEvent(QPaintEvent *event)
     }
 }
 
+int GraphicScore::getTime(){
+    return time;
+}
+
+int GraphicScore::getMaxTime(){
+    return maxTime;
+}
+
+void GraphicScore::addTime(int p_time){
+    time += p_time;
+}
+
 void GraphicScore::resizeEvent(QResizeEvent *event){
 //    int currentY(0);
 //    QSize old = event->oldSize();
@@ -115,6 +127,7 @@ void GraphicScore::dropEvent(QDropEvent *de)
 
 void GraphicScore::addNote(int x, int y, int number){
     GraphicNote *n = new GraphicNote(this, number);
+    x = this->width() / maxTime * time;
     QPoint *p = new QPoint(x, y);
     notes->push_back(new PositionnedNote(this, n, p));
     n->move(*p);

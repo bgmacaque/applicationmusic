@@ -14,6 +14,10 @@ GraphicTab::GraphicTab(QWidget *p_parent, unsigned int p_nbLines, int width, int
     this->scrollUp();
 }
 
+GraphicScore *GraphicTab::newGraphicScore(){
+    return new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14);
+}
+
 void GraphicTab::scrollUp(){
     if(m_indexVisible >= 2){
         m_indexVisible -= 2;
@@ -42,12 +46,29 @@ void GraphicTab::addTablature(Tablature *tab){
     int j(0);
     FrettedChord *fc;
     Fret **frets;
+    Fret *fret;
+    int height = m_scores[0]->height();
+    std::cout << height << std::endl;
+    int width = m_scores[0]->width();
+    int k(0);
+    int duration(0);
+    GraphicScore *score;
     for(i = 0 ; i < tabFrets.size() ; i++){
         fc = tabFrets.at(i);
         frets = fc->getFrets();
-        for(j = 0 ; j < fc->getNumberFrets() ; j++){
-            m_scores[0]->addNote(i * this->width() / 16, (j + 1) * this->height() / 7 - 9, frets[j]->getNumber());
+        duration = fc->getDuration();
+        if(m_scores[k]->getTime() + duration > m_scores[k]->getMaxTime()){
+            k++;
+            if(k == m_scores.size()){
+                m_scores.push_back(newGraphicScore());
+            }
         }
+        score = m_scores[k];
+        for(j = 0 ; j < fc->getNumberFrets() ; j++){
+            fret = frets[j];
+            score->addNote(i * width / 16, height - (1 + fret->getIndexString()) * height / (m_nbLines + 1) - 9, fret->getNumber());
+        }
+        score->addTime(duration);
     }
 }
 
@@ -76,7 +97,7 @@ void GraphicTab::paintEvent(QPaintEvent *event){
     QPainter *painter = new QPainter(this);
     painter->setBrush(QBrush(QColor(255, 255, 255)));
     painter->drawRect(x, y, this->width(), this->height());
-
+//    painter->drawLine(0, this->height() / 2, this->width(), this->height() / 2);
     delete painter;
     for(i = m_indexVisible ; i < maxVisible ; i++){
         score = m_scores.at(i);

@@ -8,10 +8,11 @@ GuitarString::GuitarString(){
 
 }
 
-GuitarString::GuitarString(std::string p_name, std::string p_noteName, int p_nbFrets){
+GuitarString::GuitarString(std::string p_name, std::string p_noteName, int p_nbFrets, int p_number){
     m_name = p_name;
     Notes *INotes = Notes::get_instance();
     Note *n = INotes->searchNote(p_noteName);
+    m_number = p_number;
     if(n){
         m_lowFrequency = n->getFrequency();
         m_nbFrets = p_nbFrets;
@@ -19,7 +20,7 @@ GuitarString::GuitarString(std::string p_name, std::string p_noteName, int p_nbF
         m_frets = new Fret*[p_nbFrets];
         int i(0);
         for(i = 0 ; i < p_nbFrets ; i++){
-            m_frets[i] = new Fret(i, notes[i]);
+            m_frets[i] = new Fret(i, notes[i], m_number);
         }
         m_highFrequency = m_frets[p_nbFrets - 1]->getNote()->getFrequency();
     }else{

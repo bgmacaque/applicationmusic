@@ -24,6 +24,7 @@ public:
     void removeNotes();
     void addTablature(Tablature *tab);
     void resizeEvent(QResizeEvent *event);
+    GraphicScore *newGraphicScore();
 };
 
 #endif // GRAPHICTAB_H

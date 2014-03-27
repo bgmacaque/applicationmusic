@@ -48,12 +48,12 @@ void RecordThread::run(){
                 if(!c->isEmpty()){
                     m_partition->addDurationLastChord(step);
                 }else{
-                    if(prec->isEmpty()){
-                        m_partition->addDurationLastChord(m_partition->getTempo() / 16);
-                    }else{
-                        c->setDuration(m_partition->getTempo() / 16);
-                        m_partition->addChord(c);
-                    }
+//                    if(prec->isEmpty()){
+//                        m_partition->addDurationLastChord(m_partition->getTempo() / 16);
+//                    }else{
+//                        c->setDuration(m_partition->getTempo() / 16);
+//                        m_partition->addChord(c);
+//                    }
 
                 }
             }

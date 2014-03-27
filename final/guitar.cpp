@@ -9,12 +9,12 @@ Guitar *Guitar::m_instance = NULL;
 Guitar::Guitar(){
     m_nbStrings = 6;
     m_strings = new GuitarString*[m_nbStrings];
-    m_strings[0] = new GuitarString("E", "E2", 25);
-    m_strings[1] = new GuitarString("A", "A2", 25);
-    m_strings[2] = new GuitarString("D", "D3", 25);
-    m_strings[3] = new GuitarString("G", "G3", 25);
-    m_strings[4] = new GuitarString("B", "B3", 25);
-    m_strings[5] = new GuitarString("e", "E4", 25);
+    m_strings[0] = new GuitarString("E", "E2", 25, 0);
+    m_strings[1] = new GuitarString("A", "A2", 25, 1);
+    m_strings[2] = new GuitarString("D", "D3", 25, 2);
+    m_strings[3] = new GuitarString("G", "G3", 25, 3);
+    m_strings[4] = new GuitarString("B", "B3", 25, 4);
+    m_strings[5] = new GuitarString("e", "E4", 25, 5);
 }
 
 Guitar::~Guitar(){

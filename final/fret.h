@@ -18,11 +18,13 @@ private:
 
     int m_number;
     Note *m_note;
+    int m_indexString;
 
 public:
-    Fret(int p_number, Note *p_note);
+    Fret(int p_number, Note *p_note, int p_indexString);
     int getNumber() const;
     Note *getNote() const;
+    int getIndexString() const;
 };
 
 #endif // FRET_H

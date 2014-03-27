@@ -25,9 +25,10 @@ private:
     std::string m_name;
     Fret **m_frets;
     int m_nbFrets;
+    int m_number;
 
 public:
-    GuitarString(std::string p_name, std::string p_noteName, int p_nbFrets);
+    GuitarString(std::string p_name, std::string p_noteName, int p_nbFrets, int p_number);
     GuitarString();
     ~GuitarString();
 

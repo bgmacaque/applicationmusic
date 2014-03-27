@@ -35,6 +35,9 @@ public:
     void resizeEvent(QResizeEvent *event);
     void removeNotes();
     void setTabVisible(bool visible);
+    int getTime();
+    int getMaxTime();
+    void addTime(int p_time);
 
 protected:
     void dropEvent(QDropEvent *de);
