@@ -42,6 +42,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
 
     //DEBUG
     g_score->addNote(1 * g_score->width() / 16, (0 + 1) * g_score->height() / 7 - 9, 24);
+    g_score->addNote(1 * g_score->width() / 16, (1+1) * g_score->height() / 7 - 9, 12);
 
 }
 
