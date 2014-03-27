@@ -67,6 +67,8 @@ public:
 
     int getTempo();
 
+    void deleteChords();
+
     void setTempo(int tempo);
 
     static Partition* load(const char *path);

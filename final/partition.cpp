@@ -28,6 +28,10 @@ void Partition::addDurationLastChord(double p_duration){
     }
 }
 
+void Partition::deleteChords(){
+    m_chords.clear();
+}
+
 
 void Partition::setTempo(int tempo){
     m_tempo = tempo;

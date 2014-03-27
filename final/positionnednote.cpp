@@ -1,5 +1,5 @@
 #include "positionnednote.h"
-
+#include <iostream>
 PositionnedNote::PositionnedNote(QWidget *parent, GraphicNote *n, QPoint *p) : QWidget(parent), note(n), position(p)
 {
 }
@@ -17,6 +17,12 @@ QPoint* PositionnedNote::getPos()
 void PositionnedNote::setPosition(QPoint *point){
     position = point;
     note->move(*point);
+}
+
+PositionnedNote::~PositionnedNote(){
+    std::cout << "YEAH" << std::endl;
+    delete note;
+    delete position;
 }
 
 void PositionnedNote::paintEvent(QPaintEvent *event)

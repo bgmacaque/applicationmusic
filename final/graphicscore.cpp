@@ -37,16 +37,18 @@ void GraphicScore::paintEvent(QPaintEvent *event)
     //Now we trace lines
     painter->setBrush(QBrush(QColor(255, 0, 0)));
     painter->setPen(QColor(0, 0, 0));
-    for(int i=0; i<nb_lines; i++)
-    {
+    for(int i = 0 ; i < nb_lines ; i++){
         painter->drawLine(0, this->height()/(nb_lines+1) * (i+1), this->width(), this->height()/(nb_lines+1) * (i+1));
     }
 
     //Finally we draw notes
+    PositionnedNote *current;
     for(unsigned int i = 0 ; i < notes->size() ; i++){
-        PositionnedNote *current = notes->at(i);
+        current = notes->at(i);
+        std::cout << "COUCO" << std::endl;
         current->repaint();
     }
+    std::cout << "---" << std::endl;
 }
 
 
@@ -54,8 +56,6 @@ void GraphicScore::resizeEvent(QResizeEvent *event){
     int currentY(0);
     QSize old = event->oldSize();
     QSize newe = event->size();
-    float divY(0);
-    divY = (float)old.height() / (float)newe.height();
     float newY(0);
     float position(0);
     PositionnedNote *current(0);
@@ -64,12 +64,10 @@ void GraphicScore::resizeEvent(QResizeEvent *event){
         currentY = current->getPos()->y();
         position = (float)currentY /  (float)old.height();
         for(int j(0) ; j < nb_lines ; j++){
-
             if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
                 newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
                 break;
             }
-
         }
         if(newY != 0){
             current->setPosition(new QPoint(current->getPos()->x(), newY));
@@ -105,6 +103,10 @@ void GraphicScore::addNote(int x, int y, int number){
     QPoint *p = new QPoint(x, y);
     notes->push_back(new PositionnedNote(this, n, p));
     n->move(*p);
+}
+
+void GraphicScore::removeNotes(){
+    notes->clear();
 }
 
 void GraphicScore::addTablature(Tablature *t){

@@ -24,7 +24,19 @@ void Controller::active()
     QObject::connect(frame->btn_save, SIGNAL(triggered()), this, SLOT(save()));
     QObject::connect(frame->btn_export, SIGNAL(triggered()), this, SLOT(upload()));
     QObject::connect(frame->choice_tempo, SIGNAL(valueChanged(int)), this, SLOT(changeTempo(int)));
+    QObject::connect(frame->btn_delete, SIGNAL(triggered()), this, SLOT(deletePart()));
 }
+
+void Controller::deletePart(){
+    if(!saved){
+
+    }else{
+        partition->deleteChords();
+    }
+    frame->g_score->removeNotes();
+    frame->g_score->repaint();
+}
+
 
 void Controller::changeTempo(int tempo){
     partition->setTempo(tempo);

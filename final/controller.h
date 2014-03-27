@@ -114,6 +114,8 @@ public slots:
      */
     void openConf();
 
+    void deletePart();
+
     /*!
      * \brief Try to connect the user to the website
      * \exception NotConnected If it doesn't work

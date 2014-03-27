@@ -30,6 +30,7 @@ public:
     void addTablature(Tablature *t);
     void addNote(int x, int y, int number);
     void resizeEvent(QResizeEvent *event);
+    void removeNotes();
 
 protected:
     void dropEvent(QDropEvent *de);
