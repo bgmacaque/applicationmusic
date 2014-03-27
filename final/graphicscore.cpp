@@ -45,7 +45,6 @@ void GraphicScore::paintEvent(QPaintEvent *event)
     PositionnedNote *current;
     for(unsigned int i = 0 ; i < notes->size() ; i++){
         current = notes->at(i);
-        std::cout << "COUCO" << std::endl;
         current->repaint();
     }
     std::cout << "---" << std::endl;
@@ -106,6 +105,12 @@ void GraphicScore::addNote(int x, int y, int number){
 }
 
 void GraphicScore::removeNotes(){
+    unsigned int i(0);
+    PositionnedNote *n;
+    for(i = 0 ; i < notes->size() ; i++){
+        n = notes->at(i);
+        n->close();
+    }
     notes->clear();
 }
 

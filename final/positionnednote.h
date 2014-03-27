@@ -3,6 +3,7 @@
 
 #include "graphicnote.h"
 #include <QWidget>
+#include <QCloseEvent>
 
 /*!
  * \class PositionnedNote positionnednote.h
@@ -26,7 +27,7 @@ public:
     QPoint *getPos();
     void paintEvent(QPaintEvent *event);
     void setPosition(QPoint *point);
-    ~PositionnedNote();
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // POSITIONNEDNOTE_H

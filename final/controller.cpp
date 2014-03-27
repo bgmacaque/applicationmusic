@@ -29,11 +29,26 @@ void Controller::active()
 
 void Controller::deletePart(){
     if(!saved){
-
+        int response = QMessageBox::question(frame, "Sauvegarde", "Le fichier n'a pas été sauvegardé, voulez-vous le sauvegarder?",QMessageBox ::Yes | QMessageBox::No | QMessageBox::Abort);
+        if(response == QMessageBox::Yes){
+            if(partition->getName().compare("") == 0){
+                bool ok = true;
+                QString partitionName = QInputDialog::getText(frame, "Sauvegarde", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
+                if(ok){
+                    partition->setName(partitionName.toStdString());
+                }
+            }
+            frame->g_score->removeNotes();
+            partition->deleteChords();
+        }else if(response == QMessageBox::No){
+            frame->g_score->removeNotes();
+            partition->deleteChords();
+        }
     }else{
+
+        frame->g_score->removeNotes();
         partition->deleteChords();
     }
-    frame->g_score->removeNotes();
     frame->g_score->repaint();
 }
 

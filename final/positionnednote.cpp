@@ -19,10 +19,8 @@ void PositionnedNote::setPosition(QPoint *point){
     note->move(*point);
 }
 
-PositionnedNote::~PositionnedNote(){
-    std::cout << "YEAH" << std::endl;
-    delete note;
-    delete position;
+void PositionnedNote::closeEvent(QCloseEvent *event){
+    note->close();
 }
 
 void PositionnedNote::paintEvent(QPaintEvent *event)
