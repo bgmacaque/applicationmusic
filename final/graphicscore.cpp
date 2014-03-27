@@ -63,19 +63,18 @@ void GraphicScore::resizeEvent(QResizeEvent *event){
         current = notes->at(i);
         currentY = current->getPos()->y();
         position = (float)currentY /  (float)old.height();
-        //Repositionnement de la note
         for(int j(0) ; j < nb_lines ; j++){
-            if(position >= (j) / 10 + 0.01 && position <= (j+1) + (j+1) / 10 + 0.01){
-                std::cout << position << std::endl;
-                newY = (j+1) * newe.height() / 7 - 9;
+
+            if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
+                newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
                 break;
             }
+
         }
-        if(newY == 0){
-            newY = 1;
+        if(newY != 0){
+            current->setPosition(new QPoint(current->getPos()->x(), newY));
+            current->repaint();
         }
-        current->setPosition(new QPoint(current->getPos()->x(), newY));
-        current->repaint();
     }
 }
 

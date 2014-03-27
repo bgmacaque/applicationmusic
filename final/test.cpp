@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 
 //    }
     QApplication *app = new QApplication(argc, argv);
-    NoSkin *frame = new NoSkin(320, 240);
+    NoSkin *frame = new NoSkin(400, 302);
     Controller *c = new Controller(frame);
     c->active();
 
