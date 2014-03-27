@@ -73,6 +73,8 @@ private:
      */
     QAction *btn_play_pause;
 
+    QAction *btn_open;
+
     /*!
      * \brief Set the cursor of the playing at the beginning
      */

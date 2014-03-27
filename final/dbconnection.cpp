@@ -52,7 +52,7 @@ DBConnection::DBConnection(std::string file)
     }
 }
 
-int DBConnection::getPartitions()
+void DBConnection::getPartitions()
 {
     QString q("SELECT * FROM Tabs WHERE user_id = :user_id");
 

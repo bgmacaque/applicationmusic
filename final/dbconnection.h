@@ -59,7 +59,7 @@ public:
      */
     //bool update(Partition p);
 
-    int getPartitions();
+    void getPartitions();
 
     Partition *download(int part_id);
 

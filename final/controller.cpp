@@ -25,6 +25,23 @@ void Controller::active()
     QObject::connect(frame->btn_export, SIGNAL(triggered()), this, SLOT(upload()));
     QObject::connect(frame->choice_tempo, SIGNAL(valueChanged(int)), this, SLOT(changeTempo(int)));
     QObject::connect(frame->btn_delete, SIGNAL(triggered()), this, SLOT(deletePart()));
+    QObject::connect(frame->btn_open, SIGNAL(triggered()), this, SLOT(openPartition()));
+}
+
+void Controller::openPartition(){
+    QString path = QFileDialog::getOpenFileName(frame, "Ouvrir une partition", QString());
+    if(path.compare("") != 0){
+        try{
+            partition = Partition::load(path.toStdString().c_str());
+            tablature->toTab(partition);
+            frame->g_score->removeNotes();
+            frame->g_score->addTablature(tablature);
+            saved = true;
+            frame->btn_save->setEnabled(false);
+        }catch( ... ){
+            std::cout << "ERROR" << std::endl;
+        }
+    }
 }
 
 void Controller::deletePart(){
@@ -147,7 +164,6 @@ void Controller::connectToWeb()
             if((u_n->size() > 0) && (pwd->size() > 0)){
 
                 frame->connection->connectUser(*frame->config->getUserName(), *frame->config->getPassword());
-                std::cout << "YEAH" << std::endl;
                 if(frame->connection->getUserId() == -1)
                 {
                     QMessageBox::information(frame, "Connexion", "Vous n'êtes pas connecté !");

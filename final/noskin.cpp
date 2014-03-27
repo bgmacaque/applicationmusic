@@ -109,6 +109,7 @@ void NoSkin::loadBottomIcons()
     btn_new = new QAction(QIcon(*icons_loc+QString("new.png")), "", this);
     btn_forward = new QAction(QIcon(*icons_loc+QString("forward_arrow.png")), "", this);
     btn_back = new QAction(QIcon(*icons_loc+QString("back_arrow.png")), "", this);
+    btn_open = new QAction(QString("Open"), this);
     choice_name = new QLineEdit(this);
     choice_difficulty = new QComboBox(this);
     choice_tempo = new QSpinBox(this);
@@ -126,9 +127,9 @@ QToolBar* NoSkin::createBottomBar()
 
     bottom->addAction(btn_delete);
     bottom->addAction(btn_new);
+    bottom->addAction(btn_open);
     bottom->addAction(btn_back);
     bottom->addAction(btn_forward);
-
     bottom->addSeparator();
 
     lay->addWidget(choice_name);

@@ -4,6 +4,7 @@ Tablature::Tablature(){
 }
 
 void Tablature::toTab(Partition *p){
+    m_frets.clear();
     std::vector<Chord *> chords = p->getChords();
     Chord *chord;
     int i(0);

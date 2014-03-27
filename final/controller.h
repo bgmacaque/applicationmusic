@@ -90,6 +90,8 @@ public slots:
      */
     void play();
 
+    void openPartition();
+
     /*!
      * \brief Upload the partition on the web if the user is connected
      *

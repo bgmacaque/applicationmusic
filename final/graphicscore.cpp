@@ -34,6 +34,7 @@ void GraphicScore::paintEvent(QPaintEvent *event)
     painter->setBrush(QBrush(QColor(255, 255, 255)));
     painter->drawRect(0, 0, this->width(), this->height());
 
+    painter->drawLine(this->width() / 2, 0, this->width() / 2 , this->height());
     //Now we trace lines
     painter->setBrush(QBrush(QColor(255, 0, 0)));
     painter->setPen(QColor(0, 0, 0));
@@ -123,7 +124,6 @@ void GraphicScore::addTablature(Tablature *t){
         fc = tabFrets.at(i);
         frets = fc->getFrets();
         for(j = 0 ; j < fc->getNumberFrets() ; j++){
-            std::cout << this->height() << std::endl;
             addNote(i * this->width() / 16, (j + 1) * this->height() / 7 - 9, frets[j]->getNumber());
         }
     }
