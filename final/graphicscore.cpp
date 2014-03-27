@@ -6,13 +6,14 @@ GraphicScore::GraphicScore(QWidget *parent, int nb_line, int width, int height) 
 {
     nb_lines = nb_line;
     notes = new std::vector<PositionnedNote *>();
-
     this->setMinimumSize(width, height);
     this->setMaximumSize(width, height);
     setAcceptDrops(true);
-
+    tabVisible = false;
     this->repaint();
     this->show();
+    maxTime = 16;
+    time = 0;
 }
 
 //GraphicScore::GraphicScore(QWidget *parent, int nb_line, std::vector<PositionnedNote *> *n) : QWidget(parent)
@@ -28,51 +29,66 @@ GraphicScore::GraphicScore(QWidget *parent, int nb_line, int width, int height) 
 //    this->show();
 //}
 
-void GraphicScore::paintEvent(QPaintEvent *event)
-{
-    painter = new QPainter(this);
-    painter->setBrush(QBrush(QColor(255, 255, 255)));
-    painter->drawRect(0, 0, this->width(), this->height());
-
-    painter->drawLine(this->width() / 2, 0, this->width() / 2 , this->height());
-    //Now we trace lines
-    painter->setBrush(QBrush(QColor(255, 0, 0)));
-    painter->setPen(QColor(0, 0, 0));
-    for(int i = 0 ; i < nb_lines ; i++){
-        painter->drawLine(0, this->height()/(nb_lines+1) * (i+1), this->width(), this->height()/(nb_lines+1) * (i+1));
-    }
-
-    //Finally we draw notes
-    PositionnedNote *current;
-    for(unsigned int i = 0 ; i < notes->size() ; i++){
-        current = notes->at(i);
-        current->repaint();
-    }
+void GraphicScore::setTabVisible(bool visible){
+    tabVisible = visible;
 }
 
+void GraphicScore::paintEvent(QPaintEvent *event)
+{
+    if(tabVisible){
+        QPainter *painter = new QPainter(this);
+        painter->setBrush(QBrush(QColor(255, 255, 255)));
+        painter->drawRect(0, 0, this->width(), this->height());
 
-void GraphicScore::resizeEvent(QResizeEvent *event){
-    int currentY(0);
-    QSize old = event->oldSize();
-    QSize newe = event->size();
-    float newY(0);
-    float position(0);
-    PositionnedNote *current(0);
-    for(unsigned int i = 0 ; i < notes->size() ; i++){
-        current = notes->at(i);
-        currentY = current->getPos()->y();
-        position = (float)currentY /  (float)old.height();
-        for(int j(0) ; j < nb_lines ; j++){
-            if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
-                newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
-                break;
-            }
+
+        painter->setBrush(QBrush(QColor(0, 0, 0)));
+        painter->setPen(QColor(0, 0, 0));
+        painter->drawLine(this->width() / 2, 0,this->width() / 2 ,this->height());
+
+
+        //Drawing a rectangle
+        painter->drawLine(0, 0, 0,this->height());
+        painter->drawLine(0, 0, this->width(), 0);
+        painter->drawLine(0, this->height() - 1, this->width(),this->height() - 1);
+        painter->drawLine(this->width() - 1, 0,this->width() - 1,this->height());
+
+        //Now we trace lines
+        for(int i = 0 ; i < nb_lines ; i++){
+            painter->drawLine(0,this->height()/(nb_lines+1) * (i+1),this->width(),this->height()/(nb_lines+1) * (i+1));
         }
-        if(newY != 0){
-            current->setPosition(new QPoint(current->getPos()->x(), newY));
+
+        //Finally we draw notes
+        PositionnedNote *current;
+        for(unsigned int i = 0 ; i < notes->size() ; i++){
+            current = notes->at(i);
             current->repaint();
         }
     }
+}
+
+void GraphicScore::resizeEvent(QResizeEvent *event){
+//    int currentY(0);
+//    QSize old = event->oldSize();
+//    QSize newe = event->size();
+//    float newY(0);
+//    float position(0);
+//    PositionnedNote *current(0);
+//    for(unsigned int i = 0 ; i < notes->size() ; i++){
+//        current = notes->at(i);
+//        currentY = current->getPos()->y();
+//        position = (float)currentY /  (float)old.height();
+//        for(int j(0) ; j < nb_lines ; j++){
+//            if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
+//                newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
+//                break;
+//            }
+//        }
+//        if(newY != 0){
+//            current->setPosition(new QPoint(current->getPos()->x(), newY));
+//            current->repaint();
+//        }
+//    }
+//    this->repaint();
 }
 
 void GraphicScore::dragMoveEvent(QDragMoveEvent *de)

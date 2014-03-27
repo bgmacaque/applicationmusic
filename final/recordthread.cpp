@@ -41,19 +41,27 @@ void RecordThread::run(){
                     //If the volume is higher than the highstep
                     c->setDuration(m_partition->getTempo() / 16);
                     m_partition->addChord(c);
+                    std::cout << "ADD CHORD " << c->getDisplay() << std::endl;
                 }
             }else{
                 //We have to add some duration to the previous chord
                 if(!c->isEmpty()){
                     m_partition->addDurationLastChord(step);
+                }else{
+                    if(prec->isEmpty()){
+                        m_partition->addDurationLastChord(m_partition->getTempo() / 16);
+                    }else{
+                        c->setDuration(m_partition->getTempo() / 16);
+                        m_partition->addChord(c);
+                    }
+
                 }
             }
         }
         prec = c;
         //Sleeping for the shortest time in music theory(1 min / bpm / 16)
         this->msleep( 60 * 1000 / m_partition->getTempo() / 16);
-//        usleep(1000 * 1000 * 60 / (m_partition->getTempo() * 16));
-        cout << "RECORDING" << endl;
+//        std::cout << "RECORDING" << std::endl;
     }
 }
 

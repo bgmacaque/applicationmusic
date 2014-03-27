@@ -13,6 +13,8 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    Notes *n = Notes::get_instance();
+    cout << n->searchNote("E4")->getFrequency() << endl;
 //    Note *n1 = new Note("A4", 440.0);
 //    Note *n2 = new Note("B8", 7902.13);
 //    Chord *c = new Chord(0.56, 0.75);
@@ -90,6 +92,7 @@ int main(int argc, char **argv)
     //Configuration *test = new Configuration(new QString("Cémoi"), new QString("toto666"), false, true, 5);
     //test->save();
 //    return 0;
+
     app->exec();
     Notes::kill();
     Guitar::kill();

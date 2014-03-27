@@ -8,10 +8,6 @@
 
 NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
 {
-
-    //Then we create other stuff
-    ///analyzer = new Analyze;
-    ///score = new Partition;
     connection = new DBConnection("../database.conf");
 
     config = new Configuration();
@@ -31,21 +27,16 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
     bottomBar = this->createBottomBar();
     this->addToolBar(Qt::BottomToolBarArea, bottomBar);
 
-    g_score = new GraphicScore(this, 6, this->width(), this->height() - topBar->height() - bottomBar->height());
+    g_tab = new GraphicTab(this, 6, this->width(), this->calculateScoreHeight());
+
+//    g_score = new GraphicScore(this, 6, this->width(), this->height() - topBar->height() - bottomBar->height());
     //Finally, we define the window parameters
     this->setMinimumSize(QSize(minWidth, minHeight));
 
-    this->setCentralWidget(g_score);
-    g_score->setMinimumSize(this->width(), this->calculateScoreHeight());
-    g_score->setMaximumSize(this->width(), this->calculateScoreHeight());
+    this->setCentralWidget(g_tab);
+//    g_tab->setMinimumSize(this->width(), this->calculateScoreHeight());
+//    g_tab->setMaximumSize(this->width(), this->calculateScoreHeight());
     this->show();
-    Tablature *t = new Tablature();
-    t->toTab(connection->download((21)));
-    g_score->addTablature(t);
-}
-
-void NoSkin::setTablature(Tablature *t){
-    g_score->addTablature(t);
 }
 
 int NoSkin::calculateScoreHeight() const{
@@ -53,9 +44,9 @@ int NoSkin::calculateScoreHeight() const{
 }
 
 void NoSkin::resizeEvent(QResizeEvent *event){
-    g_score->setMaximumSize(this->width(), this->calculateScoreHeight());
-    g_score->setMinimumSize(this->width(), this->calculateScoreHeight());
-    g_score->repaint();
+    g_tab->setMaximumSize(this->width(), this->calculateScoreHeight());
+    g_tab->setMinimumSize(this->width(), this->calculateScoreHeight());
+    g_tab->repaint();
 }
 
 QToolBar* NoSkin::createTopBar()

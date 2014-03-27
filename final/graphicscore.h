@@ -19,9 +19,12 @@ class GraphicScore : public QWidget
 {
 
 private:
-    QPainter *painter;
+//    QPainter *painter;
     std::vector<PositionnedNote *> *notes;
     int nb_lines;
+    bool tabVisible;
+    int time;
+    int maxTime;
 
 public:
     GraphicScore(QWidget *parent, int nb_line, int width, int height);
@@ -31,6 +34,7 @@ public:
     void addNote(int x, int y, int number);
     void resizeEvent(QResizeEvent *event);
     void removeNotes();
+    void setTabVisible(bool visible);
 
 protected:
     void dropEvent(QDropEvent *de);

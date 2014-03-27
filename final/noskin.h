@@ -14,6 +14,7 @@
 #include <QSpinBox>
 #include <QLineEdit>
 
+#include "graphictab.h"
 #include "dbconnection.h"
 #include "configuration.h"
 #include "graphicnote.h"
@@ -128,7 +129,7 @@ private:
     QToolBar *bottomBar;
 
 
-    GraphicScore *g_score;
+    GraphicTab *g_tab;
 
 
      /*!
@@ -200,8 +201,6 @@ public:
      * \param pos The new position of the cursor
      */
     int changePlayBackPosition(int pos);
-
-    void setTablature(Tablature *t);
 
     /*!
      * \brief Change the record's cursor position
