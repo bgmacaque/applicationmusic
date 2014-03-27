@@ -33,6 +33,8 @@ public:
 
     Fret *getFret(Note *n) const;
     bool playable(Note *n) const;
+    float getLowFrequency();
+    float getHighFrequency();
 };
 
 #endif // GUITARSTRING_H

@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include "tablature.h"
 #include <QInputDialog>
+#include <QFileDialog>
 
 /*!
  * \class Controller controller.h

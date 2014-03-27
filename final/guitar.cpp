@@ -9,12 +9,12 @@ Guitar *Guitar::m_instance = NULL;
 Guitar::Guitar(){
     m_nbStrings = 6;
     m_strings = new GuitarString*[m_nbStrings];
-    m_strings[0] = new GuitarString("E", "E2", 25);
-    m_strings[1] = new GuitarString("A", "A2", 25);
-    m_strings[2] = new GuitarString("D", "D3", 25);
-    m_strings[3] = new GuitarString("G", "G3", 25);
-    m_strings[4] = new GuitarString("B", "B3", 25);
-    m_strings[5] = new GuitarString("e", "E4", 25);
+    m_strings[0] = new GuitarString("E", "E5", 25);
+    m_strings[1] = new GuitarString("A", "A4", 25);
+    m_strings[2] = new GuitarString("D", "D4", 25);
+    m_strings[3] = new GuitarString("G", "G4", 25);
+    m_strings[4] = new GuitarString("B", "B4", 25);
+    m_strings[5] = new GuitarString("e", "E5", 25);
 }
 
 Guitar::~Guitar(){
@@ -66,6 +66,14 @@ Fret **Guitar::getFrets(Chord *chord, int *realSize) const{
         retour = frets;
     }
     return retour;
+}
+
+float Guitar::getHighestFrequency(){
+    return m_strings[0]->getHighFrequency();
+}
+
+float Guitar::getLowestFrequency(){
+    return m_strings[m_nbStrings - 1]->getLowFrequency();
 }
 
 Guitar *Guitar::get_instance(){

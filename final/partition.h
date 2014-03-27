@@ -34,6 +34,8 @@ private:
 
     float m_highStep;
 
+    std::string m_path;
+
 public:
     //Constructor that initialize an empty partition
     Partition();
@@ -41,6 +43,9 @@ public:
 
     //Display the partition in text format (debug)
     std::string getDisplay();
+
+    std::string getPath() const;
+    void setPath(std::string p_path);
 
     //Getter of the chords
     std::vector<Chord*> getChords() const;

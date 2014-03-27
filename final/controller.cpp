@@ -32,12 +32,18 @@ void Controller::deletePart(){
         int response = QMessageBox::question(frame, "Sauvegarde", "Le fichier n'a pas été sauvegardé, voulez-vous le sauvegarder?",QMessageBox ::Yes | QMessageBox::No | QMessageBox::Abort);
         if(response == QMessageBox::Yes){
             if(partition->getName().compare("") == 0){
-                bool ok = true;
-                QString partitionName = QInputDialog::getText(frame, "Sauvegarde", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
-                if(ok){
-                    partition->setName(partitionName.toStdString());
-                }
+                QString path = QFileDialog::getSaveFileName(frame, "Enregistrer la partition", QString(), "Partition (*.tab)");
+                std::cout << path.toStdString() << std::endl;
+
+                QStringList list1 = path.split("/");
+                partition->setName(list1.at(list1.size() - 1).toStdString());
+                //We will save here the file
+                partition->save(path.toStdString());
+            }else{
+                partition->save(partition->getPath());
             }
+            saved = true;
+            frame->btn_save->setEnabled(false);
             frame->g_score->removeNotes();
             partition->deleteChords();
         }else if(response == QMessageBox::No){
@@ -112,18 +118,15 @@ void Controller::record()
 
 void Controller::save()
 {
-    bool ok = true;
-    while(partition->getName().compare("") == 0 && ok){
-        QString partitionName = QInputDialog::getText(frame, "Upload", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
-        if(ok){
-            partition->setName(partitionName.toStdString());
 
-        }
-    }
+    QString path = QFileDialog::getSaveFileName(frame, "Enregistrer la partition", QString(), "Partition (*.tab)");
+    std::cout << path.toStdString() << std::endl;
 
+    QStringList list1 = path.split("/");
+    partition->setName(list1.at(list1.size() - 1).toStdString());
     //We will save here the file
-    std::string name = partition->getName() + ".tab";
-    partition->save(name);
+    partition->save(path.toStdString());
+    partition->setPath(path.toStdString());
 
     saved = true;
     frame->btn_save->setEnabled(false);

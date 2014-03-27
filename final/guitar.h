@@ -27,6 +27,8 @@ public:
     static Guitar *get_instance();
     static void kill();
     Fret **getFrets(Chord *c, int *realSize) const;
+    float getLowestFrequency();
+    float getHighestFrequency();
 };
 
 #endif // GUITARE_H

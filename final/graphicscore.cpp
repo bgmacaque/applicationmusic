@@ -47,7 +47,6 @@ void GraphicScore::paintEvent(QPaintEvent *event)
         current = notes->at(i);
         current->repaint();
     }
-    std::cout << "---" << std::endl;
 }
 
 

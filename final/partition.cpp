@@ -45,6 +45,16 @@ std::string Partition::getName(){
     return m_name;
 }
 
+std::string Partition::getPath() const{
+    return m_path;
+}
+
+void Partition::setPath(string p_path){
+    m_path = p_path;
+}
+
+
+
 
 float Partition::getHighStep() const{
     return m_highStep;

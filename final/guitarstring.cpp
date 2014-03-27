@@ -57,3 +57,11 @@ bool GuitarString::playable(Note *n) const{
 //    std::cout << n->getFrequency() << ", high" << m_highFrequency << std::endl;
     return n->getFrequency() >= m_lowFrequency && n->getFrequency() <= m_highFrequency;
 }
+
+float GuitarString::getLowFrequency(){
+    return m_lowFrequency;
+}
+
+float GuitarString::getHighFrequency(){
+    return m_highFrequency;
+}

@@ -22,7 +22,7 @@ void Analyze::start(){
     int result(0);
     result = m_system->recordStart(0, m_sound, true);
     result = m_system->playSound(FMOD_CHANNEL_REUSE, m_sound, false, &m_channel);
-    result = m_channel->setVolume(0);
+//    result = m_channel->setVolume(0);
 }
 
 
@@ -45,8 +45,6 @@ Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax, float *max
     i = SPECTRUM_SIZE - 1;
     bool stop = false;
     while(i >= 0 && c->notesNumber() < size_max && !stop){
-//        cout << n->getFrequency() << endl;
-//        cout << spectrum[places[i]] << endl;
         if(spectrum[places[i]] < 0.025){
             stop = true;
         }else{
@@ -56,7 +54,6 @@ Chord *Analyze::mainChord(int size_max, float freqMin, float freqMax, float *max
             }
             i--;
         }
-//                cout << spectrum[places[i]] << endl;
     }
     *maxVolume = spectrum[places[SPECTRUM_SIZE - 1]];
     delete[] places;

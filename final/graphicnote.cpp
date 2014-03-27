@@ -16,7 +16,6 @@ void GraphicNote::setParent(QWidget *p_parent){
 void GraphicNote::paintEvent(QPaintEvent *event)
 {
     painter = new QPainter(this);
-    std::cout << "COUCOU, je suis une note" << std::endl;
     //We begin by drawing the ellipse
     QBrush *background = new QBrush(QColor(23, 23, 34));
     painter->setBrush(*background);

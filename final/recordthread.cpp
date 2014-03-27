@@ -20,11 +20,13 @@ void RecordThread::run(){
     float maxVolume;
     double step = m_partition->getTempo() / 16;
     int i(0);
+
     FrettedChord *cfrets;
     Fret **frets;
+    Guitar *g = Guitar::get_instance();
     while(record){
         //Get the main chord with the possible frenquencies of the instrument
-        c = m_analyze->mainChord(6, 82.41, 1318.51, &maxVolume);
+        c = m_analyze->mainChord(6, g->getLowestFrequency(), g->getHighestFrequency(), &maxVolume);
         c->setVolume(maxVolume);
         //If we have found a chord
         if(prec != 0){
@@ -39,7 +41,6 @@ void RecordThread::run(){
                     //If the volume is higher than the highstep
                     c->setDuration(m_partition->getTempo() / 16);
                     m_partition->addChord(c);
-                    cout << c->getDisplay() << endl;
                 }
             }else{
                 //We have to add some duration to the previous chord
