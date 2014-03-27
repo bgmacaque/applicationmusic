@@ -54,11 +54,11 @@ Fret **Guitar::getFrets(Chord *chord, int *realSize) const{
     }
 
     Fret **retour = new Fret*[i];
-    std::cout << "I : " << i << std::endl;
+//    std::cout << "I : " << i << std::endl;
     if(i < chord->notesNumber()){
         for(j = 0 ; j < i ; j++){
             retour[j] = frets[j];
-            std::cout << "NOTE : " << retour[j]->getNote()->getName() << std::endl;
+//            std::cout << "NOTE : " << retour[j]->getNote()->getName() << std::endl;
         }
         *realSize = i;
     }else{

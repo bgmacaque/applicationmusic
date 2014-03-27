@@ -64,6 +64,8 @@ public:
 
     QString stringify();
 
+    static Partition *parse(std::string json);
+
     std::string getName();
 
     void setName(std::string p_name);
@@ -76,7 +78,7 @@ public:
 
     void setTempo(int tempo);
 
-    static Partition* load(const char *path);
+    static Partition *load(const char *path);
 
 };
 

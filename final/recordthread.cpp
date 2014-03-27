@@ -51,8 +51,9 @@ void RecordThread::run(){
         }
         prec = c;
         //Sleeping for the shortest time in music theory(1 min / bpm / 16)
-        usleep(1000 * 1000 * 60 / (m_partition->getTempo() * 16));
-//        cout << "RECORDING" << endl;
+        this->msleep( 60 * 1000 / m_partition->getTempo() / 16);
+//        usleep(1000 * 1000 * 60 / (m_partition->getTempo() * 16));
+        cout << "RECORDING" << endl;
     }
 }
 

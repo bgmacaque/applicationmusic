@@ -13,6 +13,7 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
     ///analyzer = new Analyze;
     ///score = new Partition;
     connection = new DBConnection("../database.conf");
+
     config = new Configuration();
 
     //We tried to load previous configs if they exist
@@ -38,7 +39,9 @@ NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
     g_score->setMinimumSize(this->width(), this->calculateScoreHeight());
     g_score->setMaximumSize(this->width(), this->calculateScoreHeight());
     this->show();
-
+    Tablature *t = new Tablature();
+    t->toTab(connection->download((21)));
+    g_score->addTablature(t);
 }
 
 void NoSkin::setTablature(Tablature *t){

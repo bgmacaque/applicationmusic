@@ -22,7 +22,7 @@ void Analyze::start(){
     int result(0);
     result = m_system->recordStart(0, m_sound, true);
     result = m_system->playSound(FMOD_CHANNEL_REUSE, m_sound, false, &m_channel);
-//    result = m_channel->setVolume(0);
+    result = m_channel->setVolume(0);
 }
 
 

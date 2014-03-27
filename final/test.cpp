@@ -7,6 +7,7 @@
 #include "notes.h"
 #include "fret.h"
 #include "guitar.h"
+#include <QTextCodec>
 using namespace std;
 
 
@@ -67,6 +68,9 @@ int main(int argc, char **argv)
     //    for( ; ; ){
 
 //    }
+
+    //Change the charset for all messages and QStrings
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
     QApplication *app = new QApplication(argc, argv);
     NoSkin *frame = new NoSkin(400, 302);
     Controller *c = new Controller(frame);
@@ -89,5 +93,6 @@ int main(int argc, char **argv)
     app->exec();
     Notes::kill();
     Guitar::kill();
+    delete c;
     return 0;
 }

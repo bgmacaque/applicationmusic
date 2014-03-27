@@ -10,6 +10,8 @@
 #include <QVariant>
 #include <QMessageBox>
 #include <partition.h>
+#include <QFileDialog>
+#include <fstream>
 //#include <qsql_mysql.h>
 
 /*!
@@ -57,12 +59,9 @@ public:
      */
     //bool update(Partition p);
 
-    /*!
-     * \brief Select a particular partition of the authentified user with its id
-     * \param id The id of the partition
-     * \return The selected partition
-     */
-    //Partition select(int id);
+    int getPartitions();
+
+    Partition *download(int part_id);
 
     /*!
      * \brief Select all partitions of the authentified user.

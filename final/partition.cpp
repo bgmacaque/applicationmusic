@@ -105,6 +105,8 @@ void Partition::save(string path){
     }
 }
 
+
+
 Partition *Partition::load(const char *path){
     Partition *p = new Partition();
     FileReader *fr = new FileReader(path);
@@ -207,7 +209,6 @@ Partition *Partition::load(const char *path){
             if(word.compare("]") == 0){
                 hasNextChord = false;
             }else if(word.compare(",") != 0){
-                cout << "CACA" << endl;
                 throw "Parse error";
             }else{
                 word = fr->next();
@@ -224,7 +225,7 @@ Partition *Partition::load(const char *path){
         throw "Parse error";
     }
 
-    cout << p->stringify().toStdString() << endl;
+//    cout << p->stringify().toStdString() << endl;
     delete fr;
     return p;
 }

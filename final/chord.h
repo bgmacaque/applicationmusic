@@ -2,6 +2,7 @@
 #define CHORD_H
 #include <vector>
 #include <string>
+#include <stdlib.h>
 #include "note.h"
 #include "notes.h"
 #include <iostream>

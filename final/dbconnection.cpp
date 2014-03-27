@@ -52,21 +52,43 @@ DBConnection::DBConnection(std::string file)
     }
 }
 
-/*Partition DBConnection::select(int id)
+int DBConnection::getPartitions()
 {
-    QString q("SELECT * FROM Partitions WHERE part_id = :id");
+    QString q("SELECT * FROM Tabs WHERE user_id = :user_id");
 
-    QSqlQuery *query = new QSqlQuery(*base);
+    QSqlQuery *query = new QSqlQuery(base);
     query->prepare(q);
-    query->bindValue(":id", id);
+    query->bindValue(":user_id", this->id_user);
 
     query->exec();
-    QString s = query->boundValue(0).toString();
+//    QString s = query->value(0).toString();
 
-    Partition *p; //= new Partition(0);
-    return *p;
+//    Partition *p;
+//    return *p;
 }
-*/
+
+Partition *DBConnection::download(int part_id){
+    QString q("SELECT * FROM Tabs WHERE id = :part_id");
+    QSqlQuery *query = new QSqlQuery(base);
+    query->prepare(q);
+    query->bindValue(":part_id", part_id);
+    Partition *p;
+    query->exec();
+    if(query->first()){
+        QString path = "./download.tab";
+        std::ofstream file(path.toStdString().c_str(), std::ios::out | std::ios::trunc);
+
+        if(file.is_open()){
+            //Opening the partition
+            file << query->value(2).toString().toStdString();
+            file.close();
+        }
+        p = Partition::load(path.toStdString().c_str());
+    }
+    return p;
+}
+
+
 bool DBConnection::insert(Partition *p)
 {
     QString q("INSERT INTO Tabs(name, file, user_id, note) VALUES (:name, :file, :user_id, :note)");

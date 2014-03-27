@@ -33,7 +33,6 @@ void Controller::deletePart(){
         if(response == QMessageBox::Yes){
             if(partition->getName().compare("") == 0){
                 QString path = QFileDialog::getSaveFileName(frame, "Enregistrer la partition", QString(), "Partition (*.tab)");
-                std::cout << path.toStdString() << std::endl;
 
                 QStringList list1 = path.split("/");
                 partition->setName(list1.at(list1.size() - 1).toStdString());
@@ -73,6 +72,7 @@ void Controller::upload(){
             QString partitionName = QInputDialog::getText(frame, "Upload", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
             if(ok){
                 partition->setName(partitionName.toStdString());
+                frame->setWindowTitle(partitionName);
             }
         }
         if(ok){
@@ -127,7 +127,7 @@ void Controller::save()
     //We will save here the file
     partition->save(path.toStdString());
     partition->setPath(path.toStdString());
-
+    frame->setWindowTitle(QString::fromStdString(list1.at(list1.size() - 1).toStdString()));
     saved = true;
     frame->btn_save->setEnabled(false);
 }
@@ -152,7 +152,7 @@ void Controller::connectToWeb()
                 {
                     QMessageBox::information(frame, "Connexion", "Vous n'êtes pas connecté !");
                 }else{
-                    QMessageBox::information(frame, "Connexion", "Vous n'êtes connecté ! Votre id est : "+frame->connection->getUserId());
+                    QMessageBox::information(frame, "Connexion", "Vous êtes connecté ! ");
                 }
             }else{
                 QMessageBox::information(frame, "Connexion", "Vous devez renseignez vos identifiants pour vous connecter !");

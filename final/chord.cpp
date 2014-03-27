@@ -171,7 +171,7 @@ Chord *Chord::parse(FileReader *fr){
 //    }
     word = fr->next();
     if(fr->isNotJsonString(word)){
-        retour->setVolume(::atof(word.c_str()));
+        retour->setVolume(atof(word.c_str()));
     }else{
         throw "Parse error";
     }
