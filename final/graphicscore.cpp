@@ -84,8 +84,11 @@ void GraphicScore::resizeEvent(QResizeEvent *event){
 //    QSize newe = event->size();
 //    float newY(0);
 //    float position(0);
-//    PositionnedNote *current(0);
-//    for(unsigned int i = 0 ; i < notes->size() ; i++){
+    PositionnedNote *current(0);
+    int y(0);
+    for(unsigned int i = 0 ; i < notes->size() ; i++){
+        current = notes->at(i);
+        y = current->getPos()->y() + 9;
 //        current = notes->at(i);
 //        currentY = current->getPos()->y();
 //        position = (float)currentY /  (float)old.height();
@@ -99,7 +102,7 @@ void GraphicScore::resizeEvent(QResizeEvent *event){
 //            current->setPosition(new QPoint(current->getPos()->x(), newY));
 //            current->repaint();
 //        }
-//    }
+    }
 //    this->repaint();
 }
 

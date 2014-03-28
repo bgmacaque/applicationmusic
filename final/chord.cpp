@@ -10,6 +10,11 @@ Chord::Chord(std::vector<Note*> p_notes, float p_duration, float p_volume){
     m_duration = p_duration;
 }
 
+
+void Chord::sort(){
+
+}
+
 Chord::Chord(){
     m_volume = 0;
     m_duration = 0;

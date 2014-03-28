@@ -11,6 +11,7 @@ GraphicTab::GraphicTab(QWidget *p_parent, unsigned int p_nbLines, int width, int
     m_scores.push_back(new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14));
     m_scores.push_back(new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14));
     m_scores.push_back(new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14));
+
     this->scrollUp();
 }
 
@@ -97,7 +98,6 @@ void GraphicTab::paintEvent(QPaintEvent *event){
     QPainter *painter = new QPainter(this);
     painter->setBrush(QBrush(QColor(255, 255, 255)));
     painter->drawRect(x, y, this->width(), this->height());
-//    painter->drawLine(0, this->height() / 2, this->width(), this->height() / 2);
     delete painter;
     for(i = m_indexVisible ; i < maxVisible ; i++){
         score = m_scores.at(i);
