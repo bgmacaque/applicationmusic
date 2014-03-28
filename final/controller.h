@@ -92,6 +92,10 @@ public slots:
 
     void openPartition();
 
+    void scrollDown();
+
+    void scrollUp();
+
     /*!
      * \brief Upload the partition on the web if the user is connected
      *

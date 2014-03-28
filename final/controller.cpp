@@ -15,6 +15,14 @@ Controller::Controller(NoSkin *f) : frame(f)
     tablature = new Tablature();
 }
 
+void Controller::scrollDown(){
+    frame->g_tab->scrollDown();
+}
+
+void Controller::scrollUp(){
+    frame->g_tab->scrollUp();
+}
+
 void Controller::active()
 {
     QObject::connect(frame->btn_play_pause, SIGNAL(triggered()), this, SLOT(play()));
@@ -26,6 +34,9 @@ void Controller::active()
     QObject::connect(frame->choice_tempo, SIGNAL(valueChanged(int)), this, SLOT(changeTempo(int)));
     QObject::connect(frame->btn_delete, SIGNAL(triggered()), this, SLOT(deletePart()));
     QObject::connect(frame->btn_open, SIGNAL(triggered()), this, SLOT(openPartition()));
+    QObject::connect(frame->btn_back, SIGNAL(triggered()), this, SLOT(scrollUp()));
+    QObject::connect(frame->btn_forward, SIGNAL(triggered()), this, SLOT(scrollDown()));
+
 }
 
 void Controller::openPartition(){
