@@ -36,6 +36,7 @@ Fret **Guitar::getFrets(Chord *chord, int *realSize) const{
     Fret **frets = new Fret*[chord->notesNumber()];
     Fret *fret;
     bool found = false;
+    chord->sort();
     while(i < chord->notesNumber() && j < m_nbStrings){
         found = false;
         while(j < m_nbStrings && !found){

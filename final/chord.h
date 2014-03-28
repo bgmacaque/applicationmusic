@@ -42,6 +42,9 @@ public:
     Chord();
     Chord(float p_duration, float p_volume);
 
+
+    void sort();
+
     /*!
      * \brief Getter of the duration
      */
