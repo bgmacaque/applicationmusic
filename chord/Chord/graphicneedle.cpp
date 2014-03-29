@@ -1,12 +1,11 @@
 #include "graphicneedle.h"
 
-GraphicNeedle::GraphicNeedle(QWidget *parent) : QWidget(parent)
+GraphicNeedle::GraphicNeedle(QWidget *parent, int sizeX, int sizeY) : QWidget(parent)
 {
-    this->setMinimumSize(200, 100);
-    this->setMaximumSize(200, 100);
+    this->setMinimumSize(sizeX, sizeY);
+    this->setMaximumSize(sizeX, sizeY);
 
-    position_x = this->width()/2 - 20;
-    position = position_x;
+    position_x = this->width()/2;
     position_y = 20;
 
     this->show();
@@ -42,11 +41,6 @@ void GraphicNeedle::paintEvent(QPaintEvent *event)
     }
 }*/
 
-qreal GraphicNeedle::pos()
-{
-    return this->position;
-}
-
 int GraphicNeedle::x(){
     return position_x;
 }
@@ -65,22 +59,18 @@ void GraphicNeedle::setY(int y)
     position_y = y;
 }
 
-void GraphicNeedle::goBack()
+void GraphicNeedle::goRight()
 {
     int x = position_x, y = position_y;
 
-    position_x = qCos(0.5) * (x - this->width()/2) - qSin(0.5) * (y - this->height()) + this->width()/2;
-    position_y = qSin(0.5) * (x - this->width()/2) + qCos(0.5) * (y - this->height()) + this->height();
-
-    position--;
+    position_x = qCos(0.1) * (x - this->width()/2) - qSin(0.1) * (y - this->height()) + this->width()/2;
+    position_y = qSin(0.1) * (x - this->width()/2) + qCos(0.1) * (y - this->height()) + this->height();
 }
 
-void GraphicNeedle::goForward()
+void GraphicNeedle::goLeft()
 {
     int x = position_x, y = position_y;
 
-    position_x = qCos(-0.5) * (x - this->width()/2) - qSin(-0.5) * (y - this->height()) + this->width()/2;
-    position_y = qSin(-0.5) * (x - this->width()/2) + qCos(-0.5) * (y - this->height()) + this->height();
-
-    position++;
+    position_x = qCos(-0.1) * (x - this->width()/2) - qSin(-0.1) * (y - this->height()) + this->width()/2;
+    position_y = qSin(-0.1) * (x - this->width()/2) + qCos(-0.1) * (y - this->height()) + this->height();
 }

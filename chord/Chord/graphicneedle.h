@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <qmath.h>
+#include <iostream>
 
 class GraphicNeedle : public QWidget
 {
@@ -13,19 +14,17 @@ private:
     QPainter *painter;
     int position_x;
     int position_y;
-    qreal position;
 
 public:
-    GraphicNeedle(QWidget *parent = 0);
+    GraphicNeedle(QWidget *parent = 0, int sizeX = 200, int sizeY = 100);
     void paintEvent(QPaintEvent *event);
     
 signals:
     
 public slots:
     //void goTo(int rotation);
-    void goBack();
-    void goForward();
-    qreal pos();
+    void goRight();
+    void goLeft();
     int x();
     int y();
     void setX(int x);

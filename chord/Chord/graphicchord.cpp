@@ -2,7 +2,7 @@
 
 GraphicChord::GraphicChord(QWidget *parent) : QWidget(parent)
 {
-    note_needle = new GraphicNeedle(this);
+    note_needle = new GraphicNeedle(this, 300, 150);
     note_label = new QLabel();
 
     note_label->setMinimumSize(50, 50);
@@ -31,28 +31,51 @@ void GraphicChord::setTo(std::string note, int dest_needle)
 
 void GraphicChord::needleGoTo(qreal pos)
 {
-    while(note_needle->x()!=pos){
+    int posXIni = note_needle->x();
+    int posYIni = note_needle->y();
+
+    int posX = note_needle->width()/2;
+    int posY = 20;
+
+    if(pos == 1){
+        posX = note_needle->width() - 30;
+        posY = note_needle->height() - 30;
+    }else if(pos==-1){
+        posX = 30;
+        posY = note_needle->height() - 30;
+        std::cout << "COUCOU" << posX << "  :  " << posY << std::endl;
+    }
+
+    bool end = false;
+
+    while(note_needle->y()!=posY && note_needle->x()!=posX && !end){
 
         //We modify the position of the needle
-        if(note_needle->x() > pos){
-            if(note_needle->y()<=this->height())
-                note_needle->goForward();
-            else
-                note_needle->setX(30);
-        }else if(note_needle->x() < pos ){
+        if(posXIni > posX){
+            //if(note_needle->y()<=note_needle->height())
+                note_needle->goLeft();
 
-            if(note_needle->y()<=this->height())
-                note_needle->goBack();
-            else
-                note_needle->setX(this->width()-30);
+                if(note_needle->x() < posX){
+                    end = true;
+                }
+        }else if(posXIni < posX ){
 
+            //if(note_needle->y()<=note_needle->height())
+                note_needle->goRight();
+
+            if(note_needle->x() > posX){
+                end = true;
+            }
         }
 
-        std::cout << note_needle->x() << std::endl;
-
         note_needle->update();
-        sleep(800);
+        sleep(30);
     }
+
+    std::cout << "Aim : x-> " << posX << "  y-> " << posY<< std::endl;
+    std::cout << "FIN : x-> " << note_needle->x() << "  y-> " << note_needle->y() << std::endl;
+
+    //if(posX)
 }
 
 
