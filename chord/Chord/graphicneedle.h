@@ -11,10 +11,8 @@ class GraphicNeedle : public QWidget
 {
     Q_OBJECT
 private:
-    QPainter *painter;
-    int position_x;
-    int position_y;
 
+    QPainter *painter;
     int rayon;
     qreal angle;
 
@@ -25,13 +23,8 @@ public:
 signals:
     
 public slots:
-    //void goTo(int rotation);
     void goRight();
     void goLeft();
-    int x();
-    int y();
-    void setX(int x);
-    void setY(int y);
     qreal getAngle();
     void setAngle(qreal ang);
     

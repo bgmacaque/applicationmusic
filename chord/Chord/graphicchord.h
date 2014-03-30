@@ -15,27 +15,23 @@ class GraphicChord : public QWidget
     
 private:
 
-    std::vector<std::string> *notes;
-
     QLabel *note_label;
     GraphicNeedle *note_needle;
     int status;
 
+    void goToLeft();
+    void goToRight();
+    void goAndStay();
+    void needleGoTo(int pos);
 
 public:
-     GraphicChord(QWidget *parent = 0);
+     GraphicChord(QWidget *parent = 0, QString first_note = "A");
 
      /*!
       * \brief setTo places the chord to the note selected
       */
      void setTo(std::string note, int dest_needle);
-     void needleGoTo(int pos);
-     void goToLeft();
-     void goToRight();
-     void goAndStay();
      static void sleep(int ms);
-     //void paintEvent(QPaintEvent *event);
-
 };
 
 #endif // GRAPHICCHORD_H
