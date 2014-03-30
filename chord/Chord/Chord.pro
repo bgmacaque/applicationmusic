@@ -14,10 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     graphicneedle.cpp \
-    graphictuner.cpp
+    graphictuner.cpp \
+    tabchooser.cpp \
+    partresume.cpp
 
 HEADERS  += \
     graphicneedle.h \
-    graphictuner.h
+    graphictuner.h \
+    tabchooser.h \
+    partresume.h
 
 FORMS    +=
