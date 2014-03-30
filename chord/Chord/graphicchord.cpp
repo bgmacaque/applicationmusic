@@ -1,9 +1,8 @@
 #include "graphicchord.h"
 
-#define TEMPS_PAUSE 5
-
 GraphicChord::GraphicChord(QWidget *parent, QString first_note) : QWidget(parent)
 {
+    //At the beginning, the needle is at the middle
     status = 0;
 
     note_needle = new GraphicNeedle(this, 300, 150);
@@ -19,17 +18,18 @@ GraphicChord::GraphicChord(QWidget *parent, QString first_note) : QWidget(parent
     lay->addWidget(note_label, 0, Qt::AlignCenter);
 
     this->setLayout(lay);
-
-
     this->show();
 
     note_needle->repaint();
     note_label->repaint();
 }
 
-void GraphicChord::setTo(std::string note, int dest_needle)
+void GraphicChord::setTo(QString note, int dest_needle)
 {
-    note_label->setText(QString(note.c_str()));
+    //We change the note displayed
+    note_label->setText(note);
+
+    //We set the needle to the new position
     needleGoTo(dest_needle);
 }
 
@@ -129,7 +129,6 @@ void GraphicChord::goAndStay(){
 #endif
 void GraphicChord::sleep(int ms)
 {
-
         QTime dieTime= QTime::currentTime().addMSecs(ms);
         while( QTime::currentTime() < dieTime )
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);

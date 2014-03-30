@@ -1,13 +1,11 @@
 #include "graphicneedle.h"
 
-#define ROTATION_ANGLE 0.01
-
 GraphicNeedle::GraphicNeedle(QWidget *parent, int sizeX, int sizeY) : QWidget(parent)
 {
     this->setMinimumSize(sizeX, sizeY);
     this->setMaximumSize(sizeX, sizeY);
 
-    rayon = qSqrt(qPow((this->width()/2 - this->width()/2), 2) + qPow((20 - this->height()), 2));
+    radius = qSqrt(qPow((this->width()/2 - this->width()/2), 2) + qPow((20 - this->height()), 2));
     angle = 1.57;
 
     this->show();
@@ -23,7 +21,7 @@ void GraphicNeedle::paintEvent(QPaintEvent *event)
     //Now we trace lines
     painter->setBrush(QBrush(QColor(255, 0, 0)));
     painter->setPen(QColor(255, 0, 0));
-    painter->drawLine(rayon * qCos(angle) + this->width()/2, this->height() - rayon * qSin(angle), (int) this->width()/2, this->height());
+    painter->drawLine(radius * qCos(angle) + this->width()/2, this->height() - radius * qSin(angle), (int) this->width()/2, this->height());
 }
 
 qreal GraphicNeedle::getAngle(){
