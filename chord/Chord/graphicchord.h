@@ -19,6 +19,7 @@ private:
 
     QLabel *note_label;
     GraphicNeedle *note_needle;
+    int status;
 
 
 public:
@@ -28,7 +29,10 @@ public:
       * \brief setTo places the chord to the note selected
       */
      void setTo(std::string note, int dest_needle);
-     void needleGoTo(qreal pos);
+     void needleGoTo(int pos);
+     void goToLeft();
+     void goToRight();
+     void goAndStay();
      static void sleep(int ms);
      //void paintEvent(QPaintEvent *event);
 

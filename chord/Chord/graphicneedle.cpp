@@ -1,5 +1,7 @@
 #include "graphicneedle.h"
 
+#define ROTATION_ANGLE 0.01
+
 GraphicNeedle::GraphicNeedle(QWidget *parent, int sizeX, int sizeY) : QWidget(parent)
 {
     this->setMinimumSize(sizeX, sizeY);
@@ -7,6 +9,9 @@ GraphicNeedle::GraphicNeedle(QWidget *parent, int sizeX, int sizeY) : QWidget(pa
 
     position_x = this->width()/2;
     position_y = 20;
+
+    rayon = qSqrt(qPow((position_x - this->width()/2), 2) + qPow((position_y - this->height()), 2));
+    angle = 1.57;
 
     this->show();
     this->repaint();
@@ -21,7 +26,10 @@ void GraphicNeedle::paintEvent(QPaintEvent *event)
     //Now we trace lines
     painter->setBrush(QBrush(QColor(255, 0, 0)));
     painter->setPen(QColor(255, 0, 0));
-    painter->drawLine(position_x, position_y, (int) this->width()/2, this->height());
+    //painter->drawLine(rayon * qCos(angle) + this->width()/2, rayon * qSin(angle), (int) this->width()/2, this->height());
+    painter->drawLine(rayon * qCos(angle) + this->width()/2, this->height() - rayon * qSin(angle), (int) this->width()/2, this->height());
+
+    //std::cout << "RAYON : " << rayon << ", ANGLE : " << angle << ", X : " << position_x << ", Y : " << rayon * qSin(angle) - (height() - 20) ;
 
 }
 
@@ -41,6 +49,14 @@ void GraphicNeedle::paintEvent(QPaintEvent *event)
     }
 }*/
 
+qreal GraphicNeedle::getAngle(){
+    return angle;
+}
+
+void GraphicNeedle::setAngle(qreal ang){
+    angle = ang;
+}
+
 int GraphicNeedle::x(){
     return position_x;
 }
@@ -59,18 +75,38 @@ void GraphicNeedle::setY(int y)
     position_y = y;
 }
 
-void GraphicNeedle::goRight()
-{
-    int x = position_x, y = position_y;
-
-    position_x = qCos(0.1) * (x - this->width()/2) - qSin(0.1) * (y - this->height()) + this->width()/2;
-    position_y = qSin(0.1) * (x - this->width()/2) + qCos(0.1) * (y - this->height()) + this->height();
-}
-
 void GraphicNeedle::goLeft()
 {
-    int x = position_x, y = position_y;
+    //int x, y;
 
-    position_x = qCos(-0.1) * (x - this->width()/2) - qSin(-0.1) * (y - this->height()) + this->width()/2;
-    position_y = qSin(-0.1) * (x - this->width()/2) + qCos(-0.1) * (y - this->height()) + this->height();
+    //x = qCos(0.1) * (position_x - this->width()/2) - qSin(0.1) * (position_y - this->height()) + this->width()/2;
+    //y = qSin(0.1) * (position_x - this->width()/2) + qCos(0.1) * (position_y - this->height()) + this->height();
+
+    //position_x = x;
+    //position_y = y;
+    /*position_x += rayon * qCos(0.05);
+    position_y = rayon * qSin(0.05);*/
+    angle+=ROTATION_ANGLE;
+
+    position_x = rayon * qCos(angle);
+    position_y = rayon * qSin(angle);
+}
+
+void GraphicNeedle::goRight()
+{
+    /*int x, y;
+
+    x = qCos(-0.1) * (position_x - this->width()/2) - qSin(-0.1) * (position_y - this->height()) + this->width()/2;
+    y = qSin(-0.1) * (position_x - this->width()/2) + qCos(-0.1) * (position_y - this->height()) + this->height();
+
+    position_x = x;
+    position_y = y;*/
+
+    /*position_x -= rayon * qCos(0.05);
+    position_y = rayon * qSin(0.05);*/
+
+
+    angle-=ROTATION_ANGLE;
+    position_x = rayon * qCos(angle);
+    position_y = rayon * qSin(angle);
 }

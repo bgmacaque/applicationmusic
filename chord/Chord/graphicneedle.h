@@ -15,6 +15,9 @@ private:
     int position_x;
     int position_y;
 
+    int rayon;
+    qreal angle;
+
 public:
     GraphicNeedle(QWidget *parent = 0, int sizeX = 200, int sizeY = 100);
     void paintEvent(QPaintEvent *event);
@@ -29,6 +32,8 @@ public slots:
     int y();
     void setX(int x);
     void setY(int y);
+    qreal getAngle();
+    void setAngle(qreal ang);
     
 };
 
