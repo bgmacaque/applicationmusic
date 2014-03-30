@@ -92,7 +92,6 @@ void GraphicChord::goToRight(){
     qreal ang = note_needle->getAngle();
 
     while(note_needle->getAngle() < (ang-1.52) || note_needle->getAngle() > (ang-1.48)){
-        std::cout << "ANGLE PREVU : " << ang-1.48 << ", ANGLE COURANT : " << note_needle->getAngle();
         note_needle->goRight();
         note_needle->update();
         sleep(TEMPS_PAUSE);

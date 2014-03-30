@@ -1,7 +1,6 @@
 #include "graphicchord.h"
 #include "graphicneedle.h"
 #include <QApplication>
-#include <iostream>
 
 int main(int argc, char *argv[])
 {

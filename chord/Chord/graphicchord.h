@@ -6,7 +6,6 @@
 #include <QVBoxLayout>
 #include <QTime>
 #include <QCoreApplication>
-#include <iostream>
 #include "graphicneedle.h"
 
 class GraphicChord : public QWidget

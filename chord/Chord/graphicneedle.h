@@ -5,7 +5,6 @@
 #include <QPainter>
 #include <QTimer>
 #include <qmath.h>
-#include <iostream>
 
 class GraphicNeedle : public QWidget
 {
