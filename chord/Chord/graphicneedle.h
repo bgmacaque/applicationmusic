@@ -24,13 +24,13 @@ private:
 
     /*!
      * \brief radius
-     * The radius of the needle
+     * The radius of the needle in pixels
      */
     int radius;
 
     /*!
      * \brief angle
-     * The angle of the rotation
+     * The angle of the rotation in radians
      */
     qreal angle;
 

@@ -13,10 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        graphicchord.cpp \
-    graphicneedle.cpp
+    graphicneedle.cpp \
+    graphictuner.cpp
 
-HEADERS  += graphicchord.h \
-    graphicneedle.h
+HEADERS  += \
+    graphicneedle.h \
+    graphictuner.h
 
 FORMS    +=
