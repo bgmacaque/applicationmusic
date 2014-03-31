@@ -11,7 +11,6 @@ RecordThread::RecordThread(Partition *p_partition, Analyze *p_analyze){
 }
 
 void RecordThread::run(){
-//    m_partition->startRecord(m_analyze);
     record = true;
     //Starting the record
     m_analyze->start();
@@ -19,10 +18,6 @@ void RecordThread::run(){
     Chord *prec = 0;
     float maxVolume;
     double step = m_partition->getTempo() / 16;
-    int i(0);
-
-    FrettedChord *cfrets;
-    Fret **frets;
     Guitar *g = Guitar::get_instance();
     while(record){
         //Get the main chord with the possible frenquencies of the instrument
@@ -54,7 +49,6 @@ void RecordThread::run(){
 //                        c->setDuration(m_partition->getTempo() / 16);
 //                        m_partition->addChord(c);
 //                    }
-
                 }
             }
         }
@@ -66,7 +60,6 @@ void RecordThread::run(){
 }
 
 Partition *RecordThread::stop(){
-    cout << "STOP" << endl;
     record = false;
     this->quit();
     m_analyze->close();

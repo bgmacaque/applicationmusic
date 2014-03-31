@@ -25,7 +25,10 @@ SOURCES += main.cpp \
     tablature.cpp \
     frettedchord.cpp \
     filereader.cpp \
-    graphictab.cpp
+    graphictab.cpp \
+    graphicneedle.cpp \
+    graphictuner.cpp \
+    tunethread.cpp
 
 HEADERS += \
     note.h \
@@ -49,7 +52,10 @@ HEADERS += \
     tablature.h \
     frettedchord.h \
     filereader.h \
-    graphictab.h
+    graphictab.h \
+    graphictuner.h \
+    graphicneedle.h \
+    tunethread.h
 
 QT += core gui
 QT += sql

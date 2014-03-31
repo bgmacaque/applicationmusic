@@ -19,6 +19,7 @@
 #include "configuration.h"
 #include "graphicnote.h"
 #include "graphicscore.h"
+#include "graphictuner.h"
 
 /*!
  * \class NoSkin noskin.h
@@ -38,7 +39,6 @@ private:
  * \brief Represents the configurations of the user
  */
     Configuration* config;
-
     /*!
      * \brief An object to represent the connection with the database
      */
@@ -53,6 +53,8 @@ private:
      * \brief Import a partition (JSON text)
      */
     QAction *btn_import;
+
+    GraphicTuner *tuner;
 
     /*!
      * \brief Export the current partition to the website (JSON text)

@@ -160,6 +160,7 @@ Note* Analyze::getNote(float frequency, float *diff){
         if(frequency == freqNote){
             found = true;
             n = notes[index];
+            *diff = 0;
         }else{
             if(frequency < freqNote){
                 max = index - 1;
@@ -168,26 +169,31 @@ Note* Analyze::getNote(float frequency, float *diff){
             }
         }
     }
+    int sign(0);
     if(!found){
         diffMin = frequency - notes[min]->getFrequency();
         if(diffMin < 0){
             diffMin = -diffMin;
+            sign = -1;
         }
         diffMax = frequency - notes[max]->getFrequency();
         if(diffMax < 0 ){
             diffMax = -diffMax;
+            sign = -1;
         }
         if(diffMax <= diffMin){
             n = notes[max];
             if(diff != 0){
-                *diff = diffMax;
-//                std::cout << "Différence : " << *diff << ", note : " << m_notes[max]->getFrequency() << " fréquence : " <<  frequency << std::endl;
+                *diff = sign * diffMax;
             }
+            std::cout << "diffMax" << diffMax << std::endl;
         }else{
             n = notes[min];
+
+            std::cout << "diffin" << diffMax << std::endl;
+
             if(diff != 0){
-                *diff = diffMin;
-//                std::cout << "Différence : " << *diff << ", note : " << m_notes[max]->getFrequency() << " fréquence : " <<  frequency << std::endl;
+                *diff = sign * diffMin;
             }
         }
     }

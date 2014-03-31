@@ -11,6 +11,7 @@
 #include "tablature.h"
 #include <QInputDialog>
 #include <QFileDialog>
+#include "tunethread.h"
 
 /*!
  * \class Controller controller.h
@@ -37,6 +38,8 @@ private:
      * \brief Boolean for the statement of the recording, true if recording
      */
     bool recording;
+
+    TuneThread *tune_thread;
 
     /*!
      * \brief Boolean for the file statement, true if it has been saved since last modification

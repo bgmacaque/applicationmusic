@@ -13,6 +13,8 @@ Controller::Controller(NoSkin *f) : frame(f)
     recordThread = new RecordThread(partition, analyze);
     frame->btn_save->setEnabled(false);
     tablature = new Tablature();
+    tune_thread = new TuneThread(analyze, frame->tuner);
+    tune_thread->start();
 }
 
 void Controller::scrollDown(){

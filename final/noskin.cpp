@@ -9,7 +9,6 @@
 NoSkin::NoSkin(int minWidth = 600, int minHeight = 180) : QMainWindow()
 {
     connection = new DBConnection("../database.conf");
-
     config = new Configuration();
 
     //We tried to load previous configs if they exist
@@ -115,6 +114,7 @@ QToolBar* NoSkin::createBottomBar()
     QToolBar *bottom = new QToolBar("bottom", this);
     QVBoxLayout *lay = new QVBoxLayout;
     QWidget* tmp = new QWidget;
+    tuner = new GraphicTuner(this, "A4");
 
     bottom->addAction(btn_delete);
     bottom->addAction(btn_new);
@@ -142,7 +142,7 @@ QToolBar* NoSkin::createBottomBar()
     tmp->setLayout(lay);
 
     bottom->addWidget(tmp);
-
+    bottom->addWidget(tuner);
 //    bottom->addWidget(choice_name);
 //    bottom->addWidget(choice_tempo);
 //    bottom->addWidget(choice_difficulty);

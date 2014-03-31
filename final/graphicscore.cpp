@@ -65,23 +65,7 @@ void GraphicScore::resizeEvent(QResizeEvent *event){
         }
         current->setPosition(new QPoint(posX, posY));
         current->repaint();
-
-//        y = current->getPos()->y() + 9;
-//        current = notes->at(i);
-//        currentY = current->getPos()->y();
-//        position = (float)currentY /  (float)old.height();
-//        for(int j(0) ; j < nb_lines ; j++){
-//            if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
-//                newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
-//                break;
-//            }
-//        }
-//        if(newY != 0){
-//            current->setPosition(new QPoint(current->getPos()->x(), newY));
-//            current->repaint();
-//        }
     }
-//    this->repaint();
 }
 
 
