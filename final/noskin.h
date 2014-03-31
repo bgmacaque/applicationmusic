@@ -88,10 +88,6 @@ private:
      */
     QAction *btn_record_pause;
 
-    /*!
-     * \brief Show the chord' window to accord the guitar
-     */
-    QAction *btn_chord;
 
     /*!
      * \brief Show the options' window
