@@ -1,5 +1,5 @@
 #include "recordthread.h"
-
+#include <ctime>
 //Just for debug, removed after
 using namespace std;
 
