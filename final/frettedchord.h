@@ -21,6 +21,7 @@ private:
     Chord *m_chord;
 public:
     FrettedChord(Chord *c);
+    ~FrettedChord();
     Fret **getFrets();
     int getNumberFrets();
     float getDuration();

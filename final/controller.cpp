@@ -46,6 +46,7 @@ void Controller::openPartition(){
     if(path.compare("") != 0){
         try{
             partition = Partition::load(path.toStdString().c_str());
+            tablature = new Tablature();
             tablature->toTab(partition);
             frame->g_tab->removeNotes();
             frame->g_tab->addTablature(tablature);
@@ -73,15 +74,15 @@ void Controller::deletePart(){
             }
             saved = true;
             frame->btn_save->setEnabled(false);
-            frame->g_tab->removeNotes();
+            frame->g_tab->setTablature(new Tablature());
             partition->deleteChords();
         }else if(response == QMessageBox::No){
-            frame->g_tab->removeNotes();
+            frame->g_tab->setTablature(new Tablature());
             partition->deleteChords();
         }
     }else{
 
-        frame->g_tab->removeNotes();
+        frame->g_tab->setTablature(new Tablature());
         partition->deleteChords();
     }
     frame->g_tab->repaint();
@@ -137,8 +138,10 @@ void Controller::record()
         partition = recordThread->stop();
         saved = false;
         frame->btn_save->setEnabled(true);
+        delete tablature;
+        tablature = new Tablature();
         tablature->toTab(partition);
-        frame->g_tab->addTablature(tablature);
+        frame->g_tab->setTablature(tablature);
     }else{
         recording = true;
         recordThread->start();

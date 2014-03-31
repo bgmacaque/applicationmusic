@@ -36,7 +36,6 @@ void RecordThread::run(){
                     //If the volume is higher than the highstep
                     c->setDuration(m_partition->getTempo() / 16);
                     m_partition->addChord(c);
-                    std::cout << "ADD CHORD " << c->getDisplay() << std::endl;
                 }
             }else{
                 //We have to add some duration to the previous chord

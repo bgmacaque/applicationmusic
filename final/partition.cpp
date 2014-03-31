@@ -19,6 +19,8 @@ std::vector<Chord*> Partition::getChords() const{
 
 void Partition::addChord(Chord *chord){
     this->m_chords.push_back(chord);
+
+    std::cout << "ADD CHORD " << chord->getDisplay() << std::endl;
 }
 
 void Partition::addDurationLastChord(double p_duration){

@@ -29,8 +29,17 @@ GraphicScore::GraphicScore(QWidget *parent, int nb_line, int width, int height) 
 //    this->show();
 //}
 
+void GraphicScore::setTime(int p_time){
+    time = p_time;
+}
+
 void GraphicScore::setTabVisible(bool visible){
     tabVisible = visible;
+    PositionnedNote *current;
+    for(unsigned int i = 0 ; i < notes->size() ; i++){
+        current = notes->at(i);
+        current->setNoteVisible(visible);
+    }
 }
 void GraphicScore::resizeEvent(QResizeEvent *event){
 //    int currentY(0);

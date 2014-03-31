@@ -22,8 +22,10 @@ private:
 
 public:
     Tablature();
+    ~Tablature();
     void toTab(Partition *p);
     std::vector<FrettedChord*> getFrets() const;
+
 };
 
 #endif // TABLATURE_H

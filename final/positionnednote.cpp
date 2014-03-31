@@ -19,6 +19,10 @@ void PositionnedNote::setPosition(QPoint *point){
     note->move(*point);
 }
 
+void PositionnedNote::setNoteVisible(bool visible){
+    note->setVisible(visible);
+}
+
 void PositionnedNote::closeEvent(QCloseEvent *event){
     note->close();
 }

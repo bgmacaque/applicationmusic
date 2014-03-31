@@ -28,6 +28,7 @@ public:
     void paintEvent(QPaintEvent *event);
     void setPosition(QPoint *point);
     void closeEvent(QCloseEvent *event);
+    void setNoteVisible(bool visible);
 };
 
 #endif // POSITIONNEDNOTE_H

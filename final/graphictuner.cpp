@@ -8,8 +8,8 @@ GraphicTuner::GraphicTuner(QWidget *parent, QString first_note) : QWidget(parent
     note_needle = new GraphicNeedle(this, 300, 150);
     note_label = new QLabel();
 
-    note_label->setMinimumSize(50, 50);
-    note_label->setMaximumSize(50, 50);
+    note_label->setMinimumSize(75, 50);
+    note_label->setMaximumSize(75, 50);
     note_label->setFont(QFont("Times", 30, QFont::Bold));
     note_label->setText(first_note);
 

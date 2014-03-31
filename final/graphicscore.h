@@ -38,6 +38,7 @@ public:
     int getTime();
     int getMaxTime();
     void addTime(int p_time);
+    void setTime(int p_time);
 
 protected:
     void dropEvent(QDropEvent *de);

@@ -114,6 +114,7 @@ QToolBar* NoSkin::createBottomBar()
 
     bottom->addAction(btn_delete);
 //    bottom->addAction(btn_new);
+
     bottom->addAction(btn_open);
     bottom->addAction(btn_back);
     bottom->addAction(btn_forward);

@@ -17,3 +17,10 @@ int FrettedChord::getNumberFrets(){
 float FrettedChord::getDuration(){
     return m_chord->getDuration();
 }
+
+FrettedChord::~FrettedChord(){
+    for(unsigned int i = 0 ; i < m_numberFrets ; i++){
+        delete m_frets[i];
+    }
+    delete[] m_frets;
+}

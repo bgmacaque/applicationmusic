@@ -15,6 +15,7 @@ private:
     unsigned int m_nbLines;
     int m_x;
     int m_y;
+    int lastScore;
 
 public:
     GraphicTab(QWidget *p_parent, unsigned int p_nbLines, int width, int height);
@@ -23,6 +24,7 @@ public:
     void scrollDown();
     void removeNotes();
     void addTablature(Tablature *tab);
+    void setTablature(Tablature *tab);
     void resizeEvent(QResizeEvent *event);
     GraphicScore *newGraphicScore();
 };

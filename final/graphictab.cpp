@@ -11,7 +11,7 @@ GraphicTab::GraphicTab(QWidget *p_parent, unsigned int p_nbLines, int width, int
     m_scores.push_back(new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14));
     m_scores.push_back(new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14));
     m_scores.push_back(new GraphicScore(this, m_nbLines, this->width() / 2, (6 * this->height()) / 14));
-
+    lastScore = 0;
     this->scrollUp();
 }
 
@@ -41,6 +41,18 @@ void GraphicTab::removeNotes(){
     }
 }
 
+void GraphicTab::setTablature(Tablature *tab){
+    this->removeNotes();
+    lastScore = 0;
+    for(unsigned int i = 0 ; i < m_scores.size() ; i++){
+        m_scores.at(i)->setTime(0);
+    }
+    while(m_scores.size() != 4){
+        m_scores.pop_back();
+    }
+    this->addTablature(tab);
+}
+
 void GraphicTab::addTablature(Tablature *tab){
     std::vector<FrettedChord*> tabFrets = tab->getFrets();
     int unsigned i(0);
@@ -49,9 +61,8 @@ void GraphicTab::addTablature(Tablature *tab){
     Fret **frets;
     Fret *fret;
     int height = m_scores[0]->height();
-    std::cout << height << std::endl;
     int width = m_scores[0]->width();
-    int k(0);
+    int k(lastScore);
     int duration(0);
     int place(0);
     GraphicScore *score;
@@ -73,6 +84,7 @@ void GraphicTab::addTablature(Tablature *tab){
         }
         score->addTime(duration);
     }
+    lastScore = k;
 }
 
 void GraphicTab::resizeEvent(QResizeEvent *event){
@@ -94,6 +106,7 @@ void GraphicTab::paintEvent(QPaintEvent *event){
     GraphicScore *score;
     for(i = 0 ; i < m_scores.size() ; i ++){
         score = m_scores.at(i);
+        score->setTabVisible(false);
     }
     int x(0);
     int y(0);
