@@ -6,15 +6,15 @@ FrettedChord::FrettedChord(Chord *c){
     m_chord = c;
 }
 
-Fret **FrettedChord::getFrets(){
+Fret **FrettedChord::getFrets() const{
     return m_frets;
 }
 
-int FrettedChord::getNumberFrets(){
+int FrettedChord::getNumberFrets() const{
     return m_numberFrets;
 }
 
-float FrettedChord::getDuration(){
+float FrettedChord::getDuration() const{
     return m_chord->getDuration();
 }
 

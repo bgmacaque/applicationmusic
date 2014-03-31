@@ -23,7 +23,7 @@ private:
     int *placesForSpectrum();
 
     /*!
-     * \brief Sort the table places with the values in spectrum
+     * \brief sort Sort the spectrum
      */
     void sort(int places[], float spectrum[], int inf, int sup);
 
@@ -41,8 +41,14 @@ public:
      */
     void mainNote(Note *note, float *diff);
 
+    /*!
+     * \brief Give the main Chord of the microphone
+     */
     Chord *mainChord(int size_max, float freqMin, float freqMax, float *maxVolume);
 
+    /*!
+     * \brief Give the main Chord
+     */
     Chord *mainChord(int size_max, float *maxVolume);
 
     /*!
@@ -55,15 +61,19 @@ public:
      */
     void close();
 
-
-
     /*!
-     * \brief Give the note that correspond to the frequency
+     * \brief Give the note that correspond to the frequency with the difference
      */
     Note *getNote(float frequency, float *diff);
 
+    /*!
+     *  \brief Give the note that correspond to the frequency
+     */
     Note *getNote(float frequency);
 
+    /*!
+     * \brief Method used to get the frequency at a place in the spectrum
+     */
     float getFrequency(int placeInSpectrum);
 
 };

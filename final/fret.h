@@ -11,7 +11,6 @@
  * \brief The attribut m_number is the number of the fret on the guitar handle
  * \brief The attribut m_note is the note played on this fret
  */
-
 class Fret{
 
 private:
@@ -22,8 +21,19 @@ private:
 
 public:
     Fret(int p_number, Note *p_note, int p_indexString);
+    /*!
+     * \brief Getter of number
+     */
     int getNumber() const;
+
+    /*!
+     * \brief Getter of the note
+     */
     Note *getNote() const;
+
+    /*!
+     * \brief Getter of the indexString
+     */
     int getIndexString() const;
 };
 

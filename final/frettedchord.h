@@ -22,9 +22,21 @@ private:
 public:
     FrettedChord(Chord *c);
     ~FrettedChord();
-    Fret **getFrets();
-    int getNumberFrets();
-    float getDuration();
+
+    /*!
+     * \brief Getter of m_frets
+     */
+    Fret **getFrets() const;
+
+    /*!
+     * \brief Getter of m_numberFrets
+     */
+    int getNumberFrets() const;
+
+    /*!
+     * \brief Getter of duration
+     */
+    float getDuration() const;
 };
 
 #endif // FRETTEDCHORD_H

@@ -39,6 +39,9 @@ private:
      */
     bool recording;
 
+    /*!
+     * \brief Thread used to tune the guitar
+     */
     TuneThread *tune_thread;
 
     /*!
@@ -93,19 +96,29 @@ public slots:
      */
     void play();
 
+    /*!
+     * \brief Open a partition
+     */
     void openPartition();
 
+    /*!
+     * \brief Scroll the graphictab one step down
+     */
     void scrollDown();
 
+    /*!
+     * \brief Scroll the graphictab one step up
+     */
     void scrollUp();
 
     /*!
      * \brief Upload the partition on the web if the user is connected
-     *
      */
     void upload();
 
-
+    /*!
+     * \brief Change the tempo of the partition
+     */
     void changeTempo(int tempo);
 
     /*!
@@ -124,6 +137,9 @@ public slots:
      */
     void openConf();
 
+    /*!
+     * \brief Delete the partition
+     */
     void deletePart();
 
     /*!

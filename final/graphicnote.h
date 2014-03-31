@@ -31,6 +31,9 @@ private:
 public:
     GraphicNote(QWidget *parent, int num);
     void paintEvent(QPaintEvent *event);
+    /*!
+     * \brief Get the number of the note
+     */
     int getNumber();
     QDrag* getDrager();
     void setParent(QWidget *p_parent);

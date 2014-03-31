@@ -32,9 +32,24 @@ public:
     GuitarString();
     ~GuitarString();
 
+    /*!
+     * \brief Get the fret for a note on the string
+     */
     Fret *getFret(Note *n) const;
+
+    /*!
+     * \brief Show if the note is playable on the string or not
+     */
     bool playable(Note *n) const;
+
+    /*!
+     * \brief Get the lowest frequency on the string
+     */
     float getLowFrequency();
+
+    /*!
+     * \brief Get the highest frequency on the string
+     */
     float getHighFrequency();
 };
 

@@ -20,10 +20,29 @@ private:
 public:
     FModInit();
     ~FModInit();
+    /*!
+     * \brief Init the FMOD lib
+     */
     std::string init();
+
+    /*!
+     * \brief Release the FMOD lib
+     */
     std::string release();
+
+    /*!
+     * \brief Getter of m_system
+     */
     FMOD::System *getSystem();
+
+    /*!
+     * \brief Getter of m_sound
+     */
     FMOD::Sound *getSound();
+
+    /*!
+     * \brief Check if there is an error
+     */
     std::string static errorCheck(FMOD_RESULT result);
 };
 

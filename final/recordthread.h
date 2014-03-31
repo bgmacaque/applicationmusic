@@ -29,6 +29,9 @@ private:
 
 
 public:
+    /*!
+     * \brief Stop the recording of a partition
+     */
     Partition *stop();
     RecordThread(Partition *p_partition, Analyze *p_analyze);
 };

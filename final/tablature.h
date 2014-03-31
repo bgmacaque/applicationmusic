@@ -23,6 +23,9 @@ private:
 public:
     Tablature();
     ~Tablature();
+    /*!
+     * \brief Transfer a partition into a tablature
+     */
     void toTab(Partition *p);
     std::vector<FrettedChord*> getFrets() const;
 

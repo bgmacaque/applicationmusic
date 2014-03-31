@@ -37,47 +37,87 @@ private:
     std::string m_path;
 
 public:
-    //Constructor that initialize an empty partition
     Partition();
     Partition(int tempo, float p_lowStep, float p_highStep);
 
-    //Display the partition in text format (debug)
+    /*!
+     * \brief Display in text format
+     */
     std::string getDisplay();
 
+    /*!
+     * \brief Get the path of the partition
+     */
     std::string getPath() const;
+
+    /*!
+     * \brief Set the path of the partition
+     */
     void setPath(std::string p_path);
 
-    //Getter of the chords
+    /*!
+     * \brief Get all the chords of the partition
+     */
     std::vector<Chord*> getChords() const;
 
-    //Method that add a Chord at the end of the Partition
+    /*!
+     * \brief Add a chord at the end of the partition
+     */
     void addChord(Chord *chord);
 
-    //Method that play all the partition
-    void startPlay();
-
-    void stopPlay();
-
+    /*!
+     * \brief Save a partition at the path specified
+     */
     void save(std::string path);
 
+    /*!
+     * \brief Get the highstep of the partition
+     */
     float getHighStep() const;
 
+    /*!
+     * \brief Return the string description of the partition in JSON
+     */
     QString stringify();
 
+    /*!
+     * \brief Parse the JSON string into an object
+     */
     static Partition *parse(std::string json);
 
+    /*!
+     * \brief Get the name of the partition
+     */
     std::string getName();
 
+    /*!
+     * \brief Set the name of the partition
+     */
     void setName(std::string p_name);
 
+    /*!
+     * \brief Add duration to the last chord
+     */
     void addDurationLastChord(double p_duration);
 
+    /*!
+     * \brief Get tempo of the partition
+     */
     int getTempo();
 
+    /*!
+     * \brief Delete all the chords of the parititon
+     */
     void deleteChords();
 
+    /*!
+     * \brief Set the tempo of the partition
+     */
     void setTempo(int tempo);
 
+    /*!
+     * \brief Load a partition with the path specified
+     */
     static Partition *load(const char *path);
 
 };

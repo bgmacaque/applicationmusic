@@ -42,7 +42,9 @@ public:
     Chord();
     Chord(float p_duration, float p_volume);
 
-
+    /*!
+     * \brief Sort the chord with the frequency of the notes
+     */
     void sort();
 
     /*!
@@ -96,8 +98,14 @@ public:
      */
     std::vector<Note*> getNotes() const;
 
+    /*!
+     * \brief Return the display of the chord
+     */
     std::string getDisplay();
 
+    /*!
+     * \brief Transform the object into a JSON string
+     */
     QString stringify();
 
     /*!
@@ -110,6 +118,9 @@ public:
      */
     bool isEmpty();
 
+    /*!
+     * \brief Transform the string in entry to an object
+     */
     static Chord *parse(FileReader *fr);
 
 };

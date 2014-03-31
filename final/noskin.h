@@ -54,6 +54,9 @@ private:
      */
     QAction *btn_import;
 
+    /*!
+     * \brief The graphical tuner
+     */
     GraphicTuner *tuner;
 
     /*!
@@ -126,7 +129,9 @@ private:
      */
     QToolBar *bottomBar;
 
-
+    /*!
+     * \brief The tab in the center of the application
+     */
     GraphicTab *g_tab;
 
 

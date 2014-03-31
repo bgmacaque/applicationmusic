@@ -120,12 +120,10 @@ void Controller::play()
     if(playing){
         playing = false;
         frame->btn_play_pause->setIcon(QIcon(*frame->icons_loc+"play.png"));
-        partition->stopPlay();
 
     }else{
         playing = true;
         frame->btn_play_pause->setIcon(QIcon(*frame->icons_loc+"pause_play.png"));
-        partition->startPlay();
     }
 }
 

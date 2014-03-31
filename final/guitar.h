@@ -26,8 +26,19 @@ private:
 public:
     static Guitar *get_instance();
     static void kill();
+    /*!
+     * \brief Get all the frets of the guitar
+     */
     Fret **getFrets(Chord *c, int *realSize) const;
+
+    /*!
+     * \brief Get the lowest frequency of the guitar
+     */
     float getLowestFrequency();
+
+    /*!
+     * \brief Get the highest frequency of the guitar
+     */
     float getHighestFrequency();
 };
 

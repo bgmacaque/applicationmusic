@@ -66,15 +66,6 @@ int Partition::getTempo(){
     return m_tempo;
 }
 
-
-void Partition::startPlay(){
-
-}
-
-void Partition::stopPlay(){
-
-}
-
 QString Partition::stringify(){
     QString retour = "";
     retour.append("{ ");

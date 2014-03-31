@@ -59,8 +59,14 @@ public:
      */
     //bool update(Partition p);
 
+    /*!
+     * \brief Get all the partitions of the user on the cloud
+     */
     void getPartitions();
 
+    /*!
+     * \brief Download a partition with its ID
+     */
     Partition *download(int part_id);
 
     /*!
@@ -77,6 +83,9 @@ public:
      */
     void connectUser(QString user, QString pwd);
 
+    /*!
+     * \brief Get the id of the connected user
+     */
     int getUserId();
 };
 

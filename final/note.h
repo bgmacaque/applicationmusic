@@ -28,26 +28,45 @@ public:
     Note(std::string name, float frequency);
     Note();
 
-    //Setter of name
+    /*!
+     * \brief Setter of the name
+     */
     void setName(std::string name);
-    //Getter of name
+
+    /*!
+     * \brief Getter of the name
+     */
     std::string getName() const;
 
 
-    //Setter of frequency
+    /*!
+     * \brief Setter of the frequency
+     */
     void setFrequency(float frequency);
-    //Getter of frequency
+
+    /*!
+     * \brief Getter of the frequency
+     */
     float getFrequency() const;
 
+    /*!
+     * \brief True if this and n are equals
+     */
     bool equals(Note const& n) const;
 
-    //Play the note
+    /*!
+     * \brief Method used to play a note
+     */
     void play(float volume, float duration, FMOD::System *p_system, FMOD::Sound *p_sound);
 
-    //Display the note(Debug only)
+    /*!
+     * \brief Return a string representing a note
+     */
     std::string getDisplay();
 
-    //Return the string that describe the note in JSON(to save)
+    /*!
+     * \brief Return this object in a string form
+     */
     QString stringify();
 
 };
