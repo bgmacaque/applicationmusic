@@ -22,7 +22,6 @@ void TuneThread::run(){
         }else{
             pos = 0;
         }
-        std::cout << m_diff << std::endl;
         m_tuner->setTo(QString::fromStdString(m_note->getName()), pos);
         this->msleep(1000);
     }

@@ -12,7 +12,35 @@ Chord::Chord(std::vector<Note*> p_notes, float p_duration, float p_volume){
 
 
 void Chord::sort(){
+    Note **notes = new Note*[m_notes.size()];
+    unsigned int i(0);
+    unsigned int taille = m_notes.size();
+    for(i = 0 ; i < taille ; i++){
+        notes[i] = m_notes.at(i);
+    }
+    while(!m_notes.empty()){
+        m_notes.pop_back();
+    }
+    bool sorted = false;
+    int tailleTemp = taille;
+    Note *temp;
+    while(!sorted){
+        sorted = true;
+        for(i = 0 ; i < tailleTemp - 1; i++){
+            if(notes[i]->getFrequency() > notes[i + 1]->getFrequency()){
+                temp = notes[i];
+                notes[i] = notes[i + 1];
+                notes[i + 1] = temp;
+                sorted = false;
+            }
+        }
+        tailleTemp--;
+    }
 
+
+    for(i = 0 ; i < taille ; i++){
+        m_notes.push_back(notes[i]);
+    }
 }
 
 Chord::Chord(){

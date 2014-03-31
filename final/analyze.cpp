@@ -77,7 +77,6 @@ void Analyze::mainNote(Note *note, float *diff){
             indexMax = i;
         }
     }
-    cout << "Volume max " << spectrum[indexMax] << endl;
     freqMax = this->getFrequency(indexMax);
     n = getNote(freqMax, diff);
     if(n != 0){
@@ -186,11 +185,8 @@ Note* Analyze::getNote(float frequency, float *diff){
             if(diff != 0){
                 *diff = sign * diffMax;
             }
-            std::cout << "diffMax" << diffMax << std::endl;
         }else{
             n = notes[min];
-
-            std::cout << "diffin" << diffMax << std::endl;
 
             if(diff != 0){
                 *diff = sign * diffMin;
