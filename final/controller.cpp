@@ -88,7 +88,6 @@ void Controller::deletePart(){
     frame->g_tab->repaint();
 }
 
-
 void Controller::changeTempo(int tempo){
     partition->setTempo(tempo);
 }
