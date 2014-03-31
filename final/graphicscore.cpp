@@ -32,6 +32,73 @@ GraphicScore::GraphicScore(QWidget *parent, int nb_line, int width, int height) 
 void GraphicScore::setTabVisible(bool visible){
     tabVisible = visible;
 }
+void GraphicScore::resizeEvent(QResizeEvent *event){
+//    int currentY(0);
+    QSize old = event->oldSize();
+    QSize newe = event->size();
+//    float newY(0);
+//    float position(0);
+    PositionnedNote *current(0);
+    int y(0);
+    int x(0);
+    int posX(0);
+    int posY(0);
+    int oldWidth(0);
+    int oldHeight(0);
+    oldWidth = old.width();
+    oldHeight = old.height();
+    for(unsigned int i = 0 ; i < notes->size() ; i++){
+
+        current = notes->at(i);
+        x = current->getPos()->x();
+        y = current->getPos()->y();
+        for(unsigned int j = 0 ; j < maxTime ; j ++){
+            if(oldWidth / maxTime * j == x){
+                posX = newe.width() / maxTime * j;
+                break;
+            }
+        }
+        for(unsigned int j = 0 ; j < nb_lines ; j++){
+            if( oldHeight - (1 + j) * oldHeight / (nb_lines + 1) - 9 == y){
+                posY = newe.height() - (1 + j) * newe.height() / (nb_lines + 1) - 9;
+            }
+        }
+        current->setPosition(new QPoint(posX, posY));
+        current->repaint();
+
+//        y = current->getPos()->y() + 9;
+//        current = notes->at(i);
+//        currentY = current->getPos()->y();
+//        position = (float)currentY /  (float)old.height();
+//        for(int j(0) ; j < nb_lines ; j++){
+//            if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
+//                newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
+//                break;
+//            }
+//        }
+//        if(newY != 0){
+//            current->setPosition(new QPoint(current->getPos()->x(), newY));
+//            current->repaint();
+//        }
+    }
+//    this->repaint();
+}
+
+
+void GraphicScore::addTablature(Tablature *t){
+    std::vector<FrettedChord*> tabFrets = t->getFrets();
+    int unsigned i(0);
+    int j(0);
+    FrettedChord *fc;
+    Fret **frets;
+    for(i = 0 ; i < tabFrets.size() ; i++){
+        fc = tabFrets.at(i);
+        frets = fc->getFrets();
+        for(j = 0 ; j < fc->getNumberFrets() ; j++){
+            addNote(i * this->width() / 16, (j + 1) * this->height() / 7 - 9, frets[j]->getNumber());
+        }
+    }
+}
 
 void GraphicScore::paintEvent(QPaintEvent *event)
 {
@@ -78,33 +145,7 @@ void GraphicScore::addTime(int p_time){
     time += p_time;
 }
 
-void GraphicScore::resizeEvent(QResizeEvent *event){
-//    int currentY(0);
-//    QSize old = event->oldSize();
-//    QSize newe = event->size();
-//    float newY(0);
-//    float position(0);
-    PositionnedNote *current(0);
-    int y(0);
-    for(unsigned int i = 0 ; i < notes->size() ; i++){
-        current = notes->at(i);
-        y = current->getPos()->y() + 9;
-//        current = notes->at(i);
-//        currentY = current->getPos()->y();
-//        position = (float)currentY /  (float)old.height();
-//        for(int j(0) ; j < nb_lines ; j++){
-//            if(position >= ( ( ( (float)(j)) ) / 10) + 0.1 && position <= ( ( ( (float)(j)+1) ) / 10) + 0.1){
-//                newY = (j+1) * newe.height() / (nb_lines + 1 ) - 9;
-//                break;
-//            }
-//        }
-//        if(newY != 0){
-//            current->setPosition(new QPoint(current->getPos()->x(), newY));
-//            current->repaint();
-//        }
-    }
-//    this->repaint();
-}
+
 
 void GraphicScore::dragMoveEvent(QDragMoveEvent *de)
 {
@@ -146,20 +187,6 @@ void GraphicScore::removeNotes(){
     notes->clear();
 }
 
-void GraphicScore::addTablature(Tablature *t){
-    std::vector<FrettedChord*> tabFrets = t->getFrets();
-    int unsigned i(0);
-    int j(0);
-    FrettedChord *fc;
-    Fret **frets;
-    for(i = 0 ; i < tabFrets.size() ; i++){
-        fc = tabFrets.at(i);
-        frets = fc->getFrets();
-        for(j = 0 ; j < fc->getNumberFrets() ; j++){
-            addNote(i * this->width() / 16, (j + 1) * this->height() / 7 - 9, frets[j]->getNumber());
-        }
-    }
-}
 
 
 

@@ -53,6 +53,7 @@ void GraphicTab::addTablature(Tablature *tab){
     int width = m_scores[0]->width();
     int k(0);
     int duration(0);
+    int place(0);
     GraphicScore *score;
     for(i = 0 ; i < tabFrets.size() ; i++){
         fc = tabFrets.at(i);
@@ -65,9 +66,10 @@ void GraphicTab::addTablature(Tablature *tab){
             }
         }
         score = m_scores[k];
+        place = m_scores[k]->getTime();
         for(j = 0 ; j < fc->getNumberFrets() ; j++){
             fret = frets[j];
-            score->addNote(i * width / 16, height - (1 + fret->getIndexString()) * height / (m_nbLines + 1) - 9, fret->getNumber());
+            score->addNote(place * width / 16, height - (1 + fret->getIndexString()) * height / (m_nbLines + 1) - 9, fret->getNumber());
         }
         score->addTime(duration);
     }
