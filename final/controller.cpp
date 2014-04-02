@@ -149,15 +149,22 @@ void Controller::record()
 void Controller::save()
 {
 
-    QString path = QFileDialog::getSaveFileName(frame, "Enregistrer la partition", QString(), "Partition (*.tab)");
-    std::cout << path.toStdString() << std::endl;
-
-    QStringList list1 = path.split("/");
-    partition->setName(list1.at(list1.size() - 1).toStdString());
+//    QString path = QFileDialog::getSaveFileName(frame, "Enregistrer la partition", "./", "");
+//    QStringList list1 = path.split("/");
+//    partition->setName(list1.at(list1.size() - 1).toStdString());
     //We will save here the file
-    partition->save(path.toStdString());
-    partition->setPath(path.toStdString());
-    frame->setWindowTitle(QString::fromStdString(list1.at(list1.size() - 1).toStdString()));
+    bool ok = true;
+    while(partition->getName().compare("") == 0 && ok){
+        QString partitionName = QInputDialog::getText(frame, "Upload", "Nom de la partition?", QLineEdit::Normal, QString(), &ok);
+        if(ok){
+            partition->setName(partitionName.toStdString());
+            frame->setWindowTitle(partitionName);
+            partition->save("./" + partitionName.toStdString());
+        }
+    }
+//    partition->save(path.toStdString());
+//    partition->setPath(path.toStdString());
+//    frame->setWindowTitle(QString::fromStdString(list1.at(list1.size() - 1).toStdString()));
     saved = true;
     frame->btn_save->setEnabled(false);
 }

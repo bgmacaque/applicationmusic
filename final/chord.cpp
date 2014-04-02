@@ -147,14 +147,14 @@ QString Chord::stringify(){
     retour.append(volume);
     retour.append(duration);
     retour.append(" \" notes \" : ");
-    retour.append(" { ");
+    retour.append(" [ ");
     for(i = 0; i < m_notes.size() ; i++){
         retour.append(m_notes.at(i)->stringify());
         if(i != m_notes.size() - 1){
             retour.append(" , ");
         }
     }
-    retour.append(" } ");
+    retour.append(" ] ");
     retour.append(" } ");
     return retour;
 }
@@ -271,7 +271,7 @@ Chord *Chord::parse(FileReader *fr){
         throw "Parse error";
     }
     word = fr->next();
-    if(word.compare("{") != 0){
+    if(word.compare("[") != 0){
         throw "Parse error";
     }
     word = fr->next();
@@ -279,7 +279,6 @@ Chord *Chord::parse(FileReader *fr){
         bool hasNextNote = true;
         while(hasNextNote){
             if(word.compare("\"") != 0){
-                cout << "CACA" << endl;
                 throw "Parse error";
             }
             word = fr->next();
@@ -305,7 +304,7 @@ Chord *Chord::parse(FileReader *fr){
                 word = fr->next();
             }
         }
-    }else if(word.compare("}") != 0){
+    }else if(word.compare("]") != 0){
         throw "Parse error";
     }
     if(fr->getCurrent().compare("}") != 0){
