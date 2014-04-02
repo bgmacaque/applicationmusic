@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QString>
 #include "filereader.h"
+//#include "tablature.h"
 
 
 /*!

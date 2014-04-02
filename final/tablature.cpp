@@ -13,11 +13,20 @@ void Tablature::toTab(Partition *p){
         chord = chords.at(i);
         m_frets.push_back(new FrettedChord(chord));
     }
-    std::cout << "SIZE" << m_frets.size() << std::endl;
 }
 
 std::vector<FrettedChord*> Tablature::getFrets() const{
     return m_frets;
+}
+
+QString Tablature::stringify() const{
+    QString retour = "";
+    retour.append(" [ ");
+    for(unsigned int i = 0 ; i < m_frets.size() ; i++){
+        retour.append(m_frets.at(i)->stringify());
+    }
+    retour.append(" ] ");
+    return retour;
 }
 
 

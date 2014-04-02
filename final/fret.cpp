@@ -19,3 +19,15 @@ Note *Fret::getNote() const{
 int Fret::getIndexString() const{
     return m_indexString;
 }
+
+QString Fret::stringify() const{
+    QString retour = "";
+    retour.append(" { ");
+    retour.append(" \" line \" : ");
+    retour.append(QString::number(m_indexString));
+    retour.append(" , ");
+    retour.append(" \" number \" : ");
+    retour.append(QString::number(m_number));
+    retour.append(" } ");
+    return retour;
+}

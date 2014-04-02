@@ -1,4 +1,5 @@
 #include "partition.h"
+#include "tablature.h"
 
 //During debug only
 using namespace std;
@@ -84,6 +85,12 @@ QString Partition::stringify(){
         }
     }
     retour.append(" ] ");
+    retour.append(" , ");
+
+    Tablature *tab = new Tablature();
+    retour.append(" \" emplacements \" : ");
+    tab->toTab(this);
+    retour.append(tab->stringify());
     retour.append(" } ");
     return retour;
 }

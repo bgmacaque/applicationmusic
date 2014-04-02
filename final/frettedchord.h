@@ -37,6 +37,8 @@ public:
      * \brief Getter of duration
      */
     float getDuration() const;
+
+    QString stringify() const;
 };
 
 #endif // FRETTEDCHORD_H

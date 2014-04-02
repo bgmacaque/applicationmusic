@@ -24,3 +24,17 @@ FrettedChord::~FrettedChord(){
     }
     delete[] m_frets;
 }
+
+QString FrettedChord::stringify() const{
+    QString retour =  "";
+    retour.append(" [ ");
+    for(unsigned int i = 0 ; i < m_numberFrets ; i++){
+        std::cout << m_frets[i]->stringify().toStdString() << std::endl;
+        retour.append(m_frets[i]->stringify());
+        if(i != m_numberFrets - 2){
+            retour.append(" , ");
+        }
+    }
+    retour.append(" ] ");
+    return retour;
+}

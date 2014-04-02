@@ -295,7 +295,7 @@ Chord *Chord::parse(FileReader *fr){
             }
             word = fr->next();
             if(word.compare(",") != 0){
-                if(word.compare("}") != 0){
+                if(word.compare("]") != 0){
                     throw "Parse error";
                 }else{
                     hasNextNote = false;
@@ -307,7 +307,7 @@ Chord *Chord::parse(FileReader *fr){
     }else if(word.compare("]") != 0){
         throw "Parse error";
     }
-    if(fr->getCurrent().compare("}") != 0){
+    if(fr->getCurrent().compare("]") != 0){
         throw "Parse error";
     }
     word  = fr->next();

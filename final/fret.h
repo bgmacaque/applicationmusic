@@ -35,6 +35,8 @@ public:
      * \brief Getter of the indexString
      */
     int getIndexString() const;
+
+    QString stringify() const;
 };
 
 #endif // FRET_H

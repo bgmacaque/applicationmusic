@@ -28,6 +28,7 @@ public:
      */
     void toTab(Partition *p);
     std::vector<FrettedChord*> getFrets() const;
+    QString stringify() const;
 
 };
 
