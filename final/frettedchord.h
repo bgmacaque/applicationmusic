@@ -39,6 +39,8 @@ public:
     float getDuration() const;
 
     QString stringify() const;
+
+    static void parse(FileReader *fr);
 };
 
 #endif // FRETTEDCHORD_H

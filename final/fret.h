@@ -1,7 +1,7 @@
 #ifndef FRET_H
 #define FRET_H
 #include "note.h"
-
+#include "filereader.h"
 /*!
  * \class Fret fret.h
  * \author Vincent ALBERT, Théo GERRIET, Adonis NAJIMI, Valentin STERN
@@ -37,6 +37,8 @@ public:
     int getIndexString() const;
 
     QString stringify() const;
+
+    static void parse(FileReader *fr);
 };
 
 #endif // FRET_H

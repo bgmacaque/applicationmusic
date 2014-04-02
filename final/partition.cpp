@@ -221,11 +221,33 @@ Partition *Partition::load(const char *path){
         throw "Parse error";
     }
     word = fr->next();
-    if(word.compare("}") != 0){
+    if(word.compare(",") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("emplacements") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
         throw "Parse error";
     }
 
-//    cout << p->stringify().toStdString() << endl;
+    Tablature *tab = new Tablature();
+    tab->parse(fr);
+
+    word = fr->next();
+    if(word.compare("}") != 0){
+        throw "Parse error";
+    }
     delete fr;
     return p;
 }

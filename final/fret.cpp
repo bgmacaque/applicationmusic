@@ -20,6 +20,58 @@ int Fret::getIndexString() const{
     return m_indexString;
 }
 
+void Fret::parse(FileReader *fr){
+    std::string word = fr->getCurrent();
+    if(word.compare("{") != 0){
+        throw "Parse error";
+    }
+
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("line") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+
+
+    word = fr->next();
+    if(word.compare(",") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("number") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare("\"") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    if(word.compare(":") != 0){
+        throw "Parse error";
+    }
+    word = fr->next();
+    word = fr->next();
+    if(word.compare("}") != 0){
+        throw "Parse error";
+    }
+}
+
 QString Fret::stringify() const{
     QString retour = "";
     retour.append(" { ");
